@@ -1,0 +1,3 @@
+# Learn Robotics
+
+This repository is designed to provide a comprehensive learning path for anyone interested in robotics, from beginners to advanced practitioners. The curriculum is structured into several key sections, each focusing on different aspects of robotics, including foundational concepts, programming, hardware, and real-world applications. There are various resources and projects linked throughout the curriculum to help you deepen your understanding and apply what you've learned. Whether you're looking to build your own robot, understand the underlying algorithms, or explore the latest research in robotics, this repository has something for you.

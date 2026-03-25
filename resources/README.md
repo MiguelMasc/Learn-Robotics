@@ -1,0 +1,3 @@
+# Resources Guide
+
+The curriculum contains references to various resources, including books, research papers, online courses, and tools. This folder holds free resources which are either open-source or freely available online. This folder also contains links to resources that are either paid or require a subscription. These resources are provided for those who want to dive deeper into specific topics or prefer different learning materials. Each resource includes a brief description and a link to access it.
