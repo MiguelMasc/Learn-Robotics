@@ -88,7 +88,6 @@ export default function ProjectsPage() {
                           {project.level}
                         </span>
                         <span className={badgeClasses.outline}>{project.stage}</span>
-                        <span className={badgeClasses.outline}>{project.duration}</span>
                       </div>
                       <h3 className="mt-4 text-2xl font-black tracking-normal">
                         {project.title}

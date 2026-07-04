@@ -57,7 +57,6 @@ export default function CurriculumPage() {
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
                       <span className={badgeClasses.secondary}>{stage.label}</span>
-                      <span className={badgeClasses.outline}>{stage.duration}</span>
                     </div>
                     <h2 className="mt-4 text-2xl font-black tracking-normal">{stage.title}</h2>
                     <p className="mt-3 text-base leading-7 text-zinc-600">{stage.summary}</p>

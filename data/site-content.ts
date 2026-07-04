@@ -3,7 +3,6 @@ export type CurriculumStage = {
   label: string;
   title: string;
   summary: string;
-  duration: string;
   emphasis: string;
   outcomes: string[];
   topics: string[];
@@ -30,7 +29,6 @@ export type Project = {
   focus: string;
   summary: string;
   deliverable: string;
-  duration: string;
   stage: string;
   learningGoals: string[];
   constraints: string[];
@@ -40,11 +38,10 @@ export type Project = {
 export const curriculumStages: CurriculumStage[] = [
   {
     id: "foundations",
-    label: "Year 1",
+    label: "Stage 1",
     title: "Foundations",
     summary:
       "Build the math, programming, and physics base needed to reason about robots as moving physical systems.",
-    duration: "3-6 months",
     emphasis: "Learn to describe motion, write small simulations, and explain robot behavior with math instead of guesswork.",
     topics: ["Calculus", "Python", "Mechanics", "Linear algebra", "Robotics overview"],
     outcomes: [
@@ -65,11 +62,10 @@ export const curriculumStages: CurriculumStage[] = [
   },
   {
     id: "core-engineering",
-    label: "Year 2",
+    label: "Stage 2",
     title: "Core Engineering",
     summary:
       "Add algorithms, electronics, probability, and dynamic systems so software can meet hardware cleanly.",
-    duration: "4-8 months",
     emphasis: "Connect software decisions to physical signals, circuit limits, and system behavior over time.",
     topics: [
       "Differential equations",
@@ -96,11 +92,10 @@ export const curriculumStages: CurriculumStage[] = [
   },
   {
     id: "robotics-core",
-    label: "Year 3",
+    label: "Stage 3",
     title: "Robotics Core",
     summary:
       "Study the robot-specific core: kinematics, dynamics, controls, sensors, embedded systems, and ROS 2.",
-    duration: "6-10 months",
     emphasis: "Build the mental model for mobile robots: motion, feedback, sensing, transforms, and robot software architecture.",
     topics: ["Kinematics", "Controls", "Sensors", "Embedded systems", "ROS 2"],
     outcomes: [
@@ -121,11 +116,10 @@ export const curriculumStages: CurriculumStage[] = [
   },
   {
     id: "specialization",
-    label: "Year 4",
+    label: "Stage 4",
     title: "Specialization and Capstone",
     summary:
       "Turn the core into autonomy with perception, planning, learning, safety, and an integrated capstone.",
-    duration: "6-12 months",
     emphasis: "Integrate perception, planning, and control into complete systems with clear safety and testing habits.",
     topics: ["Computer vision", "Motion planning", "Machine learning", "Safety", "Capstone"],
     outcomes: [
@@ -230,7 +224,6 @@ export const projects: Project[] = [
     summary:
       "Build a differential-drive simulator with obstacles, path traces, and noisy odometry.",
     deliverable: "Notebook, simulator script, and demo GIF.",
-    duration: "1-2 weeks",
     stage: "Foundations",
     learningGoals: [
       "Model position, heading, and velocity in 2D.",
@@ -256,7 +249,6 @@ export const projects: Project[] = [
     summary:
       "Use a microcontroller, reflectance sensors, and motor control to follow a taped path.",
     deliverable: "Wiring diagram, firmware, and tuning notes.",
-    duration: "2-4 weeks",
     stage: "Core Engineering",
     learningGoals: [
       "Read noisy sensor values and convert them into steering corrections.",
@@ -282,7 +274,6 @@ export const projects: Project[] = [
     summary:
       "Build a small remote-controlled car, then add telemetry and speed feedback as a robotics foundation.",
     deliverable: "Proposal, wiring diagram, firmware, test log, and demo video.",
-    duration: "3-6 weeks",
     stage: "Core Engineering",
     learningGoals: [
       "Choose motors, drivers, batteries, and wiring with current limits in mind.",
@@ -308,7 +299,6 @@ export const projects: Project[] = [
     summary:
       "Instrument a pendulum or small balance platform and tune a controller using real data.",
     deliverable: "Control log, plots, and parameter explanation.",
-    duration: "3-5 weeks",
     stage: "Robotics Core",
     learningGoals: [
       "Understand feedback, error, overshoot, and settling time.",
@@ -334,7 +324,6 @@ export const projects: Project[] = [
     summary:
       "Create nodes for IMU, encoder, and camera data, then visualize robot state over time.",
     deliverable: "ROS 2 package, launch file, and architecture diagram.",
-    duration: "3-6 weeks",
     stage: "Robotics Core",
     learningGoals: [
       "Understand ROS 2 nodes, topics, messages, and launch files.",
@@ -360,7 +349,6 @@ export const projects: Project[] = [
     summary:
       "Combine odometry, LiDAR or depth sensing, mapping, and navigation in simulation first.",
     deliverable: "Map output, navigation demo, and postmortem.",
-    duration: "6-10 weeks",
     stage: "Specialization",
     learningGoals: [
       "Understand the relationship between odometry, sensing, maps, and localization.",
@@ -386,7 +374,6 @@ export const projects: Project[] = [
     summary:
       "Integrate the whole stack into a robot that finds, approaches, and moves objects.",
     deliverable: "Public repo, build guide, test videos, and final writeup.",
-    duration: "10-16 weeks",
     stage: "Specialization",
     learningGoals: [
       "Integrate perception, mobile-base motion, manipulation, and safety checks.",
