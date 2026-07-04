@@ -1,18 +1,33 @@
 # Resources Guide
 
-The curriculum contains references to various resources, including books, research papers, online courses, and tools. This folder holds free resources which are either open-source or freely available online. This folder also contains links to resources that are either paid or require a subscription. These resources are provided for those who want to dive deeper into specific topics or prefer different learning materials. Each resource includes a brief description and a link to access it.
+This folder collects resources that support the curriculum and projects. Prefer links that are high signal, stable, and useful for independent learners.
 
-### Courses
+## Foundations
 
-[ETH Zurich - Programming for Robotics](https://rsl.ethz.ch/education-students/lectures/ros.html)
+- [MIT OCW 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/) - core math for kinematics, estimation, and control.
+- [CS50P Harvard](https://cs50.harvard.edu/python/) - beginner-friendly Python programming.
+- [3Blue1Brown Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) - visual intuition for vectors, matrices, and transforms.
 
-[CS 123: A Hands-On Introduction to Building AI-Enabled Robots](https://cs123-stanford-2024.readthedocs.io/en/latest/)
+## Robotics
 
-[UC Berkeley - CS287: Advanced Robotics (YouTube)](https://www.youtube.com/playlist?list=PLwRJQ4m4UJjNBPJdt8WamRAt4XKc639wF)
+- [Modern Robotics](https://modernrobotics.northwestern.edu/) - book, video supplements, and software for robot motion.
+- [ROS 2 Documentation](https://docs.ros.org/) - official ROS 2 concepts, tutorials, and API docs.
+- [ETH Zurich - Programming for Robotics](https://rsl.ethz.ch/education-students/lectures/ros.html) - robotics programming course material.
+- [Stanford CS 123](https://cs123-stanford-2024.readthedocs.io/en/latest/) - hands-on AI-enabled robotics course.
+- [UC Berkeley CS287: Advanced Robotics](https://www.youtube.com/playlist?list=PLwRJQ4m4UJjNBPJdt8WamRAt4XKc639wF) - advanced robotics lectures.
 
+## AI and simulation
 
-[UC Berkeley - CS285: Deep RL (YouTube)](https://www.youtube.com/watch?v=SupFHGbytvA&list=PL_iWQOsE6TfVYGEGiAOMaOzzv41Jfm_Ps)
+- [Hugging Face Robotics Course](https://huggingface.co/learn/robotics-course/unit0/1) - open robotics lessons connected to learning-based tools.
+- [NVIDIA Physical AI Learning](https://docs.nvidia.com/learning/physical-ai/) - Isaac Sim, Isaac Lab, Isaac ROS, and sim-to-real workflows.
+- [UC Berkeley CS285: Deep RL](https://www.youtube.com/watch?v=SupFHGbytvA&list=PL_iWQOsE6TfVYGEGiAOMaOzzv41Jfm_Ps) - deep reinforcement learning lectures.
 
-[Hugging Face - Robotics Course](https://huggingface.co/learn/robotics-course/unit0/1)
+## Resource entry format
 
-[NVIDIA - Robotics Fundamentals](https://www.nvidia.com/en-us/learn/learning-path/robotics/)
+When adding a resource, include:
+
+- Topic area.
+- Level.
+- Cost or access model.
+- Why it belongs in the guide.
+- Date last checked.
