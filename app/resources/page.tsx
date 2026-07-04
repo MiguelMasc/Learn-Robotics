@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExternalLink, Filter, LibraryBig, Search } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import { Footer } from "@/components/home/footer";
 import { Header } from "@/components/home/header";
@@ -119,23 +119,5 @@ export default function ResourcesPage() {
       </section>
       <Footer />
     </main>
-  );
-}
-
-function GuideCard({
-  icon: Icon,
-  title,
-  body,
-}: {
-  icon: typeof Search;
-  title: string;
-  body: string;
-}) {
-  return (
-    <article className="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-      <Icon className="size-5 text-emerald-700" aria-hidden="true" />
-      <h2 className="mt-4 text-base font-bold">{title}</h2>
-      <p className="mt-2 text-sm leading-6 text-zinc-600">{body}</p>
-    </article>
   );
 }

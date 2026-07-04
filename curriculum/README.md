@@ -2,7 +2,7 @@
 
 This curriculum is designed to guide you through the essential topics and skills needed to become proficient in robotics. It covers a wide range of subjects, from basic programming to advanced robotics concepts.
 
-### Foundations (Year 1)
+### Foundations (Stage 1)
  
 | # | Course | Key Topics | Best Resources |
 |---|---|---|---|
@@ -12,7 +12,7 @@ This curriculum is designed to guide you through the essential topics and skills
 | 4 | **Linear Algebra** | Vectors, matrices, eigenvalues, SVD | MIT OCW 18.06 Gilbert Strang (free — best course available); 3Blue1Brown (YouTube, free) |
 | 5 | **Intro to Robotics** | Overview of sensing, acting, planning | CMU 16-311 (free notes); edX Delft Intro to Robotics (free) |
 
-### Core Engineering (Year 2)
+### Core Engineering (Stage 2)
  
 | # | Course | Key Topics | Best Resources |
 |---|---|---|---|
@@ -22,7 +22,7 @@ This curriculum is designed to guide you through the essential topics and skills
 | 4 | **Probability & Statistics** | Distributions, Bayesian inference | MIT OCW 6.041 (free); *Think Stats* (free PDF); Coursera Probability UCSD |
 | 5 | **Circuits & Electronics** | Resistors, op-amps, microcontrollers | MIT OCW 6.002 (free); *Make: Electronics* (Platt); Ben Eater YouTube (free) |
  
-### Robotics Core (Year 3)
+### Robotics Core (Stage 3)
  
 | # | Course | Key Topics | Best Resources |
 |---|---|---|---|
@@ -32,7 +32,7 @@ This curriculum is designed to guide you through the essential topics and skills
 | 4 | **Embedded Systems** | ARM Cortex, FreeRTOS, UART/SPI/I2C | *Making Embedded Systems* (White); STM32 ControllersTech (YouTube, free) |
 | 5 | **ROS 2 Fundamentals** | Nodes, topics, services, tf2, Gazebo | ROS2 official docs (free); The Construct ROS2 courses |
  
-### Specialization & Capstone (Year 4)
+### Specialization & Capstone (Stage 4)
  
 | # | Course | Key Topics | Best Resources |
 |---|---|---|---|

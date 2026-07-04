@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section
       id="top"
-      className="relative isolate min-h-[78svh] overflow-hidden bg-zinc-950 text-white"
+      className="relative isolate min-h-screen overflow-hidden bg-zinc-950 text-white"
       aria-labelledby="hero-title"
     >
       <Image
@@ -41,7 +41,7 @@ export function HeroSection() {
             </Link>
             <Link
               href="/projects"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/50 bg-transparent px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/50 bg-white/10 px-6 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-colors hover:bg-white hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
               Start a project
               <ArrowRight className="size-4" aria-hidden="true" />
