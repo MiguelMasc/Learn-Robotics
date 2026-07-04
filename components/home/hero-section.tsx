@@ -33,14 +33,14 @@ export function HeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="#curriculum"
+              href="/curriculum"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-amber-300 px-6 py-2 text-sm font-semibold text-zinc-950 transition-colors hover:bg-amber-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
               View curriculum
               <BookOpenCheck className="size-4" aria-hidden="true" />
             </Link>
             <Link
-              href="#projects"
+              href="/projects"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/50 bg-transparent px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
               Start a project
