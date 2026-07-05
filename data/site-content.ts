@@ -292,6 +292,31 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "web-teleop-controller",
+    title: "Web Teleop Controller",
+    level: "Beginner",
+    focus: "Web UI, command protocols, failsafes, telemetry",
+    summary:
+      "Build a browser-based driving interface with joystick, keyboard control, speed limits, and a visible emergency stop.",
+    deliverable: "Responsive controller UI, command schema, mock robot service, and demo recording.",
+    stage: "Core Engineering",
+    learningGoals: [
+      "Translate browser input into normalized robot commands.",
+      "Separate the interface from hardware-specific pin control.",
+      "Design a command timeout that stops the robot when control drops.",
+    ],
+    constraints: [
+      "The first version should run against a software mock.",
+      "Commands must include a freshness or timeout rule.",
+      "Emergency stop must be visible without scrolling.",
+    ],
+    milestones: [
+      "Create joystick, keyboard, and speed-limit controls.",
+      "Send commands to a mock endpoint and show connection state.",
+      "Add telemetry panels and verify timeout-to-stop behavior.",
+    ],
+  },
+  {
     slug: "pid-balancing-rig",
     title: "PID Balancing Rig",
     level: "Intermediate",
@@ -314,6 +339,56 @@ export const projects: Project[] = [
       "Read sensor angle or position reliably.",
       "Close a low-gain feedback loop.",
       "Tune and explain proportional, integral, and derivative effects.",
+    ],
+  },
+  {
+    slug: "encoder-odometry-test-stand",
+    title: "Encoder Odometry Test Stand",
+    level: "Intermediate",
+    focus: "Encoders, calibration, odometry, data logging",
+    summary:
+      "Instrument a drive base or bench rig so wheel encoder readings become repeatable distance and velocity estimates.",
+    deliverable: "Calibration notes, odometry script, plots, and repeatability report.",
+    stage: "Robotics Core",
+    learningGoals: [
+      "Convert encoder ticks into wheel distance and chassis motion.",
+      "Measure drift, backlash, and wheel-slip effects from real runs.",
+      "Use plots to compare commanded motion with estimated motion.",
+    ],
+    constraints: [
+      "Run straight-line and turn-in-place tests separately.",
+      "Keep raw logs so calibration can be repeated later.",
+      "Document wheel diameter, gear ratio, and encoder resolution.",
+    ],
+    milestones: [
+      "Read encoder ticks reliably at motor speed.",
+      "Estimate distance and heading from repeated test runs.",
+      "Publish a short report showing error over multiple trials.",
+    ],
+  },
+  {
+    slug: "arduino-r4-ros-2-base-bridge",
+    title: "Arduino R4 ROS 2 Base Bridge",
+    level: "Intermediate",
+    focus: "Microcontroller firmware, serial protocol, ROS 2 base control",
+    summary:
+      "Use an Arduino UNO R4-class controller as the low-level bridge between ROS 2 velocity commands and motor hardware.",
+    deliverable: "Firmware, ROS 2 bridge node, message contract, and bench-test video.",
+    stage: "Robotics Core",
+    learningGoals: [
+      "Define a simple serial protocol between a ROS 2 computer and microcontroller.",
+      "Map /cmd_vel-style motion commands to motor outputs.",
+      "Report battery, watchdog, encoder, and motor status back to ROS 2.",
+    ],
+    constraints: [
+      "The microcontroller must stop motors when commands expire.",
+      "Motor power must stay separate from logic power.",
+      "The protocol should be testable without the robot on the floor.",
+    ],
+    milestones: [
+      "Send safe motor commands from a desktop script.",
+      "Wrap the protocol in a ROS 2 node with telemetry topics.",
+      "Bench-test watchdog stop, direction changes, and speed limits.",
     ],
   },
   {
@@ -342,6 +417,31 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "lidar-slam-rover",
+    title: "LiDAR SLAM Rover",
+    level: "Advanced",
+    focus: "2D LiDAR, SLAM, navigation, transforms",
+    summary:
+      "Add a 2D LiDAR to a mobile base and create a repeatable mapping and navigation workflow in ROS 2.",
+    deliverable: "Map files, launch configuration, navigation demo, and tuning notes.",
+    stage: "Specialization",
+    learningGoals: [
+      "Publish LiDAR scans and robot transforms with consistent frame names.",
+      "Build maps and evaluate localization quality from real test runs.",
+      "Tune navigation parameters from observed robot behavior.",
+    ],
+    constraints: [
+      "Validate odometry before trusting SLAM results.",
+      "Start in a small, controlled test space.",
+      "Keep manual teleop and emergency stop available during autonomy tests.",
+    ],
+    milestones: [
+      "Visualize scan, odometry, and transforms in RViz.",
+      "Create a map of a small room and save it for reuse.",
+      "Navigate between two goals and record failures with screenshots.",
+    ],
+  },
+  {
     slug: "autonomous-room-mapper",
     title: "Autonomous Room Mapper",
     level: "Advanced",
@@ -364,6 +464,31 @@ export const projects: Project[] = [
       "Create or load a simulated indoor world.",
       "Generate a usable map from robot sensor data.",
       "Navigate to goals and write a failure-mode postmortem.",
+    ],
+  },
+  {
+    slug: "ros-2-embodied-assistant",
+    title: "ROS 2 Embodied Assistant",
+    level: "Capstone",
+    focus: "Voice or text commands, perception, task planning, safety gates",
+    summary:
+      "Create a robot assistant that turns high-level user requests into checked, auditable robot actions.",
+    deliverable: "Capability registry, safety policy, task logs, demo video, and final writeup.",
+    stage: "Specialization",
+    learningGoals: [
+      "Expose robot capabilities as small, validated actions.",
+      "Combine camera, map, and telemetry context before executing tasks.",
+      "Add human approval gates for risky or ambiguous actions.",
+    ],
+    constraints: [
+      "Autonomous actions must be bounded by a written safety envelope.",
+      "Every high-level command needs an execution log.",
+      "The robot must ask for confirmation before moving in uncertain contexts.",
+    ],
+    milestones: [
+      "Create a typed registry of robot actions and preconditions.",
+      "Route text or voice commands into approved ROS 2 actions.",
+      "Demonstrate a multi-step task with logs, safety checks, and recovery.",
     ],
   },
   {
