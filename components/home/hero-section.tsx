@@ -51,7 +51,7 @@ export function HeroSection() {
             {[
               ["4", "learning stages"],
               ["20", "core topics"],
-              ["7", "starter projects"],
+              ["12", "starter projects"],
             ].map(([value, label]) => (
               <div key={label} className="border-l-4 border-amber-300 pl-4">
                 <dt className="text-4xl font-black leading-none">{value}</dt>
