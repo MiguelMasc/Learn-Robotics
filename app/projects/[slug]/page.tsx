@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  AlertTriangle,
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
   ClipboardList,
   Clock3,
+  Cpu,
+  FileText,
+  GitBranch,
+  HelpCircle,
+  ListChecks,
   ShieldCheck,
   Target,
 } from "lucide-react";
@@ -125,6 +131,54 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
         </div>
 
+        {project.proposal ? (
+          <section className="mt-14" aria-labelledby="project-proposal">
+            <div className="flex items-center gap-2">
+              <FileText className="size-5 text-emerald-700" aria-hidden="true" />
+              <h2 id="project-proposal" className="text-2xl font-black">
+                Project proposal
+              </h2>
+            </div>
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <ProposalBlock
+                icon={FileText}
+                title="Overview"
+                items={project.proposal.overview}
+              />
+              <ProposalBlock
+                icon={GitBranch}
+                title="Repository boundary"
+                items={project.proposal.repositoryBoundary}
+              />
+              <ProposalBlock
+                icon={Cpu}
+                title="Hardware plan"
+                items={project.proposal.hardwarePlan}
+              />
+              <ProposalBlock
+                icon={ClipboardList}
+                title="Software plan"
+                items={project.proposal.softwarePlan}
+              />
+              <ProposalBlock
+                icon={ListChecks}
+                title="Validation plan"
+                items={project.proposal.validationPlan}
+              />
+              <ProposalBlock
+                icon={AlertTriangle}
+                title="Risks"
+                items={project.proposal.risks}
+              />
+              <ProposalBlock
+                icon={HelpCircle}
+                title="Open decisions"
+                items={project.proposal.openDecisions}
+              />
+            </div>
+          </section>
+        ) : null}
+
         {relatedProjects.length > 0 ? (
           <section className="mt-14" aria-labelledby="related-projects">
             <div className="flex items-center gap-2">
@@ -188,6 +242,31 @@ function DetailBlock({
       <div className="flex items-center gap-2">
         <Icon className="size-5 text-emerald-700" aria-hidden="true" />
         <h2 className="text-sm font-black uppercase tracking-normal text-zinc-700">{title}</h2>
+      </div>
+      <ul className="mt-5 grid gap-3">
+        {items.map((item) => (
+          <li key={item} className="text-sm leading-6 text-zinc-600">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+function ProposalBlock({
+  icon: Icon,
+  title,
+  items,
+}: {
+  icon: typeof CheckCircle2;
+  title: string;
+  items: string[];
+}) {
+  return (
+    <section className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+      <div className="flex items-center gap-2">
+        <Icon className="size-5 text-emerald-700" aria-hidden="true" />
+        <h3 className="text-sm font-black uppercase tracking-normal text-zinc-700">{title}</h3>
       </div>
       <ul className="mt-5 grid gap-3">
         {items.map((item) => (
