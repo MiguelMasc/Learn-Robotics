@@ -61,6 +61,9 @@ export function ResourceTabs() {
           >
             <div className="flex flex-col gap-3 p-6 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-2">
+                <h3 className="text-xl font-bold leading-tight tracking-normal">
+                  {resource.title}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   <span className={`${badgeBase} border-transparent bg-emerald-100 text-emerald-950`}>
                     {resource.type}
@@ -69,9 +72,6 @@ export function ResourceTabs() {
                     {resource.level}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold leading-tight tracking-normal">
-                  {resource.title}
-                </h3>
                 <p className="max-w-3xl text-base text-zinc-600">
                   {resource.description}
                 </p>

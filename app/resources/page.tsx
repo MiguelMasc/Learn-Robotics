@@ -39,8 +39,7 @@ export default function ResourcesPage() {
       <Header />
       <section className="border-b border-zinc-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <span className={badgeClasses.accent}>Resources</span>
-          <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+          <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
             A curated shelf for studying robotics without drowning in tabs.
           </h1>
           <p className="mt-5 max-w-3xl text-lg text-zinc-600">
@@ -78,14 +77,14 @@ export default function ResourcesPage() {
                       key={resource.title}
                       className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm"
                     >
-                      <div className="flex flex-wrap gap-2">
+                      <h3 className="text-xl font-bold tracking-normal">
+                        {resource.title}
+                      </h3>
+                      <div className="mt-4 flex flex-wrap gap-2">
                         <span className={badgeClasses.secondary}>{resource.type}</span>
                         <span className={badgeClasses.outline}>{resource.level}</span>
                         <span className={badgeClasses.outline}>{resource.cost}</span>
                       </div>
-                      <h3 className="mt-4 text-xl font-bold tracking-normal">
-                        {resource.title}
-                      </h3>
                       <p className="mt-3 text-sm leading-6 text-zinc-600">
                         {resource.description}
                       </p>

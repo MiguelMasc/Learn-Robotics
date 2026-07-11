@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
-import { Gauge, Route, Wrench } from "lucide-react";
-
 import { Footer } from "@/components/home/footer";
 import { Header } from "@/components/home/header";
 import { badgeClasses } from "@/components/home/badge-classes";
 import { ProjectCard } from "@/components/projects/project-card";
-import { projects } from "@/data/site-content";
+import { publishedProjects } from "@/data/site-content";
 
 export const metadata: Metadata = {
-  title: "Projects | Learn Robotics",
+  title: "Project Proposals | Learn Robotics",
   description:
-    "A robotics project ladder with deeper build goals, constraints, milestones, and deliverables.",
+    "Build-ready robotics proposals with goals, phased parts lists, safety gates, kits, and open-source references.",
 };
-
-const levelOrder = ["Beginner", "Intermediate", "Advanced", "Capstone"] as const;
 
 export default function ProjectsPage() {
   return (
@@ -21,86 +17,37 @@ export default function ProjectsPage() {
       <Header />
       <section className="border-b border-zinc-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <span className={badgeClasses.accent}>Projects</span>
-          <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
-            Build proof that you understand the robot stack.
+          <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+            Choose a build with a clear finish line.
           </h1>
-          <p className="mt-5 max-w-3xl text-lg text-zinc-600">
-            These projects are ordered to turn theory into evidence: first simulations, then
-            sensors and motors, then feedback control, robot software, autonomy, and integration.
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
+            These proposals are ready for planning: each one has a recommended platform,
+            prerequisites, measurable success criteria, phased parts lists, safety gates, and
+            links to established kits and open-source code.
           </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <PrincipleCard
-              icon={Gauge}
-              title="Constrain the first version"
-              body="A small working robot teaches more than an ambitious pile of parts that never stabilizes."
-            />
-            <PrincipleCard
-              icon={Route}
-              title="Make progress visible"
-              body="Every milestone should produce a diagram, plot, log, photo, short video, or working demo."
-            />
-            <PrincipleCard
-              icon={Wrench}
-              title="Debug across layers"
-              body="Mechanical, electrical, and software issues blend together, so projects include checks and constraints."
-            />
-          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-8">
-          {levelOrder.map((level) => {
-            const levelProjects = projects.filter((project) => project.level === level);
-
-            return (
-              <section key={level} aria-labelledby={`${level.toLowerCase()}-projects`}>
-                <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-                  <div>
-                    <h2 id={`${level.toLowerCase()}-projects`} className="text-2xl font-black">
-                      {level}
-                    </h2>
-                    <p className="mt-2 text-base text-zinc-600">
-                      {level === "Beginner"
-                        ? "Start here: build motion, sensing, power, and debugging instincts."
-                        : "Use this tier once the earlier projects feel repeatable and explainable."}
-                    </p>
-                  </div>
-                  <span className={level === "Capstone" ? badgeClasses.accent : badgeClasses.secondary}>
-                    {levelProjects.length} project{levelProjects.length === 1 ? "" : "s"}
-                  </span>
-                </div>
-
-                <div className="grid gap-4 xl:grid-cols-2">
-                  {levelProjects.map((project) => (
-                    <ProjectCard key={project.slug} project={project} />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-black">Current proposals</h2>
+            <p className="mt-2 max-w-2xl text-base text-zinc-600">
+              Start with the ground vehicle, or take on the microdrone after basic feedback
+              control and telemetry feel familiar.
+            </p>
+          </div>
+          <span className={badgeClasses.secondary}>
+            {publishedProjects.length} proposals
+          </span>
+        </div>
+        <div className="grid gap-4 xl:grid-cols-2">
+          {publishedProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
         </div>
       </section>
       <Footer />
     </main>
-  );
-}
-
-function PrincipleCard({
-  icon: Icon,
-  title,
-  body,
-}: {
-  icon: typeof Gauge;
-  title: string;
-  body: string;
-}) {
-  return (
-    <article className="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-      <Icon className="size-5 text-emerald-700" aria-hidden="true" />
-      <h2 className="mt-4 text-base font-bold">{title}</h2>
-      <p className="mt-2 text-sm leading-6 text-zinc-600">{body}</p>
-    </article>
   );
 }
