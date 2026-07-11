@@ -11,6 +11,7 @@ This folder is for follow-along robotics projects that turn the curriculum into 
 | Beginner | [Programmable RC Car](rc-car-robotics-starter-plan.md) | Chassis, motor control, wireless commands, power safety | Proposal, wiring diagram, firmware, test log |
 | Intermediate | PID Balancing Rig | control loops, data logging, tuning | Plots, controller notes, demo video |
 | Intermediate | ROS 2 Sensor Dashboard | nodes, topics, transforms, visualization | ROS 2 package, launch file, diagram |
+| Advanced | [RC Car SLAM Proposal](rc-car-slam-proposal.md) | RC chassis, ROS 2, odometry, 2D SLAM | proposal, architecture, validation plan |
 | Advanced | Autonomous Room Mapper | mapping, navigation, simulation | map output, navigation demo, postmortem |
 | Capstone | Mobile Manipulator | perception, planning, control, safety | public repo, build guide, final writeup |
 
