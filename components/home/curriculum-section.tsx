@@ -8,7 +8,6 @@ export function CurriculumSection() {
   return (
     <section id="curriculum" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="Curriculum guide"
         title="A staged route from foundations to autonomous systems."
         description="Each stage balances theory, implementation, and build practice so the material compounds instead of becoming a list of disconnected courses."
       />
@@ -20,8 +19,9 @@ export function CurriculumSection() {
             className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm"
           >
             <div className="flex flex-col gap-3">
-              <span className={badgeClasses.secondary}>{stage.label}</span>
-              <h3 className="text-xl font-bold leading-tight tracking-normal">{stage.title}</h3>
+              <h3 className="text-xl font-bold leading-tight tracking-normal">
+                <span className="text-zinc-500">{stage.label}.</span> {stage.title}
+              </h3>
               <p className="text-base text-zinc-600">{stage.summary}</p>
             </div>
             <div className="mt-5 space-y-5">
