@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ExternalLink,
@@ -61,27 +63,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <main className="min-h-screen bg-zinc-50 text-zinc-950">
       <Header />
-      <section className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <Link
-            href="/projects"
-            className="inline-flex min-h-10 items-center gap-2 rounded-md border border-zinc-300 bg-white px-4 text-sm font-semibold text-zinc-950 transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
-          >
-            <ArrowLeft className="size-4" aria-hidden="true" />
-            Project proposals
-          </Link>
-          <h1 className="mt-8 max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
-            {project.title}
-          </h1>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <span className={badgeClasses.secondary}>{project.level}</span>
-            <span className={badgeClasses.outline}>{project.stage}</span>
-          </div>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
-            {project.summary}
-          </p>
-        </div>
-      </section>
+      <ProjectHero project={project} />
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <nav
@@ -248,6 +230,116 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
       <Footer />
     </main>
+  );
+}
+
+function ProjectHero({ project }: { project: PublishedProject }) {
+  const themes: Record<
+    string,
+    {
+      image: string;
+      imagePosition: string;
+      eyebrow: string;
+      accent: string;
+      button: string;
+      ring: string;
+    }
+  > = {
+    "programmable-rc-car": {
+      image: "/images/mascot-rc-car-hero.png",
+      imagePosition: "object-[68%_center]",
+      eyebrow: "Ground robotics project",
+      accent: "text-orange-700",
+      button: "bg-[#29193d] text-white hover:bg-[#3a2454]",
+      ring: "focus-visible:ring-orange-500",
+    },
+    "autonomous-development-quadcopter": {
+      image: "/images/mascot-quadcopter-hero.png",
+      imagePosition: "object-[70%_center]",
+      eyebrow: "Aerial robotics project",
+      accent: "text-violet-700",
+      button: "bg-[#29193d] text-white hover:bg-[#3a2454]",
+      ring: "focus-visible:ring-violet-500",
+    },
+  };
+  const theme = themes[project.slug] ?? {
+    image: "/images/robotics-learning-hero.png",
+    imagePosition: "object-center",
+    eyebrow: "Robotics project",
+    accent: "text-emerald-700",
+    button: "bg-[#29193d] text-white hover:bg-[#3a2454]",
+    ring: "focus-visible:ring-emerald-600",
+  };
+
+  return (
+    <section
+      className="relative isolate min-h-[680px] overflow-hidden border-b border-zinc-200 bg-[#f7f2e8] text-zinc-950"
+      aria-labelledby="project-hero-title"
+    >
+      <Image
+        src={theme.image}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={`-z-30 object-cover ${theme.imagePosition}`}
+      />
+      <div
+        className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.97)_0%,rgba(255,255,255,0.88)_36%,rgba(255,255,255,0.24)_62%,transparent_82%),linear-gradient(0deg,rgba(255,255,255,0.38)_0%,transparent_42%)]"
+        aria-hidden="true"
+      />
+
+      <div className="mx-auto flex min-h-[680px] max-w-7xl items-end px-4 pb-16 pt-12 sm:px-6 sm:pb-20 lg:px-8 lg:pb-24">
+        <div className="max-w-3xl">
+          <Link
+            href="/projects"
+            className={`inline-flex min-h-10 items-center gap-2 rounded-md border border-zinc-950/15 bg-white/65 px-4 text-sm font-semibold text-zinc-950 shadow-sm backdrop-blur-sm transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 ${theme.ring}`}
+          >
+            <ArrowLeft className="size-4" aria-hidden="true" />
+            All project proposals
+          </Link>
+
+          <p className={`mt-12 text-sm font-black uppercase tracking-[0.2em] ${theme.accent}`}>
+            {theme.eyebrow}
+          </p>
+          <h1
+            id="project-hero-title"
+            className="mt-4 max-w-3xl text-5xl font-black leading-[1.02] tracking-normal sm:text-6xl lg:text-7xl"
+          >
+            {project.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-700 sm:text-xl">
+            {project.summary}
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <span className="inline-flex w-fit items-center rounded-md border border-zinc-950/15 bg-white/65 px-2.5 py-1 text-xs font-semibold uppercase tracking-normal text-zinc-800 backdrop-blur-sm">
+              {project.level}
+            </span>
+            <span className="inline-flex w-fit items-center rounded-md border border-zinc-950/15 bg-white/65 px-2.5 py-1 text-xs font-semibold uppercase tracking-normal text-zinc-800 backdrop-blur-sm">
+              {project.stage}
+            </span>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#overview"
+              className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white ${theme.button} ${theme.ring}`}
+            >
+              Explore the proposal
+              <ArrowDown className="size-4" aria-hidden="true" />
+            </a>
+            <a
+              href="#build-phases"
+              className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-zinc-950/20 bg-white/65 px-5 text-sm font-semibold text-zinc-950 shadow-sm backdrop-blur-sm transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 ${theme.ring}`}
+            >
+              View build phases
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
