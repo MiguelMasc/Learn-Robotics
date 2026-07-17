@@ -1,0 +1,395 @@
+ROBOTICS SHOPPING / BROWSING CHECKLIST
+Bay Area - researched July 12, 2026
+
+This list is based on the projects in this repo:
+- Programmable differential-drive RC car with safe wireless teleop
+- Line following, encoders, odometry, telemetry, and PID control
+- Arduino/Pico/ESP32-to-ROS 2 base bridge
+- ROS 2 sensor dashboard
+- 2D LiDAR SLAM rover and autonomous room mapper
+- Later: mobile manipulator and embodied assistant
+
+MAIN RECOMMENDATION
+===================
+
+Build in this order:
+1. Reliable differential-drive base
+2. Wheel encoders + battery telemetry
+3. PID speed control and repeatable odometry
+4. ROS 2 bridge and high-level computer
+5. LiDAR and SLAM
+
+Do not let a good-looking LiDAR, camera, AI HAT, or complete robot kit jump ahead of the base. The repo's own plan correctly says manual control first, odometry second, and SLAM third.
+
+Given the equipment already on hand, the main gap is not another controller or computer. It is a well-specified rolling base, encoder feedback, safe motor power, and the small hardware needed to assemble and test it. The Pololu Romi route below is the best overall match I found.
+
+
+INVENTORY ASSUMPTIONS FROM YOUR EDITS
+=====================================
+
+I treated the items you removed as already owned or otherwise covered:
+- A suitable low-level controller (Pico-, ESP32-, or Arduino-class)
+- A Raspberry Pi-class ROS 2 computer, storage, cooling, and bench power
+- A temperature-controlled soldering setup
+- Breadboard, jumper wires, and basic hookup wire
+- A digital caliper and general electronics starter components
+
+The purchase plans and totals below no longer include those items. If something was removed because you do not want it rather than because you own it, this assumptions list is the place to correct first.
+
+
+MICRO CENTER SANTA CLARA
+========================
+
+Address: 5201 Stevens Creek Blvd., Santa Clara, CA 95051
+Hours listed by Micro Center: Mon-Sat 10am-9pm; Sun 11am-6pm
+Store page: https://www.microcenter.com/site/stores/santa-clara.aspx
+
+Set the website store to Santa Clara before checking inventory. Reserve scarce items for pickup when possible. Prices and quantities below were visible online on or shortly before July 12, 2026 and can change without notice.
+
+HIGH PRIORITY - CHECK / PROBABLY BUY
+-----------------------------------
+
+[ ] Adafruit DRV8833 dual motor-driver breakout - $5.99 seen
+    Why: Compact two-channel H-bridge for SMALL low-voltage motors; useful for a one-motor bench test and a light 2WD car.
+    Check before buying: motor voltage and measured/declared stall current. Its motor supply range is 2.7-10.8 V and it does not give comfortable current headroom for every TT motor.
+    Important: The Hiwonder encoder TT motor below is specified at 1.2 A stall, so a DRV8833-class board is near its limit rather than generously oversized. A driver with more per-channel headroom is better for jam/reversal tests.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=category%3AMaker%2FSTEM%7C712%2Cbrand%3AAdafruit+Industries
+
+[ ] Klein MM325 multimeter - $34.99, limited stock seen
+    Why: Voltage, continuity, resistance, and DC-current measurements are essential for battery sag, brownouts, wiring faults, and motor-current checks.
+    In-store test: Make sure the current-input fuse is replaceable and the leads/probe tips are comfortable around small headers.
+    Alternative budget meter seen: Eclipse MT-1236 True-RMS, $29.99.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=Category%3AMultiMeters%60+Test+Equipment%7C541&storeid=195
+
+[ ] Basic prototyping consumables
+    Look for: heat shrink; screw terminals; JST/locking connectors; zip ties; ferrules; M2/M3 standoffs and screws.
+    Do not use loose Dupont jumpers for final motor-power or battery wiring.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=category%3AElectronic+Supplies%7C729&storeid=195
+
+[ ] Power-safety small parts
+    Look for: a real main switch, inline fuse and spare fuses, strain relief, 470 uF or larger electrolytic capacitors with suitable voltage rating,
+    and 0.1 uF ceramic decoupling capacitors. Buy only after confirming voltage/current ratings and connector polarity.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=category%3AElectronic+Components%7C735&storeid=195
+
+
+GOOD TO INSPECT - BUY ONLY FOR THE RIGHT MILESTONE
+--------------------------------------------------
+
+[ ] Orbbec Oradar MS200 2D LiDAR - $99.99; 4 listed in stock
+    Why: 360-degree 2D ranging with ROS/ROS 2 support at a plausible starter price.
+    Buy only after: Repeatable encoder odometry and rigid sensor mounting exist.
+    Check in store / online before purchase: exact MS200 vs MS200K model, included USB/serial adapter and cable, voltage/current, ROS 2 package support 
+    for your Ubuntu/ROS distribution, mounting-hole pattern, return policy, and whether replacement cables are available.
+    Comparison target: Slamtec RPLIDAR C1 at about $99.99. Slamtec documents a 12 m radius, 5 kHz sampling, 110 g weight, Class 1 laser, 
+    and official ROS/ROS 2 packages.
+    Micro Center link: https://www.microcenter.com/search/search_results.aspx?fq=category%3AElectronic+Parts%7C689&storeid=195
+    Slamtec product info: https://www.slamtec.com/en/c1
+
+[ ] Adafruit MPU-6050 6-DoF IMU - $12.99; very limited stock seen
+    Why: Useful later for comparing inertial readings to encoder odometry and for a balancing/PID rig.
+    Do not expect: A low-cost gyro to replace wheel encoders or fix bad mechanics.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=brand%3AAdafruit+Industries%2Ccategory%3ABoards%2FProjects%7C734&storeid=195
+
+[ ] 30 V / 5 A current-limited bench supply - about $109.99-$159.99
+    Why: Safely bring up one motor channel, cap current, reproduce brownouts, and measure load response without repeatedly draining batteries.
+    Seen: SRA KD3005D around $109.99; KA3005D around $136.99.
+    Buy only if: You expect regular electronics work. Maker Nexus may be cheaper for occasional use.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=Category%3AMultiMeters%60+Test+Equipment%7C541&storeid=195
+
+[ ] Matched rechargeable NiMH cells and smart charger
+    Why: The repo wisely recommends NiMH for early indoor testing. They are more forgiving than a beginner-built lithium pack.
+    For a 4xAA base: Buy four identical cells plus spares.
+    For Pololu Romi: Buy six identical cells plus matched spares.
+    Do not mix brands, ages, or capacities in one pack. Avoid rectangular 9 V batteries for drive motors.
+    Micro Center examples seen: Duracell charger + four 1300 mAh AA cells, $19.99; four 2400 mAh AA cells, $15.99. The mixed capacities make these two listings a poor combined six-cell Romi set, so look for 6-8 identical cells and an independent-channel smart charger.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=Category%3AChargers%60+Rechargeable+Batteries%7C551&storeid=195
+
+[ ] Bambu Lab A1 or A1 mini 3D printer
+    A1 mini: $209.99 sale, 180 x 180 x 180 mm, 8 listed in stock.
+    A1: $279.99 sale, 256 x 256 x 256 mm, listed in stock.
+    Recommendation: If buying for robot plates, sensor masts, brackets, and later manipulator parts, the A1's larger bed is worth the extra $70. 
+    The mini is good for small brackets but can force chassis plates into multiple pieces.
+    Skip AMS/multicolor initially; it does not make a robot function better.
+    First consider one month at Maker Nexus or a library printing service so you learn what you actually need.
+    Link: https://www.microcenter.com/search/search_results.aspx?fq=category%3A3D+Printers%7C701&storeID=195
+
+
+LOOK AT, BUT PROBABLY SKIP
+--------------------------
+
+[ ] Hiwonder TT gearmotor with Hall encoder - $27.99 EACH at Micro Center
+    Firm recommendation: Do not buy at this price.
+    Hiwonder's own current listing showed the same 3-12 V, 150 RPM, 1:42, 1.2 A-stall encoder motor for $6.99. Micro Center is about 4x the direct price before shipping.
+    Direct link: https://www.hiwonder.com/products/tt-motor-plastic
+
+[ ] Hiwonder ROS2 Robot Car with mecanum wheels - $129.99
+    Why it is tempting: Fast path to something that moves.
+    Why it is not the best first base here: Mecanum wheels add lateral slip and more complicated odometry, while the repo explicitly recommends simple differential drive for the first SLAM platform. Inspect its construction for ideas, but do not let the ROS2 label decide the purchase.
+
+[ ] ROSOrin / complete AI robot kits, robot dogs, and arms
+    These hide many of the exact motor, power, encoder, and bridge decisions your project ladder is meant to teach. Revisit after you have built and instrumented the base yourself.
+
+[ ] Random bare DC motors without gear-ratio, stall-current, torque, and mounting data
+    Cheap is not cheap if no matching wheel, bracket, encoder, or driver can be selected from a datasheet.
+
+[ ] LiPo/Li-ion cells, custom packs, and generic chargers
+    Delay until you can state cell count, chemistry, charge voltage, continuous/peak current, connector, fuse, low-voltage cutoff, and enclosure plan. Never charge an unknown pack unattended.
+
+
+BEST ALTERNATIVE PRODUCT / CURRENT DEAL
+=======================================
+
+POLOLU ROMI DIFFERENTIAL-DRIVE BASE - RECOMMENDED
+-------------------------------------------------
+
+This is the strongest match I found for the repo's programmable car -> encoders -> PID -> odometry -> ROS 2 -> SLAM path. Pololu publishes documentation, drawings, encoder details, and power information instead of selling an opaque "ROS robot" bundle.
+
+Current component prices seen:
+- Romi chassis kit with two motors, wheels, caster, and 6xAA battery contacts: $39.95
+- Romi quadrature encoder pair: $9.95
+- Romi dual motor-driver + power-distribution/regulator board: $34.95
+- Subtotal: $84.85
+- Coupon JULY4SALE26: 10% off active Pololu-brand items through July 13, 2026
+- Approximate discounted subtotal: $76.37 before tax/shipping
+- Pololu lists free US shipping over $100.
+
+Use the low-level controller already on hand. The Romi board handles motor drive and useful power distribution; verify logic voltage, pin assignments, grounding, and the exact signal/power wiring from both manuals before connecting the controller.
+
+Links:
+https://www.pololu.com/product/3500
+https://www.pololu.com/product/3542
+https://www.pololu.com/product/3543
+
+Alternative integrated route:
+- Romi 32U4 Control Board: $74.95 before the same 10% coupon.
+- It integrates an Arduino-compatible MCU, dual motor drivers, power regulation, battery monitoring, encoder inputs, gyro/accelerometer, and Raspberry Pi interface.
+- Chassis + encoder pair + 32U4 board is $124.85 before discount, about $112.37 after 10%, before shipping/tax.
+- This is cleaner and feature-rich, but using the controller already on hand with the modular motor/power board exposes more of the driver and telemetry work you want to learn.
+Link: https://www.pololu.com/product/3544
+
+Deal deadline: The Pololu page says the 10% coupon is valid through July 13, 2026. Confirm the discount in the cart before ordering.
+
+
+OTHER BAY AREA STOPS / WAYS TO SAVE
+===================================
+
+CENTRAL COMPUTERS
+-----------------
+
+Useful because it has five Bay Area stores: Santa Clara, Sunnyvale, San Mateo, San Francisco, and Newark/East Bay. It supports store pickup and can transfer inventory.
+Pickup info: https://www.centralcomputer.com/pickup-and-shipping
+
+Santa Clara: 3777 Stevens Creek Blvd., close to Micro Center's 5201 Stevens Creek location.
+
+Since the Pi and its normal accessories are already covered, Central is a low-priority stop. It is most useful for an emergency replacement cable, storage device, USB adapter, power supply, or other computer-side accessory when Micro Center is out of stock or another Central location is closer.
+Pi section: https://www.centralcomputer.com/all-products/hardware/maker-diy/pi.html
+
+
+ANCHOR ELECTRONICS - SANTA CLARA
+--------------------------------
+
+Address: 2040 Walsh Ave., Santa Clara, CA 95050
+Hours listed: Mon-Fri 7:30am-4pm
+Phone: (408) 727-3693
+Site: https://anchor-electronics.com/contact/
+
+Best for: Individual connectors, switches, fuses, capacitors, resistors, headers, wire, heat shrink, project boxes, and odd hardware when a big-box assortment is weak.
+
+Important: Anchor states sales are final except defects/errors. Bring exact pin pitch, connector sex, voltage, current, wire gauge, and dimensions; do not buy mystery parts by appearance.
+
+
+JAMECO WILL CALL - BELMONT
+--------------------------
+
+Address: 1355 Shoreway Road, Belmont, CA 94002
+Will-call hours listed: Mon-Fri 8am-5pm, closed holidays
+Robot store: https://www.jameco.com/Jameco/Robot/img/robotstore.html
+
+Best for: Robot chassis parts, motors, batteries, connectors, power electronics, and components ordered ahead for pickup.
+
+
+MAKER NEXUS - SUNNYVALE
+-----------------------
+
+Address: 1330 Orleans Drive, Sunnyvale, CA
+Hours listed: 10am-10pm, seven days a week
+Site: https://www.makernexus.org/
+
+This may be a better "deal" than buying tools immediately:
+- Limited membership: $75/month, including electronics lab/bench tools and 3D printers.
+- Hobbyist membership: $160/month, adding the broader wood, metal, machine, laser, and fabrication shops.
+- Equipment training may be required and can cost extra.
+
+Use it to try bench instruments, Prusa FDM printers, and fabrication workflows before spending $100-$400 on more equipment. It is especially attractive for one concentrated month of chassis plates, LiDAR mounts, and electronics bring-up.
+
+
+PROPOSED PURCHASE PLANS
+=======================
+
+PLAN A - SMALL-PARTS MICRO CENTER RUN
+-------------------------------------
+
+[ ] DRV8833: $5.99, only if the selected motors fit its voltage/current limits
+[ ] Klein MM325: $34.99 if a trustworthy meter is not already covered
+[ ] Heat shrink, locking connectors, switch/fuse, capacitors, standoffs, and fasteners as needed
+
+Known subtotal: $40.98 before tax and before the as-needed small parts.
+
+This is support hardware, not a complete rover. Do not add random motors just to finish the cart.
+
+
+PLAN B - BEST SERIOUS ROVER FOUNDATION
+--------------------------------------
+
+[ ] Order Pololu Romi chassis + encoder pair + motor/power board: about $76.37 with the time-limited 10% coupon, before tax/shipping
+[ ] Buy 6-8 identical NiMH AA cells and a proper smart charger
+[ ] Add a multimeter if needed, plus locking connectors, switch/fuse, capacitors, standoffs, and heat shrink
+[ ] Connect the controller already on hand after verifying logic levels and the wiring diagrams
+
+This is the recommended plan. It produces the platform your first six repo milestones need without prematurely buying the Pi or LiDAR.
+
+
+PLAN C - ROS 2 / SLAM UPGRADE, LATER
+------------------------------------
+
+[ ] Robot-side regulated 5 V power sized for the Pi and USB sensor load
+[ ] Orbbec MS200 or Slamtec C1 2D LiDAR: about $99.99
+[ ] Rigid sensor mast and measured transform
+
+The LiDAR alone is about $99.99; robot-side regulation, cables, and a rigid mount are additional. The computer and storage already on hand are not included again. Buy this upgrade only after encoder odometry passes repeated 1 m straight and 90-degree turn tests.
+
+
+PLAN D - FABRICATION
+--------------------
+
+First choice: Use Maker Nexus or a local library/service for early mounts.
+
+If buying a printer:
+[ ] Bambu A1 at $279.99 is a better robot-fabrication choice than the $209.99 A1 mini because of its 256 mm bed.
+[ ] Add one spool of ordinary PLA or PETG; skip multicolor hardware initially.
+
+IN-STORE QUESTIONS TO ASK / CHECK WITH YOUR PHONE
+=================================================
+
+For every motor:
+[ ] Nominal voltage
+[ ] No-load current and speed
+[ ] Stall current
+[ ] Gear ratio and torque
+[ ] Encoder type, voltage, counts per motor revolution, and counts per wheel revolution
+[ ] Shaft dimensions, matching wheels, and brackets
+[ ] Datasheet/manual URL, not just packaging claims
+
+For every motor driver:
+[ ] Motor-voltage range
+[ ] Continuous current PER CHANNEL with realistic cooling
+[ ] Peak-current duration
+[ ] Logic-high compatibility with 3.3 V
+[ ] Brake/coast behavior
+[ ] Current limiting, fault, and thermal protection
+[ ] Enough headroom over measured motor stall current
+
+For chassis/kits:
+[ ] Differential drive, not mecanum, for the first mapping build
+[ ] Rigid encoder mounts and non-slipping wheel hubs
+[ ] Space for battery, switch, fuse, controller, driver, wiring, and later Pi/LiDAR
+[ ] M2/M3 or clearly documented mounting pattern
+[ ] Easy battery access and a reachable physical power switch
+[ ] Slow enough for safe indoor tests
+
+For batteries/power:
+[ ] Exact chemistry and cell count
+[ ] Correct matching charger
+[ ] Continuous and peak current capability
+[ ] Fuse and main-switch plan
+[ ] Separate motor and logic regulation with an intentional shared ground
+[ ] No custom multi-cell lithium pack as a beginner shortcut
+
+For LiDAR/cameras:
+[ ] Linux ARM64 driver and ROS 2 package for the intended distribution
+[ ] Included data/power cable
+[ ] Power draw and connector
+[ ] Minimum and maximum range, scan rate, and indoor-light limitations
+[ ] Mount dimensions or downloadable CAD
+[ ] Return policy in case driver support is not as advertised
+
+
+FINAL "DO NOT FORGET" LIST
+==========================
+
+[ ] Multimeter with working current fuse
+[ ] Safety glasses
+[ ] Small metric screwdriver/hex set
+[ ] Wire stripper and flush cutters
+[ ] Heat shrink and strain relief
+[ ] Main power switch and fuse
+[ ] Locking connectors for battery and motors
+[ ] Extra headers and correct USB data cables (not charge-only cables)
+[ ] M2/M3 standoffs, screws, nuts, and washers
+[ ] Labels or colored heat shrink for polarity and motor channels
+[ ] Notebook/test-log habit: motor voltage, current, PWM, battery sag, temperature, encoder counts
+
+
+QUICK BOTTOM LINE
+=================
+
+Buy/inspect at Micro Center now:
+1. A real multimeter if you lack one
+2. Locking connectors, switch/fuse, heat shrink, capacitors, standoffs, and fasteners
+3. DRV8833 only after confirming the chosen motor current
+
+Best platform purchase:
+- Pololu Romi chassis + encoders + motor/power board, using JULY4SALE26 before it expires July 13, 2026.
+
+SOURCE LINKS / PRICE CHECKS
+===========================
+
+Micro Center Santa Clara store:
+https://www.microcenter.com/site/stores/santa-clara.aspx
+
+Micro Center boards and current Santa Clara stock/prices:
+https://www.microcenter.com/search/search_results.aspx?fq=category%3ABoards%2FProjects%7C734&storeid=195
+
+Micro Center electronic kits:
+https://www.microcenter.com/search/search_results.aspx?fq=category%3AElectronic+Kits%7C709&storeid=195
+
+Micro Center electronic parts / LiDAR:
+https://www.microcenter.com/search/search_results.aspx?fq=category%3AElectronic+Parts%7C689&storeid=195
+
+Micro Center test equipment:
+https://www.microcenter.com/search/search_results.aspx?fq=Category%3AMultiMeters%60+Test+Equipment%7C541&storeid=195
+
+Micro Center 3D printers:
+https://www.microcenter.com/search/search_results.aspx?fq=category%3A3D+Printers%7C701&storeID=195
+
+Pololu Romi chassis and accessories:
+https://www.pololu.com/product/3500
+https://www.pololu.com/product/3542
+https://www.pololu.com/product/3543
+https://www.pololu.com/product/3544
+
+Hiwonder direct encoder motor:
+https://www.hiwonder.com/products/tt-motor-plastic
+
+Slamtec RPLIDAR C1 official information/support:
+https://www.slamtec.com/en/c1
+https://www.slamtec.com/en/support
+
+Orbbec MS200 manual/docs:
+https://www.orbbec.com/wp-content/uploads/2023/07/MS200-dToF-Lidar-user-manual-A0-20230605-1.pdf
+https://doc.orbbec.com/
+
+Central Computers pickup and Pi listings:
+https://www.centralcomputer.com/pickup-and-shipping
+https://www.centralcomputer.com/all-products/hardware/maker-diy/pi.html
+
+Anchor Electronics:
+https://anchor-electronics.com/contact/
+
+Jameco Robot Store:
+https://www.jameco.com/Jameco/Robot/img/robotstore.html
+
+Maker Nexus:
+https://www.makernexus.org/
+
+Prices, promotions, and inventory are snapshots, not guarantees. Confirm the final price, model number, return policy, and stock before driving or paying.
