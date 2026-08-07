@@ -1,42 +1,34 @@
 import { CheckCircle2 } from "lucide-react";
 
-import { badgeClasses } from "@/components/home/badge-classes";
 import { SectionHeading } from "@/components/home/section-heading";
-import { curriculumStages } from "@/data/site-content";
+import { curriculumPillars } from "@/data/site-content";
 
 export function CurriculumSection() {
   return (
     <section id="curriculum" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionHeading
-        title="A staged route from foundations to autonomous systems."
-        description="Each stage balances theory, implementation, and build practice so the material compounds instead of becoming a list of disconnected courses."
+        title="Robotics is built on six connected pillars."
+        description="Each pillar is an enduring subject area. Learn within a pillar, then integrate across them in complete robot systems."
       />
 
-      <div className="grid gap-4 lg:grid-cols-4">
-        {curriculumStages.map((stage) => (
+      <div className="grid gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+        {curriculumPillars.map((pillar) => (
           <article
-            key={stage.id}
-            className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm"
+            key={pillar.id}
+            className="border-t border-zinc-300 py-8"
           >
             <div className="flex flex-col gap-3">
               <h3 className="text-xl font-bold leading-tight tracking-normal">
-                <span className="text-zinc-500">{stage.label}.</span> {stage.title}
+                {pillar.title}
               </h3>
-              <p className="text-base text-zinc-600">{stage.summary}</p>
+              <p className="text-base font-medium leading-7 text-zinc-700">{pillar.summary}</p>
             </div>
             <div className="mt-5 space-y-5">
-              <div>
-                <p className="mb-2 text-sm font-bold">Topics</p>
-                <div className="flex flex-wrap gap-2">
-                  {stage.topics.map((topic) => (
-                    <span key={topic} className={badgeClasses.outline}>
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <p className="text-sm font-semibold leading-6 text-zinc-500">
+                {pillar.topics.map((topic) => topic.name).join(", ")}
+              </p>
               <ul className="space-y-3">
-                {stage.outcomes.map((outcome) => (
+                {pillar.outcomes.slice(0, 2).map((outcome) => (
                   <li key={outcome} className="flex gap-2 text-sm">
                     <CheckCircle2
                       className="mt-0.5 size-4 shrink-0 text-emerald-700"

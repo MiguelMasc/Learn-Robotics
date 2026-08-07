@@ -1,13 +1,20 @@
-export type CurriculumStage = {
+export type CurriculumPillar = {
   id: string;
   label: string;
   title: string;
   summary: string;
   emphasis: string;
   outcomes: string[];
-  topics: string[];
+  topics: CurriculumTopic[];
   checkpoints: string[];
   practice: string[];
+  projectSlugs: string[];
+};
+
+export type CurriculumTopic = {
+  name: string;
+  detail: string;
+  methods: string[];
 };
 
 export type Resource = {
@@ -66,108 +73,388 @@ export type PublishedProject = Project & {
   proposal: ProjectProposal;
 };
 
-export const curriculumStages: CurriculumStage[] = [
+export const curriculumPillars: CurriculumPillar[] = [
   {
-    id: "foundations",
-    label: "Stage 1",
-    title: "Foundations",
+    id: "mathematics-computation",
+    label: "Foundations",
+    title: "Mathematics & Computation",
     summary:
-      "Build the math, programming, and physics base needed to reason about robots as moving physical systems.",
-    emphasis: "Learn to describe motion, write small simulations, and explain robot behavior with math instead of guesswork.",
-    topics: ["Calculus", "Python", "Mechanics", "Linear algebra", "Robotics overview"],
+      "The language for describing motion, uncertainty, algorithms, and the behavior of complete robot systems.",
+    emphasis:
+      "Use mathematics and code as working engineering tools: model a behavior, simulate it, inspect the result, and explain what changed.",
+    topics: [
+      {
+        name: "Linear algebra",
+        detail:
+          "Represent coordinate frames, rigid transforms, velocities, and sensor models with vectors and matrices. Use decompositions to solve inverse problems and reason about rank, observability, and numerical conditioning.",
+        methods: ["SE(2) / SE(3)", "Eigenvalues & SVD", "Least squares"],
+      },
+      {
+        name: "Calculus",
+        detail:
+          "Relate position, velocity, acceleration, and energy through derivatives and integrals. Apply multivariable derivatives to kinematics, sensitivity analysis, and gradient-based optimization.",
+        methods: ["Jacobians", "Gradients", "Numerical integration"],
+      },
+      {
+        name: "Differential equations",
+        detail:
+          "Model how mechanical, electrical, and control states evolve over time. Analyze equilibrium behavior, linearize nonlinear dynamics, and simulate continuous and discrete-time systems.",
+        methods: ["State-space models", "ODE solvers", "Linearization"],
+      },
+      {
+        name: "Probability",
+        detail:
+          "Describe sensor noise, process uncertainty, and belief over robot state. Work with conditional probability, covariance, likelihoods, and recursive Bayesian inference.",
+        methods: ["Bayes filters", "Covariance", "Gaussian models"],
+      },
+      {
+        name: "Programming",
+        detail:
+          "Implement reliable robot software across high-level experimentation and performance-critical runtime code. Manage concurrency, memory, hardware interfaces, tests, and diagnostic logging.",
+        methods: ["Python & C++", "Automated testing", "Concurrency"],
+      },
+      {
+        name: "Algorithms",
+        detail:
+          "Choose data structures and algorithms by correctness, computational complexity, memory use, and real-time constraints. Emphasize graph search, spatial indexing, and online computation.",
+        methods: ["Graphs & trees", "A* search", "Complexity analysis"],
+      },
+    ],
     outcomes: [
-      "Write clean Python programs and simple simulations.",
-      "Use vectors, matrices, and physics to describe motion.",
-      "Explain how sensing, planning, and control fit together.",
+      "Represent pose, motion, and uncertainty with vectors, matrices, and probability.",
+      "Write clear programs and choose data structures for robotics problems.",
+      "Turn a physical idea into a model, simulation, and testable prediction.",
     ],
     checkpoints: [
       "Simulate a point robot moving through 2D space.",
-      "Plot position, velocity, and acceleration from sampled data.",
-      "Explain frames, vectors, and basic forces in plain language.",
-    ],
-    practice: [
-      "Spend most build time in Python notebooks or small scripts.",
-      "Keep a short engineering log for every mini-experiment.",
-      "Pair every math topic with a visible robot-motion example.",
-    ],
-  },
-  {
-    id: "core-engineering",
-    label: "Stage 2",
-    title: "Core Engineering",
-    summary:
-      "Add algorithms, electronics, probability, and dynamic systems so software can meet hardware cleanly.",
-    emphasis: "Connect software decisions to physical signals, circuit limits, and system behavior over time.",
-    topics: [
-      "Differential equations",
-      "Data structures",
-      "E&M",
-      "Probability",
-      "Circuits",
-    ],
-    outcomes: [
-      "Analyze dynamic behavior and uncertainty.",
-      "Choose data structures for planning and perception tasks.",
-      "Prototype and debug basic electronic subsystems.",
-    ],
-    checkpoints: [
-      "Breadboard and measure a sensor circuit safely.",
       "Use graph search to route through a grid world.",
-      "Read a datasheet well enough to choose a motor driver or sensor.",
+      "Plot and interpret position, velocity, acceleration, and noisy measurements.",
     ],
     practice: [
-      "Use a multimeter before trusting software readings.",
-      "Write short notes on voltage, current, timing, and failure symptoms.",
-      "Convert project bugs into repeatable tests or measurements.",
+      "Pair every mathematical idea with a visible robot example.",
+      "Keep units, coordinate frames, and assumptions explicit.",
+      "Prefer small reproducible scripts over unexplained calculations.",
+    ],
+    projectSlugs: ["2d-robot-simulator"],
+  },
+  {
+    id: "mechanics-design",
+    label: "Physical systems",
+    title: "Mechanics & Robot Design",
+    summary:
+      "How geometry, forces, materials, actuators, and mechanisms turn intent into reliable physical motion.",
+    emphasis:
+      "Treat the robot body as part of the computation. Good geometry, transmission choices, and mechanical limits make every controller easier.",
+    topics: [
+      {
+        name: "Kinematics",
+        detail:
+          "Describe robot configuration and motion without considering forces. Derive forward and inverse kinematics, velocity mappings, singularities, and workspace constraints for mobile bases and manipulators.",
+        methods: ["Product of exponentials", "Jacobians", "Inverse kinematics"],
+      },
+      {
+        name: "Dynamics",
+        detail:
+          "Relate forces and torques to acceleration using mass, inertia, Coriolis, gravity, friction, and contact models. Use the model for simulation, actuator sizing, and model-based control.",
+        methods: ["Newton-Euler", "Lagrangian mechanics", "Rigid-body simulation"],
+      },
+      {
+        name: "Statics & structures",
+        detail:
+          "Trace load paths through frames, joints, fasteners, and supports. Evaluate stress, deflection, buckling, fatigue, and safety factors under nominal and worst-case loading.",
+        methods: ["Free-body diagrams", "Beam theory", "FEA fundamentals"],
+      },
+      {
+        name: "CAD & fabrication",
+        detail:
+          "Create parametric parts and assemblies with manufacturable geometry, controlled interfaces, and service access. Account for tolerance stacks across printed, machined, laser-cut, and sheet components.",
+        methods: ["Parametric CAD", "Tolerance analysis", "DFMA"],
+      },
+      {
+        name: "Actuators",
+        detail:
+          "Select DC, BLDC, servo, stepper, pneumatic, or linear actuators from torque-speed, force-velocity, duty-cycle, thermal, precision, mass, and efficiency requirements.",
+        methods: ["Torque-speed curves", "Thermal limits", "Efficiency maps"],
+      },
+      {
+        name: "Transmissions",
+        detail:
+          "Transform speed, torque, and motion through gears, belts, chains, lead screws, cables, and compliant elements. Quantify backlash, stiffness, reflected inertia, efficiency, and failure modes.",
+        methods: ["Gear ratios", "Backlash", "Compliance"],
+      },
+    ],
+    outcomes: [
+      "Model rigid-body motion, loads, torque, speed, and power.",
+      "Choose actuators and transmissions from measurable requirements.",
+      "Design serviceable mechanisms with appropriate tolerances and safety margins.",
+    ],
+    checkpoints: [
+      "Create and explain a drivetrain or linkage model.",
+      "Produce a CAD assembly with interfaces and fasteners defined.",
+      "Compare actuator options using torque-speed, weight, and power evidence.",
+    ],
+    practice: [
+      "Prototype the riskiest mechanism before polishing the full design.",
+      "Measure backlash, friction, flex, heat, and wear.",
+      "Design for assembly, maintenance, and safe failure.",
+    ],
+    projectSlugs: ["programmable-rc-car", "autonomous-development-quadcopter"],
+  },
+  {
+    id: "electronics-embedded",
+    label: "Hardware",
+    title: "Electronics & Embedded Systems",
+    summary:
+      "The circuits, power paths, interfaces, and real-time firmware that connect computation to the physical machine.",
+    emphasis:
+      "Make power, timing, signal levels, and failure behavior visible. A robot is only as dependable as its electrical and firmware foundations.",
+    topics: [
+      {
+        name: "Circuits",
+        detail:
+          "Design analog and digital signal paths for sensing, conditioning, switching, and protection. Verify voltage levels, current paths, impedance, bandwidth, grounding, and component tolerances.",
+        methods: ["Kirchhoff analysis", "Op-amps & filters", "Signal conditioning"],
+      },
+      {
+        name: "Power systems",
+        detail:
+          "Architect battery, regulator, distribution, protection, and grounding networks for pulsed robotic loads. Budget steady-state and peak current while managing brownouts, heat, EMI, and stored-energy hazards.",
+        methods: ["Power budgets", "Battery management", "Protection & grounding"],
+      },
+      {
+        name: "Microcontrollers",
+        detail:
+          "Use timers, interrupts, ADCs, DMA, memory, and peripheral blocks to acquire sensors and command actuators deterministically. Separate hardware abstraction from application state logic.",
+        methods: ["Interrupts & DMA", "Timers / PWM / ADC", "Hardware abstraction"],
+      },
+      {
+        name: "Motor drives",
+        detail:
+          "Control current and commutation through H-bridges, stepper drivers, and electronic speed controllers. Handle switching losses, regenerative energy, current limits, dead time, and motor protection.",
+        methods: ["PWM & H-bridges", "Current sensing", "FOC fundamentals"],
+      },
+      {
+        name: "Digital interfaces",
+        detail:
+          "Connect sensors, controllers, and computers using buses selected for bandwidth, latency, distance, noise immunity, and fault tolerance. Design framing, error detection, and recovery behavior.",
+        methods: ["UART", "SPI / I2C", "CAN bus"],
+      },
+      {
+        name: "Real-time firmware",
+        detail:
+          "Schedule acquisition, estimation, control, and communications against explicit deadlines. Use state machines, watchdogs, bounded execution, and fault states to keep the robot predictable.",
+        methods: ["RTOS scheduling", "State machines", "Watchdogs"],
+      },
+    ],
+    outcomes: [
+      "Read schematics and datasheets well enough to select and connect components.",
+      "Build firmware for sensing, actuation, communication, and watchdog behavior.",
+      "Budget voltage, current, thermal load, bandwidth, and timing margins.",
+    ],
+    checkpoints: [
+      "Breadboard and measure a sensor or driver circuit safely.",
+      "Control a motor with bounded commands and a command-timeout stop.",
+      "Log power, timing, and fault state during a repeatable bench test.",
+    ],
+    practice: [
+      "Use a multimeter or oscilloscope before trusting software readings.",
+      "Keep motor power, logic power, grounding, and protection explicit.",
+      "Test firmware interfaces without moving the full robot first.",
+    ],
+    projectSlugs: [
+      "line-following-robot",
+      "encoder-odometry-test-stand",
+      "arduino-r4-ros-2-base-bridge",
     ],
   },
   {
-    id: "robotics-core",
-    label: "Stage 3",
-    title: "Robotics Core",
+    id: "sensing-perception-estimation",
+    label: "Observation",
+    title: "Sensing, Perception & Estimation",
     summary:
-      "Study the robot-specific core: kinematics, dynamics, controls, sensors, embedded systems, and ROS 2.",
-    emphasis: "Build the mental model for mobile robots: motion, feedback, sensing, transforms, and robot software architecture.",
-    topics: ["Kinematics", "Controls", "Sensors", "Embedded systems", "ROS 2"],
+      "How a robot converts imperfect measurements into useful estimates of itself, other agents, and the surrounding world.",
+    emphasis:
+      "A sensor produces data, not truth. Calibrate it, model its uncertainty, combine evidence, and validate estimates against reality.",
+    topics: [
+      {
+        name: "Sensor physics",
+        detail:
+          "Understand how encoders, IMUs, cameras, LiDAR, radar, force sensors, and range sensors convert physical phenomena into measurements. Quantify resolution, range, field of view, bias, noise, and latency.",
+        methods: ["Calibration", "Error budgets", "Sensor characterization"],
+      },
+      {
+        name: "Signal processing",
+        detail:
+          "Sample, filter, transform, and detect structure in time-series and spatial data without destroying useful dynamics. Account for aliasing, phase delay, quantization, and bandwidth.",
+        methods: ["Nyquist sampling", "FIR / IIR filters", "FFT analysis"],
+      },
+      {
+        name: "State estimation",
+        detail:
+          "Fuse models and asynchronous measurements into a belief over pose, velocity, bias, and other hidden states. Track covariance and reject inconsistent observations rather than returning a single unqualified value.",
+        methods: ["Kalman / EKF", "Particle filters", "Sensor fusion"],
+      },
+      {
+        name: "Computer vision",
+        detail:
+          "Recover geometry, motion, objects, and semantics from images or depth data. Combine camera models with features, optimization, and learned representations while measuring detection and pose error.",
+        methods: ["Projective geometry", "Features & optical flow", "CNN detectors"],
+      },
+      {
+        name: "Localization",
+        detail:
+          "Estimate robot pose relative to a local or global frame using odometry, landmarks, scans, visual-inertial data, or external infrastructure. Diagnose drift and loss of observability.",
+        methods: ["Wheel odometry", "Scan matching", "Visual-inertial odometry"],
+      },
+      {
+        name: "Mapping",
+        detail:
+          "Build geometric or semantic environment representations while accounting for uncertain pose and observations. Optimize trajectories, detect loop closures, and maintain maps suited to downstream planning.",
+        methods: ["Occupancy grids", "Pose graphs", "SLAM loop closure"],
+      },
+    ],
     outcomes: [
-      "Model robot motion with transforms and Jacobians.",
-      "Implement PID and state-space control loops.",
-      "Build ROS 2 nodes, topics, services, and transforms.",
+      "Calibrate sensors and characterize noise, bias, drift, and latency.",
+      "Estimate robot state by combining encoder, inertial, range, or visual data.",
+      "Build perception pipelines that produce task-relevant world models.",
     ],
     checkpoints: [
-      "Tune a PID loop and explain the effect of each term.",
-      "Estimate robot pose from encoder or IMU data.",
-      "Build a small ROS 2 graph with nodes, topics, and launch files.",
+      "Calibrate a camera, IMU, encoder, or range sensor and publish the error data.",
+      "Estimate pose from recorded measurements with uncertainty visible.",
+      "Create a map or detection pipeline and test it under changed conditions.",
     ],
     practice: [
-      "Log data before tuning control loops.",
-      "Draw transform trees and message flow diagrams.",
-      "Separate hardware tests from autonomy tests.",
+      "Save raw data so perception experiments can be replayed.",
+      "Track timestamps and coordinate frames with every measurement.",
+      "Evaluate false positives, missed detections, drift, and degraded conditions.",
     ],
+    projectSlugs: ["ros-2-sensor-dashboard", "lidar-slam-rover"],
   },
   {
-    id: "specialization",
-    label: "Stage 4",
-    title: "Specialization and Capstone",
+    id: "control-planning-intelligence",
+    label: "Decision & action",
+    title: "Control, Planning & Intelligence",
     summary:
-      "Turn the core into autonomy with perception, planning, learning, safety, and an integrated capstone.",
-    emphasis: "Integrate perception, planning, and control into complete systems with clear safety and testing habits.",
-    topics: ["Computer vision", "Motion planning", "Machine learning", "Safety", "Capstone"],
+      "How robots regulate motion, choose actions, plan through constraints, and adapt when the world does not match the model.",
+    emphasis:
+      "Close the loop with measured evidence. Build from stable feedback and explicit planning before adding learning-based behavior.",
+    topics: [
+      {
+        name: "Feedback control",
+        detail:
+          "Regulate position, velocity, force, and attitude despite disturbance and model error. Analyze stability, transient response, steady-state error, robustness, saturation, and sampling effects.",
+        methods: ["PID", "Bode / root locus", "State feedback"],
+      },
+      {
+        name: "System identification",
+        detail:
+          "Estimate dynamic models from commanded inputs and measured outputs. Design excitation experiments, fit parameters, validate residuals, and separate structural model error from sensor noise.",
+        methods: ["Step response", "Parameter estimation", "Frequency response"],
+      },
+      {
+        name: "Motion planning",
+        detail:
+          "Search configuration and state spaces for collision-free, dynamically feasible motion. Compare completeness, optimality, computation time, clearance, smoothness, and replanning performance.",
+        methods: ["A* / D*", "RRT / PRM", "Trajectory generation"],
+      },
+      {
+        name: "Optimization",
+        detail:
+          "Express estimation, planning, and control as objectives constrained by robot dynamics, actuator limits, geometry, and safety. Use numerical solvers while monitoring feasibility and conditioning.",
+        methods: ["Convex optimization", "Nonlinear programming", "Model predictive control"],
+      },
+      {
+        name: "Machine learning",
+        detail:
+          "Learn perception models, dynamics, policies, or residual corrections from data. Control dataset quality, uncertainty, distribution shift, inference latency, and sim-to-real validation.",
+        methods: ["Supervised learning", "Reinforcement learning", "Sim-to-real"],
+      },
+      {
+        name: "Decision-making",
+        detail:
+          "Coordinate goals, modes, recovery, and resource constraints above the trajectory level. Make transitions auditable and keep uncertainty, preconditions, and fallback states explicit.",
+        methods: ["Finite-state machines", "Behavior trees", "MDPs"],
+      },
+    ],
     outcomes: [
-      "Use vision and learning models for robot perception.",
-      "Plan paths with graph search, sampling, and trajectories.",
-      "Deliver an integrated robot system with documentation.",
+      "Design and tune feedback controllers from models and logged response data.",
+      "Plan collision-aware paths and trajectories under physical constraints.",
+      "Choose when rules, optimization, or learning are appropriate for a behavior.",
     ],
     checkpoints: [
-      "Compare at least two planning or perception approaches on the same task.",
-      "Run a robot behavior in simulation before hardware testing.",
-      "Publish a capstone writeup with architecture, tests, failures, and demo media.",
+      "Tune a PID loop and explain overshoot, settling time, and steady-state error.",
+      "Compare two planners on the same map, constraints, and evaluation metrics.",
+      "Demonstrate a bounded autonomous behavior with a defined fallback state.",
     ],
     practice: [
-      "Keep safety constraints visible in every design review.",
-      "Prefer measurable demos over vague autonomy claims.",
-      "Document assumptions, limits, and known failure modes.",
+      "Log data before tuning or retraining.",
+      "Separate controller, planner, and perception failures in tests.",
+      "Keep constraints and fallback behavior explicit in every autonomy demo.",
     ],
+    projectSlugs: ["pid-balancing-rig", "autonomous-room-mapper"],
+  },
+  {
+    id: "software-integration-safety",
+    label: "Complete systems",
+    title: "Robot Software, Integration & Safety",
+    summary:
+      "The architecture and engineering discipline that make mechanical, electrical, sensing, and autonomy subsystems work as one robot.",
+    emphasis:
+      "Integration is a core technical subject. Define interfaces, simulate risky behavior, test subsystems, manage faults, and preserve human authority.",
+    topics: [
+      {
+        name: "ROS 2",
+        detail:
+          "Compose distributed robot software from nodes with typed messages, services, actions, parameters, lifecycle state, and transforms. Configure QoS for reliability, latency, and lossy networks.",
+        methods: ["Nodes / topics / actions", "QoS policies", "tf2 transforms"],
+      },
+      {
+        name: "Simulation",
+        detail:
+          "Exercise robot models, controllers, perception, and autonomy in repeatable virtual environments. Define where software-in-the-loop, hardware-in-the-loop, and synthetic data are valid or misleading.",
+        methods: ["Gazebo / Isaac Sim", "SIL / HIL", "Synthetic data"],
+      },
+      {
+        name: "System architecture",
+        detail:
+          "Partition responsibilities across embedded controllers, robot computers, networks, operators, and cloud services. Specify interfaces, timing, ownership, lifecycle, and degraded operating modes.",
+        methods: ["Interface contracts", "State ownership", "Time synchronization"],
+      },
+      {
+        name: "Verification",
+        detail:
+          "Test components, interfaces, integrated behaviors, and failure responses against measurable requirements. Replay logs, inject faults, track regressions, and preserve evidence for every release.",
+        methods: ["Unit & integration tests", "Log replay", "Fault injection"],
+      },
+      {
+        name: "Human-robot interaction",
+        detail:
+          "Design operator commands, feedback, shared autonomy, handoff, and recovery around human attention and physical capability. Evaluate workload, trust calibration, usability, and mode awareness.",
+        methods: ["Teleoperation", "Shared autonomy", "Human-factors testing"],
+      },
+      {
+        name: "Safety & ethics",
+        detail:
+          "Identify hazards across mechanics, power, motion, autonomy, data, and human interaction. Convert risk analysis into limits, interlocks, monitored assumptions, safe states, and accountable deployment decisions.",
+        methods: ["FMEA / STPA", "Safety envelopes", "Applicable standards"],
+      },
+    ],
+    outcomes: [
+      "Design robot software around clear interfaces, messages, frames, and states.",
+      "Integrate and validate subsystems through simulation, replay, and hardware tests.",
+      "Define safety envelopes, fault responses, operator controls, and ethical limits.",
+    ],
+    checkpoints: [
+      "Build a ROS 2 graph with documented interfaces and transform trees.",
+      "Run subsystem acceptance tests before an integrated autonomy test.",
+      "Publish architecture, safety constraints, evidence, failures, and recovery behavior.",
+    ],
+    practice: [
+      "Use interface contracts and test doubles to isolate subsystem work.",
+      "Keep emergency stops, command timeouts, and operating limits testable.",
+      "Treat documentation and postmortems as engineering deliverables.",
+    ],
+    projectSlugs: ["web-teleop-controller", "ros-2-embodied-assistant", "mobile-manipulator"],
   },
 ];
 
