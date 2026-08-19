@@ -18,17 +18,20 @@ const resourceFilters: Array<{
 const badgeBase =
   "inline-flex w-fit items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold uppercase tracking-normal";
 
-export function ResourceTabs() {
+export function ResourceTabs({ limit }: { limit?: number }) {
   const [activeFilter, setActiveFilter] =
     useState<(typeof resourceFilters)[number]["value"]>("all");
 
   const visibleResources = useMemo(() => {
-    if (activeFilter === "all") {
-      return resources;
-    }
+    const filteredResources =
+      activeFilter === "all"
+        ? resources
+        : resources.filter((resource) => resource.category === activeFilter);
 
-    return resources.filter((resource) => resource.category === activeFilter);
-  }, [activeFilter]);
+    return typeof limit === "number"
+      ? filteredResources.slice(0, limit)
+      : filteredResources;
+  }, [activeFilter, limit]);
 
   return (
     <div className="space-y-5">
