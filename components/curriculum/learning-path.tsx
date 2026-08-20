@@ -2,8 +2,19 @@
 
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
-import { ArrowRight, GitBranch, LockKeyhole, Route } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  Clock3,
+  GitBranch,
+  Hammer,
+  LockKeyhole,
+  Route,
+  Wrench,
+} from "lucide-react";
 
+import { courseSyllabi } from "@/data/course-syllabi";
 import type { LearningPathCourse, LearningPathLevel } from "@/data/learning-path";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +31,13 @@ const areaTone: Record<LearningPathCourse["area"], string> = {
   "Integration & Research": "border-zinc-700 bg-zinc-100",
 };
 
+const completionCriteria = [
+  "Complete every required module and revise missed work after review.",
+  "Deliver project source or design files, assumptions, tests, results, and a concise technical report.",
+  "Meet the project constraints and explain at least one failure mode, limitation, or tradeoff.",
+  "Reproduce the final artifact or experiment from a clean setup.",
+];
+
 export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
   const [selectedId, setSelectedId] = useState(courses[0]?.id ?? "");
   const byId = useMemo(() => new Map(courses.map((course) => [course.id, course])), [courses]);
@@ -31,10 +49,13 @@ export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
 
   if (!selected) return null;
 
+  const selectedSyllabus = courseSyllabi[selected.id];
   const choose = (id: string) => {
     setSelectedId(id);
     requestAnimationFrame(() =>
-      document.getElementById("learning-path-details")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      document
+        .getElementById("learning-path-details")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" }),
     );
   };
 
@@ -53,7 +74,9 @@ export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
         <div className="flex flex-wrap gap-4 text-xs font-bold text-zinc-600">
           <span>{courses.filter((course) => course.prerequisites.length === 0).length} entry points</span>
           <span>{courses.length} courses</span>
-          <span>{courses.reduce((total, course) => total + course.prerequisites.length, 0)} prerequisite links</span>
+          <span>
+            {courses.reduce((total, course) => total + course.prerequisites.length, 0)} prerequisite links
+          </span>
         </div>
       </div>
 
@@ -61,46 +84,62 @@ export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
         {levels.map((level) => (
           <section key={level} aria-labelledby={`level-${level}`} className="border border-zinc-300 bg-white">
             <header className="border-b border-zinc-300 bg-zinc-950 px-5 py-4 text-white">
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-300">Dependency band</p>
-              <h2 id={`level-${level}`} className="mt-1 text-2xl font-black">{level}</h2>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-300">
+                Dependency band
+              </p>
+              <h2 id={`level-${level}`} className="mt-1 text-2xl font-black">
+                {level}
+              </h2>
             </header>
             <div className="grid gap-3 p-4">
-              {courses.filter((course) => course.level === level).map((course) => {
-                const isSelected = course.id === selected.id;
-                const isRequired = selected.prerequisites.includes(course.id);
-                const isUnlocked = course.prerequisites.includes(selected.id);
+              {courses
+                .filter((course) => course.level === level)
+                .map((course) => {
+                  const isSelected = course.id === selected.id;
+                  const isRequired = selected.prerequisites.includes(course.id);
+                  const isUnlocked = course.prerequisites.includes(selected.id);
 
-                return (
-                  <button
-                    key={course.id}
-                    type="button"
-                    onClick={() => choose(course.id)}
-                    aria-pressed={isSelected}
-                    className={cn(
-                      "border-l-4 p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-zinc-950/20",
-                      areaTone[course.area],
-                      isSelected && "ring-4 ring-zinc-950/20",
-                      (isRequired || isUnlocked) && "shadow-[3px_3px_0_0_#18181b]",
-                    )}
-                  >
-                    <span className="text-[11px] font-black uppercase tracking-wider text-zinc-600">{course.area}</span>
-                    <span className="mt-1 block text-base font-black leading-tight text-zinc-950">{course.title}</span>
-                    <span className="mt-3 flex flex-wrap items-center gap-2 text-xs font-bold text-zinc-600">
-                      {course.prerequisites.length === 0
-                        ? "Entry point"
-                        : `${course.prerequisites.length} prerequisite${course.prerequisites.length === 1 ? "" : "s"}`}
-                      {isRequired ? <span className="text-emerald-800">Required by selection</span> : null}
-                      {isUnlocked ? <span className="text-rose-800">Unlocked next</span> : null}
-                    </span>
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={course.id}
+                      type="button"
+                      onClick={() => choose(course.id)}
+                      aria-pressed={isSelected}
+                      className={cn(
+                        "border-l-4 p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-zinc-950/20",
+                        areaTone[course.area],
+                        isSelected && "ring-4 ring-zinc-950/20",
+                        (isRequired || isUnlocked) && "shadow-[3px_3px_0_0_#18181b]",
+                      )}
+                    >
+                      <span className="text-[11px] font-black uppercase tracking-wider text-zinc-600">
+                        {course.area}
+                      </span>
+                      <span className="mt-1 block text-base font-black leading-tight text-zinc-950">
+                        {course.title}
+                      </span>
+                      <span className="mt-3 flex flex-wrap items-center gap-2 text-xs font-bold text-zinc-600">
+                        {course.prerequisites.length === 0
+                          ? "Entry point"
+                          : `${course.prerequisites.length} prerequisite${
+                              course.prerequisites.length === 1 ? "" : "s"
+                            }`}
+                        {isRequired ? <span className="text-emerald-800">Required by selection</span> : null}
+                        {isUnlocked ? <span className="text-rose-800">Unlocked next</span> : null}
+                      </span>
+                    </button>
+                  );
+                })}
             </div>
           </section>
         ))}
       </div>
 
-      <section id="learning-path-details" className="mt-12 scroll-mt-28 border-t-4 border-zinc-950 pt-8" aria-live="polite">
+      <section
+        id="learning-path-details"
+        className="mt-12 scroll-mt-28 border-t-4 border-zinc-950 pt-8"
+        aria-live="polite"
+      >
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-800">
@@ -108,6 +147,16 @@ export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
             </p>
             <h2 className="mt-3 text-3xl font-black leading-tight sm:text-4xl">{selected.title}</h2>
             <p className="mt-4 text-lg font-medium leading-8 text-zinc-700">{selected.summary}</p>
+            {selectedSyllabus ? (
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-y border-zinc-300 py-4 text-sm font-bold text-zinc-700">
+                <span className="flex items-center gap-2">
+                  <Clock3 className="size-4 text-emerald-800" aria-hidden="true" />
+                  {selectedSyllabus.duration}
+                </span>
+                <span>{selectedSyllabus.weeklyCommitment}</span>
+                <span>{selectedSyllabus.difficulty}</span>
+              </div>
+            ) : null}
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
             <RelationshipList
@@ -126,6 +175,40 @@ export function LearningPath({ courses }: { courses: LearningPathCourse[] }) {
             />
           </div>
         </div>
+
+        {selectedSyllabus ? (
+          <div className="mt-12 grid gap-8 border-t border-zinc-300 pt-10 lg:grid-cols-2">
+            <SyllabusBlock
+              icon={<BookOpen className="size-5" aria-hidden="true" />}
+              title="Required modules"
+              items={selectedSyllabus.modules}
+              ordered
+            />
+            <SyllabusBlock
+              icon={<Hammer className="size-5" aria-hidden="true" />}
+              title={`Course project — ${selectedSyllabus.project}`}
+              items={selectedSyllabus.milestones}
+              ordered
+            />
+            <SyllabusBlock
+              icon={<Wrench className="size-5" aria-hidden="true" />}
+              title="Tools and references"
+              items={[
+                ...selectedSyllabus.tools.map((tool) => `Tool: ${tool}`),
+                ...selectedSyllabus.references.map((reference) => `Reference: ${reference}`),
+              ]}
+            />
+            <SyllabusBlock
+              icon={<CheckCircle2 className="size-5" aria-hidden="true" />}
+              title="Completion criteria"
+              items={completionCriteria}
+            />
+            <div className="border-l-4 border-emerald-800 bg-emerald-50 p-6 lg:col-span-2">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-900">Next steps</p>
+              <p className="mt-2 text-lg font-bold leading-7 text-zinc-900">{selectedSyllabus.nextSteps}</p>
+            </div>
+          </div>
+        ) : null}
       </section>
     </div>
   );
@@ -146,7 +229,10 @@ function RelationshipList({
 }) {
   return (
     <div>
-      <h3 className="flex items-center gap-2 text-lg font-black">{icon}{title}</h3>
+      <h3 className="flex items-center gap-2 text-lg font-black">
+        {icon}
+        {title}
+      </h3>
       {courses.length === 0 ? (
         <p className="mt-3 text-sm font-medium leading-6 text-zinc-600">{empty}</p>
       ) : (
@@ -159,11 +245,44 @@ function RelationshipList({
               className="group flex w-full items-center justify-between gap-3 border-t border-zinc-300 py-3 text-left text-sm font-bold hover:text-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
             >
               {course.title}
-              <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <ArrowRight
+                className="size-4 shrink-0 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </button>
           ))}
         </div>
       )}
     </div>
+  );
+}
+
+function SyllabusBlock({
+  icon,
+  title,
+  items,
+  ordered = false,
+}: {
+  icon: ReactNode;
+  title: string;
+  items: string[];
+  ordered?: boolean;
+}) {
+  const List = ordered ? "ol" : "ul";
+
+  return (
+    <article className="border border-zinc-300 bg-white p-6">
+      <h3 className="flex items-start gap-3 text-xl font-black leading-6 text-zinc-950">
+        <span className="mt-0.5 text-emerald-800">{icon}</span>
+        {title}
+      </h3>
+      <List className={cn("mt-5 grid gap-3 text-sm font-medium leading-6 text-zinc-700", ordered && "list-decimal pl-5")}>
+        {items.map((item) => (
+          <li key={item} className={cn(!ordered && "flex gap-3 before:mt-2.5 before:size-1.5 before:shrink-0 before:bg-emerald-700")}>
+            {item}
+          </li>
+        ))}
+      </List>
+    </article>
   );
 }
