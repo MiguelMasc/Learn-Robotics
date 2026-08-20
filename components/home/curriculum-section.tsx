@@ -43,10 +43,10 @@ export function CurriculumSection() {
               <div className="mt-3 flex flex-wrap gap-2">
                 {pillar.topics.map((topic) => (
                   <span
-                    key={topic.name}
+                    key={topic}
                     className="rounded-md bg-zinc-100 px-3 py-1.5 text-sm font-semibold text-zinc-700"
                   >
-                    {topic.name}
+                    {topic}
                   </span>
                 ))}
               </div>
