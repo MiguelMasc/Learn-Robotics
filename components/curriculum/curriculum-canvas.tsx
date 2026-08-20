@@ -1,21 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowDown, Check, Route } from "lucide-react";
+import { Check, Route } from "lucide-react";
 import { TopicModalGrid } from "@/components/curriculum/topic-modal-grid";
 import type { CurriculumCourse } from "@/data/curriculum";
 import { cn } from "@/lib/utils";
 
 type Tone = keyof typeof tones;
-type CourseNode = { courseIndex: number; stage: number; row: number; tone: Tone };
-
-const stages = [
-  { number: "01", title: "Build the base", note: "Mechanics, circuits, and code" },
-  { number: "02", title: "Make it move", note: "Sensing, control, and ROS" },
-  { number: "03", title: "Add autonomy", note: "Estimation, planning, and timing" },
-  { number: "04", title: "Integrate", note: "Test complete robot behavior" },
-  { number: "05", title: "Deploy", note: "Prove safety and capability" },
-];
+type CourseNode = { courseIndex: number; column: number; row: number; tone: Tone };
 
 const tones = {
   mechanical: { card: "border-amber-500 bg-amber-50 hover:bg-amber-100", tab: "bg-amber-500 text-zinc-950", dot: "bg-amber-500", label: "Mechanics + control" },
@@ -28,18 +20,18 @@ const tones = {
 };
 
 const nodes: CourseNode[] = [
-  { courseIndex: 0, stage: 0, row: 0, tone: "mechanical" }, { courseIndex: 1, stage: 0, row: 1, tone: "electrical" }, { courseIndex: 6, stage: 0, row: 2, tone: "software" },
-  { courseIndex: 5, stage: 1, row: 0, tone: "mechanical" }, { courseIndex: 2, stage: 1, row: 1, tone: "autonomy" }, { courseIndex: 7, stage: 1, row: 2, tone: "software" },
-  { courseIndex: 3, stage: 2, row: 0, tone: "autonomy" }, { courseIndex: 4, stage: 2, row: 1, tone: "autonomy" }, { courseIndex: 8, stage: 2, row: 2, tone: "software" },
-  { courseIndex: 9, stage: 3, row: 0, tone: "integration" }, { courseIndex: 10, stage: 3, row: 1, tone: "integration" }, { courseIndex: 12, stage: 3, row: 2, tone: "human" },
-  { courseIndex: 11, stage: 4, row: 0, tone: "readiness" }, { courseIndex: 13, stage: 4, row: 1, tone: "readiness" },
+  { courseIndex: 0, column: 0, row: 0, tone: "mechanical" }, { courseIndex: 1, column: 0, row: 1, tone: "electrical" }, { courseIndex: 6, column: 0, row: 2, tone: "software" },
+  { courseIndex: 5, column: 1, row: 0, tone: "mechanical" }, { courseIndex: 2, column: 1, row: 1, tone: "autonomy" }, { courseIndex: 7, column: 1, row: 2, tone: "software" },
+  { courseIndex: 3, column: 2, row: 0, tone: "autonomy" }, { courseIndex: 4, column: 2, row: 1, tone: "autonomy" }, { courseIndex: 8, column: 2, row: 2, tone: "software" },
+  { courseIndex: 9, column: 3, row: 0, tone: "integration" }, { courseIndex: 10, column: 3, row: 1, tone: "integration" }, { courseIndex: 12, column: 3, row: 2, tone: "human" },
+  { courseIndex: 11, column: 4, row: 0, tone: "readiness" }, { courseIndex: 13, column: 4, row: 1, tone: "readiness" },
 ];
 const connections = [[0, 5], [0, 9], [1, 5], [1, 2], [6, 7], [5, 9], [2, 3], [2, 9], [7, 8], [7, 9], [3, 4], [4, 10], [8, 9], [9, 10], [9, 11], [10, 11], [10, 13], [12, 13], [11, 13]] as const;
-const canvas = { width: 1360, height: 690, left: 36, top: 118, column: 267, row: 174, cardWidth: 216, cardHeight: 132 };
+const canvas = { width: 1360, height: 570, left: 36, top: 36, column: 267, row: 174, cardWidth: 216, cardHeight: 132 };
 
 function pointFor(courseIndex: number, edge: "start" | "end") {
   const node = nodes.find((candidate) => candidate.courseIndex === courseIndex)!;
-  const x = canvas.left + node.stage * canvas.column;
+  const x = canvas.left + node.column * canvas.column;
   const y = canvas.top + node.row * canvas.row;
   return { x: edge === "start" ? x + canvas.cardWidth : x, y: y + canvas.cardHeight / 2 };
 }
@@ -63,9 +55,6 @@ export function CurriculumCanvas({ courses }: { courses: CurriculumCourse[] }) {
     <div className="hidden overflow-x-auto pb-4 md:block">
       <div className="relative overflow-hidden border border-zinc-300 bg-[radial-gradient(circle_at_center,_#d4d4d8_1px,_transparent_1px)] bg-[length:22px_22px]" style={{ width: canvas.width, height: canvas.height }}>
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/45 to-white/80" />
-        {stages.map((stage, index) => <div key={stage.number} className="absolute top-0 h-full border-l border-dashed border-zinc-300 px-5 pt-6" style={{ left: index * canvas.column, width: canvas.column }}>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-800">Stage {stage.number}</p><h3 className="mt-1 text-lg font-black">{stage.title}</h3><p className="mt-1 text-xs font-semibold text-zinc-500">{stage.note}</p>
-        </div>)}
         <svg className="pointer-events-none absolute inset-0 z-10" viewBox={`0 0 ${canvas.width} ${canvas.height}`} aria-hidden="true">
           <defs><marker id="curriculum-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#52525b" /></marker></defs>
           {connections.map(([from, to]) => {
@@ -75,29 +64,24 @@ export function CurriculumCanvas({ courses }: { courses: CurriculumCourse[] }) {
         </svg>
         {nodes.map((node) => {
           const course = courses[node.courseIndex]; const tone = tones[node.tone]; const selected = course.id === selectedId;
-          return <button key={course.id} type="button" onClick={() => selectCourse(course)} className={cn("absolute z-20 flex flex-col overflow-hidden border-2 text-left shadow-[4px_4px_0_0_#18181b] transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-zinc-950/25", tone.card, selected && "-translate-y-1 ring-4 ring-zinc-950/20")} style={{ left: canvas.left + node.stage * canvas.column, top: canvas.top + node.row * canvas.row, width: canvas.cardWidth, height: canvas.cardHeight }} aria-pressed={selected}>
-            <span className={cn("flex w-full items-center justify-between px-3 py-2 text-[11px] font-black uppercase tracking-wider", tone.tab)}>Course {String(node.courseIndex + 1).padStart(2, "0")}{selected ? <Check className="size-3.5" aria-hidden="true" /> : null}</span>
+          return <button key={course.id} type="button" onClick={() => selectCourse(course)} className={cn("absolute z-20 flex flex-col overflow-hidden border-2 text-left shadow-[4px_4px_0_0_#18181b] transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-zinc-950/25", tone.card, selected && "-translate-y-1 ring-4 ring-zinc-950/20")} style={{ left: canvas.left + node.column * canvas.column, top: canvas.top + node.row * canvas.row, width: canvas.cardWidth, height: canvas.cardHeight }} aria-pressed={selected}>
+            <span className={cn("flex h-2 w-full items-center justify-end", tone.tab)}>{selected ? <Check className="mr-2 size-3.5 translate-y-3" aria-hidden="true" /> : null}</span>
             <span className="flex grow items-center px-3 text-[15px] font-black leading-[1.18]">{course.title}</span><span className="px-3 pb-3 text-[11px] font-bold text-zinc-600">{course.topics.length} topic modules</span>
           </button>;
         })}
       </div>
     </div>
 
-    <div className="relative space-y-5 pl-7 md:hidden">
-      <div className="absolute bottom-7 left-[7px] top-7 w-px bg-zinc-400" aria-hidden="true" />
-      {stages.map((stage, stageIndex) => <section key={stage.number} className="relative">
-        <div className="absolute -left-7 top-1 size-3.5 rounded-full border-2 border-white bg-zinc-950 ring-1 ring-zinc-950" />
-        <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-800">Stage {stage.number}</p><h3 className="mt-1 text-xl font-black">{stage.title}</h3><p className="mt-1 text-sm font-semibold text-zinc-500">{stage.note}</p>
-        <div className="mt-4 grid gap-3">{nodes.filter((node) => node.stage === stageIndex).map((node) => {
-          const course = courses[node.courseIndex]; const tone = tones[node.tone]; const selected = course.id === selectedId;
-          return <button key={course.id} type="button" onClick={() => selectCourse(course)} className={cn("border-l-4 p-4 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950", tone.card, selected && "ring-2 ring-zinc-950")} aria-pressed={selected}><span className="text-xs font-black uppercase tracking-wider text-zinc-500">Course {String(node.courseIndex + 1).padStart(2, "0")}</span><span className="mt-1 block text-base font-black leading-tight">{course.title}</span></button>;
-        })}</div>{stageIndex < stages.length - 1 ? <ArrowDown className="my-5 size-4 text-zinc-500" aria-hidden="true" /> : null}
-      </section>)}
+    <div className="grid gap-3 md:hidden">
+      {nodes.map((node) => {
+        const course = courses[node.courseIndex]; const tone = tones[node.tone]; const selected = course.id === selectedId;
+        return <button key={course.id} type="button" onClick={() => selectCourse(course)} className={cn("border-l-4 p-4 text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950", tone.card, selected && "ring-2 ring-zinc-950")} aria-pressed={selected}><span className="block text-base font-black leading-tight">{course.title}</span></button>;
+      })}
     </div>
 
     <section id="course-details" className="mt-12 scroll-mt-28 border-t-4 border-zinc-950 pt-8" aria-live="polite">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
-        <div><div className="flex flex-wrap items-center gap-3"><span className={cn("px-3 py-1.5 text-xs font-black uppercase tracking-wider", tones[selectedNode.tone].tab)}>Course {String(selectedIndex + 1).padStart(2, "0")}</span><span className="text-xs font-black uppercase tracking-wider text-zinc-500">Stage {stages[selectedNode.stage].number} · {stages[selectedNode.stage].title}</span></div>
+        <div><span className={cn("inline-block h-2 w-16", tones[selectedNode.tone].tab)} aria-hidden="true" />
           <h2 className="mt-5 text-3xl font-black leading-tight sm:text-4xl">{selectedCourse.title}</h2><p className="mt-4 text-lg font-medium leading-8 text-zinc-700">{selectedCourse.summary}</p><p className="mt-5 border-l-4 border-emerald-700 pl-4 text-base font-bold leading-7">{selectedCourse.emphasis}</p>
         </div>
         <div><p className="mb-3 text-xs font-black uppercase tracking-[0.16em] text-zinc-500">Choose a topic to open its learning resources</p><TopicModalGrid topics={selectedCourse.topics} /></div>
