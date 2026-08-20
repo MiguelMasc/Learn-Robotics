@@ -47,9 +47,8 @@ export function HeroSection() {
               <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
-          <dl className="mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
+          <dl className="mt-12 grid max-w-2xl gap-4 sm:grid-cols-2">
             {[
-              ["4", "learning stages"],
               ["20", "core topics"],
               ["12", "starter projects"],
             ].map(([value, label]) => (
