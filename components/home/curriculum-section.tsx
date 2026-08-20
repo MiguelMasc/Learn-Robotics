@@ -1,14 +1,54 @@
 import { SectionHeading } from "@/components/home/section-heading";
-import { curriculumPillars } from "@/data/site-content";
+
+const subjects = [
+  {
+    id: "mechanical-design",
+    title: "Mechanical Design",
+    question: "What makes a robot strong, stable, and able to move?",
+    topics: ["Structures", "Mechanisms", "Materials", "CAD & fabrication"],
+  },
+  {
+    id: "electronics-hardware",
+    title: "Electronics & Hardware",
+    question: "How is everything powered and connected?",
+    topics: ["Power systems", "Microcontrollers", "Motor drivers", "Interfaces"],
+  },
+  {
+    id: "software-coding",
+    title: "Software & Coding",
+    question: "How do we turn an idea into instructions a robot can follow?",
+    topics: ["Python & C++", "ROS 2", "Simulation", "Testing"],
+  },
+] as const;
+
+const focuses = [
+  {
+    id: "perception",
+    title: "Perception",
+    question: "How can a robot see, hear, and understand what is around it?",
+    topics: ["Sensors", "Computer vision", "Audio", "Signal processing"],
+  },
+  {
+    id: "localization-mapping",
+    title: "Localization & Mapping",
+    question: "How does a robot explore a room without getting lost?",
+    topics: ["Odometry", "Localization", "Mapping", "SLAM"],
+  },
+  {
+    id: "motion-actuation",
+    title: "Motion & Actuation",
+    question: "How does a robot turn code into movement?",
+    topics: ["Locomotion", "Manipulation", "Actuators", "Feedback control"],
+  },
+  {
+    id: "planning-ai",
+    title: "Planning & AI",
+    question: "How does a robot decide what to do next?",
+    topics: ["Path planning", "Behavior planning", "Machine learning", "Language"],
+  },
+] as const;
 
 export function CurriculumSection() {
-  const subjects = curriculumPillars.filter(
-    (pillar) => pillar.label === "Hardware & engineering foundations",
-  );
-  const focuses = curriculumPillars.filter(
-    (pillar) => pillar.label === "Functional & architectural",
-  );
-
   return (
     <section id="curriculum" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionHeading

@@ -54,22 +54,18 @@ export function TopicModalGrid({ topics }: { topics: TechnicalTopic[] }) {
     <>
       <div className="grid gap-x-10 md:grid-cols-2">
         {topics.map((topic) => (
-          <div
+          <button
             key={topic.name}
-            className="flex h-full flex-col border-t border-zinc-300 py-6 text-left"
+            ref={(element) => {
+              triggerRefs.current[topic.name] = element;
+            }}
+            type="button"
+            onClick={() => setSelectedName(topic.name)}
+            aria-haspopup="dialog"
+            className="group flex h-full flex-col border-t border-zinc-300 py-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
           >
-            <h4>
-              <button
-                ref={(element) => {
-                  triggerRefs.current[topic.name] = element;
-                }}
-                type="button"
-                onClick={() => setSelectedName(topic.name)}
-                aria-haspopup="dialog"
-                className="text-left text-xl font-black leading-tight text-emerald-800 transition-colors hover:text-emerald-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
-              >
-                {topic.name}
-              </button>
+            <h4 className="text-xl font-black leading-tight text-zinc-950 transition-colors group-hover:text-emerald-800">
+              {topic.name}
             </h4>
             <p className="mt-3 grow text-base font-medium leading-7 text-zinc-700">
               {topic.detail}
@@ -77,7 +73,10 @@ export function TopicModalGrid({ topics }: { topics: TechnicalTopic[] }) {
             <p className="mt-4 text-sm font-semibold leading-6 text-zinc-500">
               {topic.methods.join(", ")}
             </p>
-          </div>
+            <span className="mt-5 text-sm font-bold text-emerald-800">
+              View focused sources →
+            </span>
+          </button>
         ))}
       </div>
 
