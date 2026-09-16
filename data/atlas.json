@@ -1,0 +1,605 @@
+{
+  "subjects": [
+    {
+      "id": "mechanical-design",
+      "title": "Mechanical design",
+      "description": "Give a robot its shape, strength and ways to move.",
+      "color": "#c99457",
+      "orientation": "mechanisms",
+      "children": [
+        "structures-materials",
+        "mechanisms-drivetrains",
+        "cad-fabrication"
+      ]
+    },
+    {
+      "id": "electronics-sensing",
+      "title": "Electronics & sensing",
+      "description": "Bring power in and turn the physical world into signals.",
+      "color": "#849778",
+      "orientation": "circuits",
+      "children": [
+        "circuits-power",
+        "microcontrollers",
+        "sensors-measurement"
+      ]
+    },
+    {
+      "id": "programming",
+      "title": "Programming",
+      "description": "Turn signals and ideas into repeatable robot behavior.",
+      "color": "#8c9eac",
+      "orientation": "beginner",
+      "children": [
+        "programming-fundamentals",
+        "sensor-data",
+        "robot-software"
+      ]
+    },
+    {
+      "id": "motion-control",
+      "title": "Motion & control",
+      "description": "Connect commanded movement to what a robot actually does.",
+      "color": "#ba846e",
+      "orientation": "feedback",
+      "children": [
+        "actuators",
+        "motion-models",
+        "feedback-pid"
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": "structures-materials",
+      "title": "Structures & materials",
+      "subject": "mechanical-design",
+      "description": "Understand how loads, stiffness and material choices shape a robot.",
+      "resources": [
+        "mechanics",
+        "design",
+        "freecad",
+        "soft"
+      ],
+      "established": "Rigid frames hold sensors and motors in repeatable positions.",
+      "research": "Compliant structures adapt to contact and distribute loads.",
+      "question": "How do you balance weight, strength, repairability and unpredictable impacts?",
+      "researchSource": "soft",
+      "related": [
+        "cad-fabrication",
+        "mechanisms-drivetrains"
+      ],
+      "orientation": "mechanisms",
+      "establishedSource": "mechanics",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "mechanisms-drivetrains",
+      "title": "Mechanisms & drivetrains",
+      "subject": "mechanical-design",
+      "description": "Explore gears, belts, joints and the trade between speed and force.",
+      "resources": [
+        "mechanisms",
+        "design",
+        "modern",
+        "pololu"
+      ],
+      "established": "Gears and linkages transform motion for wheels, arms and grippers.",
+      "research": "Soft and underactuated mechanisms use their physical design to simplify control.",
+      "question": "How can a mechanism remain efficient and reliable when its load changes?",
+      "researchSource": "underactuated",
+      "related": [
+        "actuators",
+        "structures-materials"
+      ],
+      "orientation": "mechanisms",
+      "establishedSource": "mechanisms",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "cad-fabrication",
+      "title": "CAD & fabrication",
+      "subject": "mechanical-design",
+      "description": "Move from an idea to parts that fit together.",
+      "resources": [
+        "freecad",
+        "design",
+        "mechanisms",
+        "soft"
+      ],
+      "established": "Parametric models and drawings make assemblies reproducible.",
+      "research": "Soft robotics explores molds and fabrication processes for compliant parts.",
+      "question": "How do tolerances and manufacturing choices change the behavior of the finished robot?",
+      "researchSource": "soft",
+      "related": [
+        "structures-materials",
+        "mechanisms-drivetrains"
+      ],
+      "orientation": "freecad",
+      "establishedSource": "freecad",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "circuits-power",
+      "title": "Circuits & power",
+      "subject": "electronics-sensing",
+      "description": "Understand the electrical path from a power source to a working robot.",
+      "resources": [
+        "circuits",
+        "multimeter",
+        "arduino",
+        "motors"
+      ],
+      "established": "Regulators, motor drivers and protection circuits distribute power to different loads.",
+      "research": "Embedded robotics keeps pushing toward smaller systems with tighter power budgets.",
+      "question": "How do you keep measurements and computation stable when motors draw changing current?",
+      "researchSource": "micro",
+      "related": [
+        "actuators",
+        "microcontrollers"
+      ],
+      "orientation": "circuits",
+      "establishedSource": "circuits",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "microcontrollers",
+      "title": "Microcontrollers & interfaces",
+      "subject": "electronics-sensing",
+      "description": "Explore the small computers that read sensors and command hardware.",
+      "resources": [
+        "arduino",
+        "i2c",
+        "circuits",
+        "micro"
+      ],
+      "established": "Microcontrollers handle sensor sampling, digital inputs and motor commands.",
+      "research": "micro-ROS connects constrained devices to larger robot software systems.",
+      "question": "How can a tiny device meet timing and memory constraints while communicating reliably?",
+      "researchSource": "micro",
+      "related": [
+        "robot-software",
+        "circuits-power"
+      ],
+      "orientation": "arduino",
+      "establishedSource": "arduino",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "sensors-measurement",
+      "title": "Sensors & measurement",
+      "subject": "electronics-sensing",
+      "description": "Discover what sensors report, what they miss and how to check their readings.",
+      "resources": [
+        "arduino",
+        "multimeter",
+        "sensors",
+        "i2c"
+      ],
+      "established": "Encoders, light sensors and inertial sensors measure different aspects of a robot and its surroundings.",
+      "research": "Robotics research combines imperfect measurements to estimate hidden states.",
+      "question": "How can a robot recognize a bad reading instead of confidently acting on it?",
+      "researchSource": "sensors",
+      "related": [
+        "sensor-data",
+        "feedback-pid"
+      ],
+      "orientation": "arduino",
+      "establishedSource": "pololu",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "programming-fundamentals",
+      "title": "Programming fundamentals",
+      "subject": "programming",
+      "description": "Build the vocabulary to describe behavior in code.",
+      "resources": [
+        "beginner",
+        "python",
+        "arduino",
+        "git"
+      ],
+      "established": "Functions, state and tests turn individual commands into repeatable behavior.",
+      "research": "Robotics software tools combine simulation and optimization with conventional programs.",
+      "question": "How do you make behavior understandable when many components run at once?",
+      "researchSource": "drake",
+      "related": [
+        "robot-software",
+        "microcontrollers"
+      ],
+      "orientation": "beginner",
+      "establishedSource": "python",
+      "foundations": []
+    },
+    {
+      "id": "sensor-data",
+      "title": "Working with sensor data",
+      "subject": "programming",
+      "description": "Make readings useful through arrays, visualization and uncertainty.",
+      "resources": [
+        "numpy",
+        "sensors",
+        "python",
+        "arduino"
+      ],
+      "established": "Calibration, filtering and plotting reveal trends in noisy measurements.",
+      "research": "State estimation combines models with uncertain measurements.",
+      "question": "How much should you trust each sensor when measurements disagree?",
+      "researchSource": "sensors",
+      "related": [
+        "sensors-measurement",
+        "motion-models"
+      ],
+      "orientation": "numpy",
+      "establishedSource": "sensors",
+      "foundations": [
+        "algebra",
+        "linear"
+      ]
+    },
+    {
+      "id": "robot-software",
+      "title": "Robot software & communication",
+      "subject": "programming",
+      "description": "Connect components with messages, timing and clear responsibilities.",
+      "resources": [
+        "ros",
+        "python",
+        "git",
+        "micro"
+      ],
+      "established": "Message-based systems separate sensing, computation and action into components.",
+      "research": "Embedded integration and model-based tools connect hardware constraints to higher-level software.",
+      "question": "How can a system recover when a message arrives late or one component stops?",
+      "researchSource": "micro",
+      "related": [
+        "microcontrollers",
+        "feedback-pid"
+      ],
+      "orientation": "ros",
+      "establishedSource": "ros",
+      "foundations": []
+    },
+    {
+      "id": "actuators",
+      "title": "Actuators & motor control",
+      "subject": "motion-control",
+      "description": "Compare ways to turn electrical energy into controlled movement.",
+      "resources": [
+        "motors",
+        "servo",
+        "pololu",
+        "circuits"
+      ],
+      "established": "Motor drivers and servo systems convert control signals into physical motion.",
+      "research": "Underactuated robotics studies movement with fewer independent controls than degrees of freedom.",
+      "question": "How do torque, speed, heat and power limits constrain the movement you can achieve?",
+      "researchSource": "underactuated",
+      "related": [
+        "mechanisms-drivetrains",
+        "circuits-power"
+      ],
+      "orientation": "motors",
+      "establishedSource": "motors",
+      "foundations": [
+        "algebra",
+        "physics"
+      ]
+    },
+    {
+      "id": "motion-models",
+      "title": "Position & motion models",
+      "subject": "motion-control",
+      "description": "Describe where a robot is and how its movement changes that position.",
+      "resources": [
+        "modern",
+        "sensors",
+        "pololu",
+        "drake"
+      ],
+      "established": "Kinematic models relate wheel or joint motion to robot position.",
+      "research": "Optimization and contact-rich dynamics extend models to more complicated movement.",
+      "question": "How can a useful model account for slipping wheels and uncertain contact?",
+      "researchSource": "drake",
+      "related": [
+        "sensor-data",
+        "mechanisms-drivetrains"
+      ],
+      "orientation": "modern",
+      "establishedSource": "modern",
+      "foundations": [
+        "algebra",
+        "linear"
+      ]
+    },
+    {
+      "id": "feedback-pid",
+      "title": "Feedback & PID",
+      "subject": "motion-control",
+      "description": "Use the gap between a target and a measurement to correct behavior.",
+      "resources": [
+        "feedback",
+        "pid",
+        "pololu",
+        "underactuated"
+      ],
+      "established": "Feedback regulates motor speed, position and line-following behavior.",
+      "research": "Nonlinear and optimization-based control tackle dynamics beyond simple fixed-gain loops.",
+      "question": "How can a controller stay stable across delays, disturbances and changing loads?",
+      "researchSource": "underactuated",
+      "related": [
+        "sensors-measurement",
+        "actuators"
+      ],
+      "orientation": "feedback",
+      "establishedSource": "feedback",
+      "foundations": [
+        "algebra",
+        "linear"
+      ]
+    }
+  ],
+  "resources": {
+    "mechanisms": {
+      "id": "mechanisms",
+      "title": "Mechanisms and mechanical devices",
+      "publisher": "Carnegie Mellon",
+      "url": "https://www.cs.cmu.edu/~rapidproto/mechanisms/",
+      "format": "Illustrated reference",
+      "description": "See how gears, cams and linkages turn one kind of motion into another.",
+      "assumes": "Some geometry"
+    },
+    "mechanics": {
+      "id": "mechanics",
+      "title": "Engineering mechanics",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/",
+      "format": "University course",
+      "description": "Investigate loads, stress and deformation before choosing a structure.",
+      "assumes": "Algebra and calculus"
+    },
+    "freecad": {
+      "id": "freecad",
+      "title": "FreeCAD manual",
+      "publisher": "FreeCAD",
+      "url": "https://www.freecad.org/manual/a-freecad-manual.pdf",
+      "format": "Illustrated manual (PDF)",
+      "description": "Explore sketches, solid models and drawings with an open-source CAD tool.",
+      "assumes": "No CAD experience; screenshots use an older FreeCAD version"
+    },
+    "design": {
+      "id": "design",
+      "title": "Design and manufacturing I",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/",
+      "format": "University course",
+      "description": "Connect mechanism choices to the practical process of making a machine.",
+      "assumes": "Basic physics"
+    },
+    "circuits": {
+      "id": "circuits",
+      "title": "Voltage, current, resistance and Ohm\u2019s law",
+      "publisher": "SparkFun",
+      "url": "https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all",
+      "format": "Illustrated introduction",
+      "description": "Build a vocabulary for understanding power and simple circuits.",
+      "assumes": "No electronics experience"
+    },
+    "arduino": {
+      "id": "arduino",
+      "title": "Arduino built-in examples",
+      "publisher": "Arduino",
+      "url": "https://docs.arduino.cc/built-in-examples/",
+      "format": "Code examples",
+      "description": "Try small experiments with digital signals, analog readings and timing.",
+      "assumes": "Board needed for physical experiments"
+    },
+    "multimeter": {
+      "id": "multimeter",
+      "title": "How to use a multimeter",
+      "publisher": "SparkFun",
+      "url": "https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter/all",
+      "format": "Practical guide",
+      "description": "Learn what measurements can tell you when a circuit behaves unexpectedly.",
+      "assumes": "A multimeter for practice"
+    },
+    "i2c": {
+      "id": "i2c",
+      "title": "I\u00b2C communication",
+      "publisher": "SparkFun",
+      "url": "https://learn.sparkfun.com/tutorials/i2c/all",
+      "format": "Technical introduction",
+      "description": "Understand how a controller exchanges messages with peripheral devices.",
+      "assumes": "Digital signal basics"
+    },
+    "sensors": {
+      "id": "sensors",
+      "title": "Introduction to robotics",
+      "publisher": "Frank Dellaert and Seth Hutchinson",
+      "url": "https://www.roboticsbook.org/",
+      "format": "Interactive textbook",
+      "description": "Explore sensing, uncertainty and mobile robots through worked computational examples.",
+      "assumes": "Python; later sections use probability"
+    },
+    "python": {
+      "id": "python",
+      "title": "The Python tutorial",
+      "publisher": "Python Software Foundation",
+      "url": "https://docs.python.org/3/tutorial/",
+      "format": "Language tutorial",
+      "description": "Use functions, collections and modules to organize small programs.",
+      "assumes": "Some programming familiarity"
+    },
+    "beginner": {
+      "id": "beginner",
+      "title": "Python for beginners",
+      "publisher": "Python Software Foundation",
+      "url": "https://www.python.org/about/gettingstarted/",
+      "format": "Starting guide",
+      "description": "Find installation help and entry points for your first programming experience.",
+      "assumes": "No programming experience"
+    },
+    "numpy": {
+      "id": "numpy",
+      "title": "NumPy: the absolute basics for beginners",
+      "publisher": "NumPy",
+      "url": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+      "format": "Hands-on documentation",
+      "description": "Work with arrays when readings become too numerous to inspect one at a time.",
+      "assumes": "Basic Python"
+    },
+    "ros": {
+      "id": "ros",
+      "title": "ROS 2 Jazzy tutorials",
+      "publisher": "Open Robotics",
+      "url": "https://docs.ros.org/en/jazzy/Tutorials.html",
+      "format": "Software tutorials",
+      "description": "Explore nodes, messages and services as building blocks for robot software.",
+      "assumes": "Linux basics; Python or C++"
+    },
+    "git": {
+      "id": "git",
+      "title": "Pro Git",
+      "publisher": "Scott Chacon and Ben Straub",
+      "url": "https://git-scm.com/book/en/v2",
+      "format": "Open book",
+      "description": "Keep a recoverable history of experiments and understand what changed.",
+      "assumes": "Basic computer use"
+    },
+    "motors": {
+      "id": "motors",
+      "title": "All about stepper motors",
+      "publisher": "Adafruit",
+      "url": "https://learn.adafruit.com/all-about-stepper-motors",
+      "format": "Illustrated guide",
+      "description": "Compare stepper arrangements, drivers and the limits of open-loop positioning.",
+      "assumes": "Basic circuits"
+    },
+    "modern": {
+      "id": "modern",
+      "title": "Modern Robotics video supplements",
+      "publisher": "Northwestern University",
+      "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/",
+      "format": "Video collection",
+      "description": "Connect robot geometry, motion and control to mathematical models.",
+      "assumes": "Linear algebra; calculus for dynamics"
+    },
+    "pid": {
+      "id": "pid",
+      "title": "PID control introduction",
+      "publisher": "University of Michigan CTMS",
+      "url": "https://ctms.engin.umich.edu/CTMS/index.php?example=Introduction&section=ControlPID",
+      "format": "Worked explanation",
+      "description": "See how proportional, integral and derivative terms change a response.",
+      "assumes": "Algebra and calculus; running MATLAB examples requires MATLAB access"
+    },
+    "feedback": {
+      "id": "feedback",
+      "title": "Introduction to PID",
+      "publisher": "WPILib",
+      "url": "https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html",
+      "format": "Technical guide",
+      "description": "Understand feedback through error, gains and practical controller behavior.",
+      "assumes": "Basic programming and algebra"
+    },
+    "pololu": {
+      "id": "pololu",
+      "title": "3pi+ 32U4 robot user\u2019s guide",
+      "publisher": "Pololu",
+      "url": "https://www.pololu.com/docs/0J83/all",
+      "format": "Hardware guide",
+      "description": "Inspect a complete small robot with sensors, encoders and example programs.",
+      "assumes": "Purchased robot required to build"
+    },
+    "servo": {
+      "id": "servo",
+      "title": "Servo motor basics with Arduino",
+      "publisher": "Arduino",
+      "url": "https://docs.arduino.cc/learn/electronics/servo-motors/",
+      "format": "Hardware experiment",
+      "description": "Connect a hobby servo and observe commanded position changes.",
+      "assumes": "Arduino, servo and appropriate power"
+    },
+    "soft": {
+      "id": "soft",
+      "title": "Soft Robotics Toolkit",
+      "publisher": "Harvard and Trinity College Dublin",
+      "url": "https://softroboticstoolkit.com/",
+      "format": "Research and fabrication collection",
+      "description": "Explore compliant structures and fabrication approaches beyond rigid mechanisms.",
+      "assumes": "Varies by design"
+    },
+    "drake": {
+      "id": "drake",
+      "title": "Drake model-based design and verification",
+      "publisher": "MIT and contributors",
+      "url": "https://drake.mit.edu/",
+      "format": "Research software",
+      "description": "Explore simulation, optimization and control of complex robot systems.",
+      "assumes": "Advanced math and programming"
+    },
+    "underactuated": {
+      "id": "underactuated",
+      "title": "Underactuated robotics",
+      "publisher": "Russ Tedrake, MIT",
+      "url": "https://underactuated.mit.edu/",
+      "format": "Research-oriented course",
+      "description": "Explore nonlinear dynamics and control when a system cannot command every motion directly.",
+      "assumes": "Linear algebra, calculus and dynamics"
+    },
+    "micro": {
+      "id": "micro",
+      "title": "micro-ROS",
+      "publisher": "micro-ROS project",
+      "url": "https://micro.vulcanexus.org/",
+      "format": "Research and software platform",
+      "description": "Investigate how microcontrollers can participate in a ROS 2 system.",
+      "assumes": "Embedded programming and ROS 2"
+    },
+    "algebra": {
+      "id": "algebra",
+      "title": "Algebra and Trigonometry 2e",
+      "publisher": "OpenStax",
+      "url": "https://openstax.org/details/books/algebra-and-trigonometry-2e",
+      "format": "Open textbook",
+      "description": "Revisit equations, functions and angles when a robotics resource uses unfamiliar math.",
+      "assumes": "Basic arithmetic"
+    },
+    "physics": {
+      "id": "physics",
+      "title": "College Physics 2e",
+      "publisher": "OpenStax",
+      "url": "https://openstax.org/details/books/college-physics-2e",
+      "format": "Open textbook",
+      "description": "Find background on forces, energy and electricity alongside worked examples.",
+      "assumes": "Algebra"
+    },
+    "linear": {
+      "id": "linear",
+      "title": "Linear algebra",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+      "format": "Video course",
+      "description": "Build a foundation in vectors and matrices for motion models and estimation.",
+      "assumes": "Algebra"
+    }
+  }
+}

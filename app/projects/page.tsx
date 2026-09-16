@@ -1,53 +1,46 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components/home/footer";
-import { Header } from "@/components/home/header";
-import { badgeClasses } from "@/components/home/badge-classes";
-import { ProjectCard } from "@/components/projects/project-card";
-import { publishedProjects } from "@/data/site-content";
-
-export const metadata: Metadata = {
-  title: "Project Proposals | Learn Robotics",
-  description:
-    "Build-ready robotics proposals with goals, phased parts lists, safety gates, kits, and open-source references.",
-};
-
-export default function ProjectsPage() {
+import { Shell } from "@/components/atlas/site-shell";
+import { BuildCard } from "@/components/atlas/build-card";
+import builds from "@/data/builds.json";
+export const metadata: Metadata = { title: "Build guides" };
+export default function Projects() {
   return (
-    <main className="min-h-screen bg-zinc-50 text-zinc-950">
-      <Header />
-      <section className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-normal sm:text-5xl">
-            Choose a build with a clear finish line.
-          </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
-            These proposals are ready for planning: each one has a recommended platform,
-            prerequisites, measurable success criteria, phased parts lists, safety gates, and
-            links to established kits and open-source code.
+    <Shell>
+      <div className="shell collection-page">
+        <h1>Put an idea in motion.</h1>
+        <p className="lead">
+          Small builds that bring the subjects together. Find a documented
+          experiment, or explore a design that is still taking shape.
+        </p>
+        <section>
+          <h2>Follow a published guide</h2>
+          <p className="section-description">
+            Free instructions from the original creators. Hardware costs vary;
+            these builds have not been independently tested here.
           </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="text-2xl font-black">Current proposals</h2>
-            <p className="mt-2 max-w-2xl text-base text-zinc-600">
-              Start with the ground vehicle, or take on the microdrone after basic feedback
-              control and telemetry feel familiar.
-            </p>
+          <div className="build-grid">
+            {builds
+              .filter((b) => b.kind === "external")
+              .map((b) => (
+                <BuildCard key={b.id} build={b} />
+              ))}
           </div>
-          <span className={badgeClasses.secondary}>
-            {publishedProjects.length} proposals
-          </span>
-        </div>
-        <div className="grid gap-4 xl:grid-cols-2">
-          {publishedProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </section>
-      <Footer />
-    </main>
+        </section>
+        <section>
+          <h2>From the sketchbook</h2>
+          <p className="section-description">
+            Original, untested proposals. These are design briefs with open
+            decisions, not finished build instructions.
+          </p>
+          <div className="build-grid">
+            {builds
+              .filter((b) => b.kind === "proposal")
+              .map((b) => (
+                <BuildCard key={b.id} build={b} />
+              ))}
+          </div>
+        </section>
+      </div>
+    </Shell>
   );
 }

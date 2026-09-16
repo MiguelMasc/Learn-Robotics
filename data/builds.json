@@ -1,0 +1,168 @@
+[
+  {
+    "id": "line-following-robot",
+    "title": "A robot that follows a line",
+    "summary": "Use reflected light to turn a line on the floor into steering decisions.",
+    "kind": "external",
+    "source": "pololu",
+    "topics": [
+      "sensors-measurement",
+      "programming-fundamentals",
+      "feedback-pid",
+      "mechanisms-drivetrains"
+    ],
+    "equipment": [
+      "Pololu 3pi+ 32U4 robot in a configuration supported by the guide",
+      "Compatible batteries and USB cable specified by Pololu",
+      "Computer with the Arduino toolchain",
+      "A contrasting line course on a suitable surface"
+    ],
+    "outcome": "Explore the publisher\u2019s line-following examples, calibrate reflectance sensors and observe how steering responds to the track.",
+    "stages": [
+      [
+        "Meet the platform",
+        "Use the manufacturer\u2019s guide to identify the robot version, power requirements and supported software."
+      ],
+      [
+        "Inspect the readings",
+        "Run the documented sensor examples and compare readings over the background and line before enabling movement."
+      ],
+      [
+        "Try line following",
+        "Follow the publisher\u2019s example and calibration procedure. Begin on a simple course with room to stop."
+      ],
+      [
+        "Observe and compare",
+        "Record how curves, lighting and speed affect tracking. Change one setting at a time."
+      ]
+    ],
+    "questions": [
+      "What happens when the robot loses the line?",
+      "How do calibration and speed change tracking?"
+    ]
+  },
+  {
+    "id": "servo-motion-study",
+    "title": "Make a servo move",
+    "summary": "A small experiment connecting a software command to physical position.",
+    "kind": "external",
+    "source": "servo",
+    "topics": ["actuators", "circuits-power", "microcontrollers"],
+    "equipment": [
+      "Arduino-compatible board supported by the example",
+      "Hobby servo and wiring",
+      "Power supply appropriate for the specific servo",
+      "Computer with the Arduino IDE"
+    ],
+    "outcome": "Follow Arduino\u2019s Sweep example and observe the relationship between commanded angle and movement.",
+    "stages": [
+      [
+        "Check the components",
+        "Read the official circuit and power notes. Match the supply to your servo; requirements vary by model."
+      ],
+      [
+        "Connect the circuit",
+        "Follow the publisher\u2019s wiring instructions with power disconnected. Keep the servo horn clear of obstructions."
+      ],
+      [
+        "Run the example",
+        "Upload the documented Sweep sketch and observe the motion."
+      ],
+      [
+        "Change the command",
+        "Experiment within your servo\u2019s supported travel. Compare the requested position with what you can observe."
+      ]
+    ],
+    "questions": [
+      "Does commanding a position tell your program that the servo reached it?",
+      "What changes when the servo has a mechanical load?"
+    ]
+  },
+  {
+    "id": "programmable-rc-car",
+    "title": "A programmable rover",
+    "summary": "An original design brief for a small rover with repeatable motion and a reliable stop.",
+    "kind": "proposal",
+    "source": "pololu",
+    "topics": [
+      "structures-materials",
+      "cad-fabrication",
+      "circuits-power",
+      "robot-software",
+      "motion-models"
+    ],
+    "equipment": [
+      "Two-wheel differential-drive chassis: selection open",
+      "Geared motors with encoders: selection open",
+      "Matched motor driver, controller and power system: selection open",
+      "Physical power disconnect and a clear test space"
+    ],
+    "outcome": "Proposed outcome: command short movements, record encoder readings and stop predictably. The component selection, wiring and software have not been validated.",
+    "stages": [
+      [
+        "Define the rover",
+        "Choose payload, surface and movement limits. Record motor current, supply voltage and driver ratings before committing to parts."
+      ],
+      [
+        "Design the assembly",
+        "Model mounting points, wheel clearance and access to the power disconnect. Check the fit of the selected hardware."
+      ],
+      [
+        "Validate one subsystem",
+        "With wheels raised, verify the stop behavior, one motor direction and one encoder reading independently."
+      ],
+      [
+        "Measure a short movement",
+        "Only after subsystem checks, measure a slow straight run and compare encoder-based distance with an external measurement."
+      ]
+    ],
+    "questions": [
+      "Which exact components are electrically and mechanically compatible?",
+      "What should the robot do if commands stop arriving?",
+      "What evidence would make this a reproducible build guide?"
+    ]
+  },
+  {
+    "id": "encoder-test-stand",
+    "title": "An encoder test stand",
+    "summary": "An original bench experiment for understanding speed measurement and feedback.",
+    "kind": "proposal",
+    "source": "feedback",
+    "topics": [
+      "sensors-measurement",
+      "sensor-data",
+      "feedback-pid",
+      "actuators"
+    ],
+    "equipment": [
+      "Low-voltage geared motor with encoder: selection open",
+      "Compatible motor driver and microcontroller: selection open",
+      "Current-limited supply matched to the selected components",
+      "Secure mount and guarded rotating parts"
+    ],
+    "outcome": "Proposed outcome: log measured speed, compare it with a target and investigate a basic feedback controller. No hardware configuration or controller gains have been tested.",
+    "stages": [
+      [
+        "Choose compatible hardware",
+        "Document the encoder output, motor ratings and controller input limits. Establish a secure mechanical mount."
+      ],
+      [
+        "Validate measurement",
+        "Observe encoder pulses and confirm counts per revolution before computing speed."
+      ],
+      [
+        "Record open-loop behavior",
+        "Log command, elapsed time and measured speed. Keep test conditions consistent."
+      ],
+      [
+        "Explore feedback",
+        "After validating measurement and stop behavior, compare a modest proportional controller with the open-loop result. Set output limits before testing."
+      ]
+    ],
+    "questions": [
+      "How does sample interval affect measured speed?",
+      "What happens near zero speed?",
+      "How will you detect a disconnected or stalled motor?"
+    ]
+  }
+]

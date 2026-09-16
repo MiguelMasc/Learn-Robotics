@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>First robot lab · Learn Robotics</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 20px; background: #fafaf9; color: #18181b; font: 16px/1.5 system-ui, sans-serif; }
+    h1 { font-size: 22px; margin: 0 0 6px; }
+    p { margin: 0 0 16px; }
+    .layout { display: grid; grid-template-columns: minmax(240px, .85fr) minmax(0, 1.15fr); gap: 24px; }
+    label { display: block; font-weight: 700; margin-bottom: 6px; }
+    textarea { width: 100%; height: 245px; resize: vertical; padding: 12px; border: 1px solid #a1a1aa; border-radius: 6px; background: white; color: #18181b; font: 14px/1.6 ui-monospace, monospace; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    button { min-height: 44px; padding: 8px 14px; border: 1px solid #a1a1aa; border-radius: 6px; background: white; color: #18181b; font: 600 14px system-ui, sans-serif; cursor: pointer; }
+    button.primary { background: #fde047; border-color: #ca8a04; }
+    button:disabled { opacity: .5; cursor: default; }
+    :focus-visible { outline: 3px solid #047857; outline-offset: 3px; }
+    small { display: block; margin-top: 6px; color: #52525b; }
+    svg { display: block; width: 100%; height: auto; max-height: 420px; border: 1px solid #d4d4d8; border-radius: 8px; background: white; }
+    dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+    dt { color: #52525b; font-size: 13px; } dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+    #status { margin-top: 14px; min-height: 48px; font-size: 14px; }
+    .error { color: #b91c1c; }
+    @media (max-width: 640px) { body { padding: 16px; } .layout { grid-template-columns: 1fr; gap: 20px; } textarea { height: 200px; } }
+  </style>
+</head>
+<body>
+  <h1>Two wheels. Your first program.</h1>
+  <p>Set wheel speeds, run a sequence, and compare the trail with your prediction.</p>
+  <noscript>This simulator needs JavaScript enabled. The written tutorial includes the expected results.</noscript>
+  <div class="layout">
+    <div>
+      <label for="program">Motion commands</label>
+      <textarea id="program" spellcheck="false" autocapitalize="off" aria-describedby="help"></textarea>
+      <small id="help">left / right: wheel speed in meters per second (−0.5 to 0.5). seconds: duration (0.01 to 10). Up to 32 commands, 60 seconds total.</small>
+      <div class="buttons">
+        <button id="run" class="primary">Run from start</button>
+        <button id="stop" disabled>Stop</button>
+        <button id="reset">Reset position</button>
+      </div>
+      <div class="buttons" aria-label="Example programs">
+        <button id="straight">Load straight</button>
+        <button id="turn">Load turn</button>
+        <button id="square">Load square</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">Ready. Press Run from start.</p>
+    </div>
+    <div>
+      <svg viewBox="0 0 400 350" role="img" aria-labelledby="world-title world-description">
+        <title id="world-title">Robot path, viewed from above</title>
+        <desc id="world-description">The robot starts at the origin facing right. Position and heading are also shown below the diagram.</desc>
+        <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e4e4e7" stroke-width="1"/></pattern></defs>
+        <rect width="400" height="350" fill="url(#grid)"/>
+        <path d="M 0 230 H 400 M 110 0 V 350" stroke="#a1a1aa" stroke-width="1"/>
+        <text x="360" y="250" fill="#52525b" font-size="13">+x →</text>
+        <text x="119" y="22" fill="#52525b" font-size="13">+y ↑</text>
+        <text x="16" y="332" fill="#52525b" font-size="12">Grid: 0.25 m · dashed: square goal</text>
+        <path d="M 110 230 H 270 V 70 H 110 Z" fill="none" stroke="#a1a1aa" stroke-dasharray="5 5"/>
+        <polyline id="trail" fill="none" stroke="#047857" stroke-width="3" points="110,230"/>
+        <circle cx="110" cy="230" r="5" fill="#18181b"/>
+        <g id="robot" transform="translate(110 230)">
+          <rect x="-12" y="-16" width="24" height="6" rx="2" fill="#18181b"/>
+          <rect x="-12" y="10" width="24" height="6" rx="2" fill="#18181b"/>
+          <rect x="-14" y="-10" width="28" height="20" rx="5" fill="#fde047" stroke="#854d0e"/>
+          <path d="M -3 -5 L 6 0 L -3 5" fill="none" stroke="#18181b" stroke-width="2"/>
+        </g>
+      </svg>
+      <dl aria-label="Robot measurements">
+        <div><dt>x position</dt><dd id="x">0.00 m</dd></div>
+        <div><dt>y position</dt><dd id="y">0.00 m</dd></div>
+        <div><dt>Heading</dt><dd id="heading">0.0°</dd></div>
+      </dl>
+      <small>Ideal motion: no slipping, obstacles, or sensor noise. The diagram is a fixed window, not a wall; longer paths may leave the view.</small>
+    </div>
+  </div>
+  <script>
+    // START HERE: edit this list, save the file, then refresh your browser.
+    // Positive speeds move a wheel forward; negative speeds move it backward.
+    const STARTER_COMMANDS = [
+      { "left": 0.2, "right": 0.2, "seconds": 5 }
+    ];
+
+    const WHEEL_BASE = 0.2; // Distance between wheels, in meters.
+    const TURN_SECONDS = Math.PI / 2; // At 1 radian/second, this is a quarter turn.
+    const STRAIGHT = [{ left: 0.2, right: 0.2, seconds: 5 }];
+    const TURN = [{ left: -0.1, right: 0.1, seconds: TURN_SECONDS }];
+    const SQUARE = Array.from({ length: 4 }, () => [...STRAIGHT, ...TURN]).flat();
+
+    // Exact motion over dt seconds while wheel speeds stay constant.
+    // Heading is measured counterclockwise from +x, in radians.
+    function advance(pose, command, dt) {
+      const speed = (command.left + command.right) / 2;
+      const turnRate = (command.right - command.left) / WHEEL_BASE;
+      const heading = pose.heading + turnRate * dt;
+      if (Math.abs(turnRate) < 1e-10) {
+        return { x: pose.x + speed * Math.cos(pose.heading) * dt,
+          y: pose.y + speed * Math.sin(pose.heading) * dt, heading };
+      }
+      return { x: pose.x + speed / turnRate * (Math.sin(heading) - Math.sin(pose.heading)),
+        y: pose.y - speed / turnRate * (Math.cos(heading) - Math.cos(pose.heading)), heading };
+    }
+
+    function parseCommands(text) {
+      let commands;
+      try { commands = JSON.parse(text); }
+      catch { throw new Error('Use a JSON list: double quotes around names, commas between commands, and no trailing comma.'); }
+      if (!Array.isArray(commands) || !commands.length || commands.length > 32) {
+        throw new Error('Enter between 1 and 32 commands inside [square brackets].');
+      }
+      for (const [index, command] of commands.entries()) {
+        if (!command || typeof command !== 'object' || Array.isArray(command) ||
+            Object.keys(command).sort().join(',') !== 'left,right,seconds' ||
+            ![command.left, command.right, command.seconds].every(Number.isFinite) ||
+            Math.abs(command.left) > 0.5 || Math.abs(command.right) > 0.5 ||
+            command.seconds < 0.01 || command.seconds > 10) {
+          throw new Error(`Command ${index + 1}: use only left and right (numbers from -0.5 to 0.5), and seconds (0.01 to 10).`);
+        }
+      }
+      if (commands.reduce((sum, command) => sum + command.seconds, 0) > 60) {
+        throw new Error('Keep the total duration at 60 seconds or less.');
+      }
+      return commands;
+    }
+
+    const element = (id) => document.getElementById(id);
+    let pose = { x: 0, y: 0, heading: 0 };
+    let points = ['110,230'];
+    let commands = [], commandIndex = 0, commandTime = 0, previousTime = null, frame = null;
+
+    function headingDegrees() {
+      const degrees = (pose.heading * 180 / Math.PI % 360 + 360) % 360;
+      return degrees > 359.95 ? 0 : degrees;
+    }
+
+    function draw() {
+      const x = 110 + pose.x * 160, y = 230 - pose.y * 160;
+      points.push(`${x.toFixed(2)},${y.toFixed(2)}`);
+      element('trail').setAttribute('points', points.join(' '));
+      element('robot').setAttribute('transform', `translate(${x} ${y}) rotate(${-pose.heading * 180 / Math.PI})`);
+      element('x').textContent = `${(Math.abs(pose.x) < 0.005 ? 0 : pose.x).toFixed(2)} m`;
+      element('y').textContent = `${(Math.abs(pose.y) < 0.005 ? 0 : pose.y).toFixed(2)} m`;
+      element('heading').textContent = `${headingDegrees().toFixed(1)}°`;
+    }
+
+    function status(message, error = false) {
+      element('status').textContent = message;
+      element('status').className = error ? 'error' : '';
+      element('program').setAttribute('aria-invalid', String(error));
+    }
+
+    function stop() {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      previousTime = null;
+      element('stop').disabled = true;
+      element('run').disabled = false;
+      element('program').readOnly = false;
+    }
+
+    function reset() {
+      stop();
+      pose = { x: 0, y: 0, heading: 0 };
+      points = ['110,230'];
+      commandIndex = 0; commandTime = 0;
+      draw();
+      status('Ready. Press Run from start.');
+    }
+
+    function tick(time) {
+      // Cap each frame so a background tab never causes a sudden jump.
+      let remaining = previousTime === null ? 0 : Math.min((time - previousTime) / 1000, 0.1);
+      previousTime = time;
+      while (remaining > 0 && commandIndex < commands.length) {
+        const command = commands[commandIndex];
+        const dt = Math.min(remaining, command.seconds - commandTime);
+        pose = advance(pose, command, dt);
+        commandTime += dt; remaining -= dt;
+        draw();
+        if (command.seconds - commandTime < 1e-9) { commandIndex++; commandTime = 0; }
+      }
+      if (commandIndex >= commands.length) {
+        stop();
+        status(`Finished ${commands.length} command${commands.length === 1 ? '' : 's'}. x ${pose.x.toFixed(2)} m, y ${pose.y.toFixed(2)} m, heading ${headingDegrees().toFixed(1)}°. Distance from start: ${Math.hypot(pose.x, pose.y).toFixed(3)} m.`);
+      } else { frame = requestAnimationFrame(tick); }
+    }
+
+    element('run').addEventListener('click', () => {
+      let parsed;
+      try { parsed = parseCommands(element('program').value); }
+      catch (error) { status(error.message, true); element('program').focus(); return; }
+      reset(); commands = parsed;
+      element('stop').disabled = false;
+      element('run').disabled = true;
+      element('program').readOnly = true;
+      status('Running. Stop freezes the robot; Run from start always begins at the origin.');
+      frame = requestAnimationFrame(tick);
+    });
+    element('stop').addEventListener('click', () => { stop(); status('Stopped. Compare the measurements, or run again from the origin.'); });
+    element('reset').addEventListener('click', reset);
+    function load(program) { reset(); element('program').value = JSON.stringify(program, null, 2); }
+    element('straight').addEventListener('click', () => load(STRAIGHT));
+    element('turn').addEventListener('click', () => load(TURN));
+    element('square').addEventListener('click', () => load(SQUARE));
+    load(STARTER_COMMANDS);
+
+    // Fit the embedded lab to its content; the download also works by itself.
+    if (typeof window !== 'undefined' && window.parent !== window) {
+      const reportHeight = () => window.parent.postMessage({
+        type: 'first-robot:height', height: Math.ceil(document.body.getBoundingClientRect().height)
+      }, '*');
+      new ResizeObserver(reportHeight).observe(document.body);
+      window.addEventListener('message', (event) => {
+        if (event.source === window.parent && event.data?.type === 'first-robot:measure') reportHeight();
+      });
+      reportHeight();
+    }
+  </script>
+</body>
+</html>
