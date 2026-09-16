@@ -1,0 +1,474 @@
+{
+  "name": "Learn Robotics",
+  "purpose": "Help beginner and intermediate enthusiasts explore connected robotics subjects, favor free resources and find practical examples.",
+  "publishing_status": "Consolidated and verified: 14 canonical Backlog issues, 4 milestones, 6 dependency links and 2 deferred-discovery labels. Duplicate project retired as Canceled; 14 duplicate issues link to retained issues.",
+  "team": "MiguelMasc",
+  "linear_project_id": "71446db1-ee32-4b65-9739-2ac1c2b787d3",
+  "policy": "Local keys B01–B14 map to verified Linear issues. All issues are in Backlog; B13–B14 remain deferred discovery. Assignees, dates and cycles are intentionally unset.",
+  "constraints": [
+    "Maximum one subtitle, label or caption per object/region.",
+    "Shared static content, map-first discovery, free resources strongly preferred.",
+    "Tutorial and curriculum stay hidden. Search, filters, visitor map editing and accounts remain out of current scope.",
+    "Do not reopen the already-delivered site implementation or label untested builds verified."
+  ],
+  "issues": [
+    {
+      "local_key": "B01",
+      "title": "Align the roadmap and project documentation with the approved atlas",
+      "priority": "High",
+      "group": "Release readiness",
+      "status": "Backlog",
+      "reason": "WEBSITE_ROADMAP.md still proposes a staged curriculum and homepage content that conflict with the current website intent.",
+      "acceptance_criteria": [
+        "Rewrite the roadmap around the four-subject atlas and clearly distinguish shipped work, upcoming work and deferred ideas.",
+        "Resolve stale present-tense discovery wording in the intent document without changing the owner’s decisions or deleting their history.",
+        "Record the maximum of one subtitle, label or caption per object/region as an ongoing acceptance criterion.",
+        "Keep the tutorial and curriculum hidden; do not reintroduce search, filters or accounts."
+      ],
+      "repository_references": [
+        "WEBSITE_ROADMAP.md",
+        "WEBSITE_INTENT.md",
+        "README.md",
+        "IMPLEMENTATION_STATUS.md"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-9",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-9/align-the-roadmap-and-project-documentation-with-the-approved-atlas",
+      "linear_state": "Backlog",
+      "linear_priority": 2,
+      "linear_milestone_id": "b398691a-13e6-4656-b408-cd760cdff611",
+      "linear_issue_uuid": "4f4a4186-483d-45f1-8e91-0dec743e6082",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B02",
+      "title": "Make existing checks reproducible in continuous integration",
+      "priority": "High",
+      "group": "Release readiness",
+      "status": "Backlog",
+      "reason": "The repository has local Node and browser checks but no checked-in .github workflow; browser checks currently rely on a separately supplied Playwright runtime.",
+      "acceptance_criteria": [
+        "Add a pull-request workflow using a supported, pinned Node version and npm ci.",
+        "Run lint, existing Node tests and production build; report failures independently.",
+        "Provide a reproducible browser dependency and Chromium setup, start a production preview and run the existing browser script.",
+        "Preserve the current route, hidden-page, keyboard and responsive coverage; add the single-supporting-text rule to the relevant rendered checks.",
+        "Upload useful failure output/screenshots and shut down the preview process."
+      ],
+      "repository_references": [
+        "package.json",
+        "scripts/check-browser.cjs",
+        "tests/atlas.test.mjs",
+        "tests/first-robot.test.mjs"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-10",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-10/make-existing-checks-reproducible-in-continuous-integration",
+      "linear_state": "Backlog",
+      "linear_priority": 2,
+      "linear_milestone_id": "b398691a-13e6-4656-b408-cd760cdff611",
+      "linear_issue_uuid": "ad310bf3-fcd7-4698-9397-9fe0a3196d7b",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B03",
+      "title": "Choose the public host, domain and release owner",
+      "priority": "High",
+      "group": "Release readiness",
+      "status": "Backlog",
+      "reason": "The site has a local production preview. Public hosting, domain, budget and operational ownership have not been decided.",
+      "acceptance_criteria": [
+        "Record the owner’s selected host, domain or provisional host URL, budget and account ownership.",
+        "Confirm support for the current Next.js runtime and image optimization; do not assume standalone HTML export.",
+        "Document deployment credentials/setup requirements without storing secrets in the repository.",
+        "Identify who can publish and roll back releases."
+      ],
+      "repository_references": [
+        "README.md",
+        "next.config.ts"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-12",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-12/choose-the-public-host-domain-and-release-owner",
+      "linear_state": "Backlog",
+      "linear_priority": 2,
+      "linear_milestone_id": "b398691a-13e6-4656-b408-cd760cdff611",
+      "linear_issue_uuid": "72556aec-0f96-4cde-a119-b943a42bceb1",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B04",
+      "title": "Publish the first public release and complete launch metadata",
+      "priority": "High",
+      "group": "Release readiness",
+      "status": "Backlog",
+      "reason": "A deployable local site exists, but no public deployment or canonical domain is recorded.",
+      "acceptance_criteria": [
+        "Deploy the reviewed build to the selected host after the release decision is recorded.",
+        "Use the actual public URL for canonical/social metadata and a sitemap of public content pages; exclude hidden drafts.",
+        "Check HTTPS, image loading, direct topic/build URLs, old resources redirection and hidden-page 404s on the deployed host.",
+        "Record the deployment URL, deployed revision and rollback procedure.",
+        "Keep accounts, tracking and personalized features outside this release."
+      ],
+      "repository_references": [
+        "app/layout.tsx",
+        "app/icon.svg",
+        "README.md"
+      ],
+      "depends_on": [
+        "B02",
+        "B03"
+      ],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-13",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-13/publish-the-first-public-release-and-complete-launch-metadata",
+      "linear_state": "Backlog",
+      "linear_priority": 2,
+      "linear_milestone_id": "b398691a-13e6-4656-b408-cd760cdff611",
+      "linear_issue_uuid": "94a1f468-9e03-4b2c-b5f0-f7e353a1905e",
+      "linear_blocked_by": [
+        "MIG-6",
+        "MIG-7"
+      ],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B05",
+      "title": "Audit every topic’s starting resources for a complete beginner",
+      "priority": "High",
+      "group": "Content and trust",
+      "status": "Backlog",
+      "reason": "The site assumes no prior robotics knowledge, while some linked resources require programming, calculus or hardware. The resource cards now combine descriptions and assumptions into one paragraph.",
+      "acceptance_criteria": [
+        "Review the orientation and recommended resources for each of the twelve topics; replace unsuitable entry points with clearer free introductions where needed.",
+        "Write natural, concise descriptions that explain necessary background or equipment without separate publisher labels or stacked captions.",
+        "Distinguish free reading from paid software, hardware or account requirements within the single supporting text block.",
+        "Retain useful publisher attribution in the content model and source links.",
+        "Check the final rendered cards at phone and desktop sizes."
+      ],
+      "repository_references": [
+        "data/atlas.json",
+        "components/atlas/resource-card.tsx",
+        "app/topics/[slug]/page.tsx"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-15",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-15/audit-every-topics-starting-resources-for-a-complete-beginner",
+      "linear_state": "Backlog",
+      "linear_priority": 2,
+      "linear_milestone_id": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+      "linear_issue_uuid": "773e88a6-0cf5-43fe-92cc-7e8e629aaebd",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B06",
+      "title": "Establish source ownership and an honest resource review workflow",
+      "priority": "Normal",
+      "group": "Content and trust",
+      "status": "Backlog",
+      "reason": "Resources currently have no per-entry review date or review owner; external source maintenance remains unresolved.",
+      "acceptance_criteria": [
+        "Agree an editorial owner and review cadence, and record the decision.",
+        "Add review metadata for dates actually checked and the result of that review; do not fabricate historical dates.",
+        "Provide a repeatable link-check command/report that distinguishes broken links, redirects, timeouts and anti-bot restrictions.",
+        "Require a human/content check before replacing links that automated requests cannot verify.",
+        "Keep operational review metadata out of the visible card hierarchy."
+      ],
+      "repository_references": [
+        "data/atlas.json",
+        "README.md"
+      ],
+      "depends_on": [
+        "B05"
+      ],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-17",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-17/establish-source-ownership-and-an-honest-resource-review-workflow",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+      "linear_issue_uuid": "68abfc7f-ca8a-4475-a995-03b65129dd99",
+      "linear_blocked_by": [
+        "MIG-11"
+      ],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B07",
+      "title": "Strengthen evidence behind established uses and research directions",
+      "priority": "Normal",
+      "group": "Content and trust",
+      "status": "Backlog",
+      "reason": "The topic context has source links, but several destinations are broad tool or course homepages rather than the most specific evidence for the nearby claim.",
+      "acceptance_criteria": [
+        "For each topic, identify the precise section, original publication or documented example supporting its established-use and research text.",
+        "Separate an unresolved research question from a practical engineering problem with known conditional solutions.",
+        "Remove unsupported novelty or recency implications and retain primary-source attribution.",
+        "Keep the explanations brief and avoid adding empty future subject nodes."
+      ],
+      "repository_references": [
+        "data/atlas.json",
+        "app/topics/[slug]/page.tsx"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-18",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-18/strengthen-evidence-behind-established-uses-and-research-directions",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+      "linear_issue_uuid": "ad739b98-6e1e-4348-9e23-9bf57f68431f",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B08",
+      "title": "Define evidence required to call a build independently verified",
+      "priority": "Normal",
+      "group": "Content and trust",
+      "status": "Backlog",
+      "reason": "Current build pages correctly distinguish external documentation and untested proposals. A stronger verified status has no agreed evidence standard.",
+      "acceptance_criteria": [
+        "Define required evidence: exact component revisions, wiring, software versions, setup, measured checkpoints, failure cases and a reproducible outcome.",
+        "Distinguish publisher documentation from independent reproduction by this project.",
+        "Document how evidence, limitations and review dates are recorded and maintained.",
+        "Do not change any existing build to verified without the required evidence."
+      ],
+      "repository_references": [
+        "data/builds.json",
+        "app/about/page.tsx",
+        "WEBSITE_INTENT.md"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-20",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-20/define-evidence-required-to-call-a-build-independently-verified",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+      "linear_issue_uuid": "f3529045-95b5-4bc9-9a50-ada759e1d65d",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B09",
+      "title": "Reproduce one small build and publish the resulting evidence",
+      "priority": "Normal",
+      "group": "Content and trust",
+      "status": "Backlog",
+      "reason": "The collection has two documented external builds and two original proposals, but none has been physically reproduced by this project.",
+      "acceptance_criteria": [
+        "Choose one build with an available hardware tester and an agreed component budget; favor accessible, inexpensive equipment.",
+        "Perform the physical experiment and record actual results against the verification standard.",
+        "Publish reproducible instructions, relevant original media and troubleshooting based on observed failures.",
+        "Only update the build’s readiness once its evidence meets the agreed standard; retain proposal status if validation remains incomplete."
+      ],
+      "repository_references": [
+        "data/builds.json",
+        "app/projects/[slug]/page.tsx"
+      ],
+      "depends_on": [
+        "B08"
+      ],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-21",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-21/reproduce-one-small-build-and-publish-the-resulting-evidence",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+      "linear_issue_uuid": "838f6414-ad46-4459-bda9-027f0d7bf3cb",
+      "linear_blocked_by": [
+        "MIG-19"
+      ],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B10",
+      "title": "Test map discovery with beginner visitors on desktop and phones",
+      "priority": "Normal",
+      "group": "Explorer quality",
+      "status": "Backlog",
+      "reason": "Automated checks cover mechanics and responsiveness, but they do not establish whether a newcomer understands the map or can choose a useful starting point.",
+      "acceptance_criteria": [
+        "Observe a small set of beginner visitors following the homepage → subject → subtopic → preview → resource/build journey.",
+        "Check whether visitors interpret connections as relationships rather than prerequisites.",
+        "Observe phone pan, zoom, fit view and expanded-topic discovery; record specific task failures and confusing language.",
+        "Create evidence-backed follow-up fixes, preserving the map-first approach and the one-supporting-text rule."
+      ],
+      "repository_references": [
+        "components/atlas/atlas.tsx",
+        "app/page.tsx",
+        "WEBSITE_INTENT.md"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-23",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-23/test-map-discovery-with-beginner-visitors-on-desktop-and-phones",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "b260f731-93d5-491d-9352-edc52f750e48",
+      "linear_issue_uuid": "5226266d-bf31-41e0-8197-9a2a25e91f6d",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B11",
+      "title": "Complete an assistive-technology review of the explorer",
+      "priority": "Normal",
+      "group": "Explorer quality",
+      "status": "Backlog",
+      "reason": "Keyboard buttons and no-JavaScript links have been tested; an actual screen-reader and touch accessibility review is not recorded.",
+      "acceptance_criteria": [
+        "Check topic selection announcements and focus continuity with a screen reader.",
+        "Check keyboard navigation to topics outside the current viewport and focus after preview content changes.",
+        "Check touch targets, zoomed text, reduced motion and contrast on the active templates.",
+        "Fix observed issues without introducing a second visible navigation hierarchy or extra captions.",
+        "Record manual test conditions and outcomes alongside the existing browser checks."
+      ],
+      "repository_references": [
+        "components/atlas/atlas.tsx",
+        "components/atlas/site-shell.tsx",
+        "app/globals.css",
+        "scripts/check-browser.cjs"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-25",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-25/complete-an-assistive-technology-review-of-the-explorer",
+      "linear_state": "Backlog",
+      "linear_priority": 3,
+      "linear_milestone_id": "b260f731-93d5-491d-9352-edc52f750e48",
+      "linear_issue_uuid": "ec423946-8a22-4937-82ac-af4094f1a090",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B12",
+      "title": "Remove hardcoded map membership and guard future layout growth",
+      "priority": "Low",
+      "group": "Explorer quality",
+      "status": "Backlog",
+      "reason": "The generator hardcodes sixteen states and four subject relationships. Exhaustively precomputing expansion combinations will grow exponentially if subjects are added.",
+      "acceptance_criteria": [
+        "Move subject relationships into validated content data rather than duplicating IDs in the generator.",
+        "Derive expansion-state counts for the supported release instead of hardcoding sixteen.",
+        "Fail clearly when generated layouts are stale or content relationships reference missing subjects.",
+        "Document a bounded strategy for larger maps before expanding the subject set; retain precomputed routing for the current release.",
+        "Preserve geometry checks for both desktop and phone layouts and relationship semantics."
+      ],
+      "repository_references": [
+        "scripts/generate-atlas-layouts.mjs",
+        "data/atlas.json",
+        "tests/atlas.test.mjs"
+      ],
+      "depends_on": [],
+      "decision_gate": null,
+      "linear_issue_id": "MIG-27",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-27/remove-hardcoded-map-membership-and-guard-future-layout-growth",
+      "linear_state": "Backlog",
+      "linear_priority": 4,
+      "linear_milestone_id": "b260f731-93d5-491d-9352-edc52f750e48",
+      "linear_issue_uuid": "0b68a3f5-2485-48c3-a4f6-be7214681535",
+      "linear_blocked_by": [],
+      "linear_labels": []
+    },
+    {
+      "local_key": "B13",
+      "title": "Select the next fully developed robotics subject",
+      "priority": "Low",
+      "group": "Future discovery",
+      "status": "Deferred discovery",
+      "reason": "Perception, mapping, planning and learning are possible expansion areas. The owner prefers fewer developed subjects over broad placeholder coverage.",
+      "acceptance_criteria": [
+        "Use visitor findings and available high-quality free resources to compare candidate subjects.",
+        "Propose one subject with a useful external orientation, developed subtopics, research context and practical examples.",
+        "Obtain the owner’s scope decision before creating pages or map nodes."
+      ],
+      "repository_references": [
+        "WEBSITE_INTENT.md"
+      ],
+      "depends_on": [
+        "B10",
+        "B12"
+      ],
+      "decision_gate": "Future discovery only. Expanding the first-release subject set is not an approved implementation task.",
+      "linear_issue_id": "MIG-28",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-28/select-the-next-fully-developed-robotics-subject",
+      "linear_state": "Backlog",
+      "linear_priority": 4,
+      "linear_milestone_id": "34338ca4-add5-4522-a16b-0c4e07c634dd",
+      "linear_issue_uuid": "ae8265b5-dd84-4a99-adb5-4350e581371b",
+      "linear_blocked_by": [
+        "MIG-24",
+        "MIG-29"
+      ],
+      "linear_labels": [
+        "Deferred discovery"
+      ]
+    },
+    {
+      "local_key": "B14",
+      "title": "Clarify the future value of a user-specific environment",
+      "priority": "Low",
+      "group": "Future discovery",
+      "status": "Deferred discovery",
+      "reason": "The owner mentioned a possible user-specific environment later, while explicitly choosing a shared static site now.",
+      "acceptance_criteria": [
+        "Identify a concrete returning-visitor problem that personalization would solve.",
+        "Compare local-only and account-based approaches, including maintenance and privacy implications.",
+        "Record a go/no-go decision and, only if approved, a separate scoped implementation brief."
+      ],
+      "repository_references": [
+        "WEBSITE_INTENT.md"
+      ],
+      "depends_on": [],
+      "decision_gate": "Deferred. Do not implement accounts, saved progress or a backend from this issue.",
+      "linear_issue_id": "MIG-30",
+      "linear_issue_url": "https://linear.app/miguelmasc/issue/MIG-30/clarify-the-future-value-of-a-user-specific-environment",
+      "linear_state": "Backlog",
+      "linear_priority": 4,
+      "linear_milestone_id": "34338ca4-add5-4522-a16b-0c4e07c634dd",
+      "linear_issue_uuid": "e387894e-858b-49d9-a41e-ef93df4f223f",
+      "linear_blocked_by": [],
+      "linear_labels": [
+        "Deferred discovery"
+      ]
+    }
+  ],
+  "linear_team_id": "b54047f7-d92c-46e5-a9a9-acd8dda2fddf",
+  "linear_project_url": "https://linear.app/miguelmasc/project/learn-robotics-a55972a5e96a",
+  "linear_milestones": {
+    "Future discovery": "34338ca4-add5-4522-a16b-0c4e07c634dd",
+    "Explorer quality": "b260f731-93d5-491d-9352-edc52f750e48",
+    "Content and trust": "7e6c2bd5-aa82-4bf7-8921-b08a1c533410",
+    "Release readiness": "b398691a-13e6-4656-b408-cd760cdff611"
+  },
+  "merged_project": {
+    "id": "f0fd60e3-9b2b-43ca-9750-7cac45886f66",
+    "name": "Learn Robotics — merged",
+    "status": "Canceled",
+    "duplicate_issue_mapping": {
+      "MIG-32": "MIG-30",
+      "MIG-31": "MIG-28",
+      "MIG-29": "MIG-27",
+      "MIG-26": "MIG-25",
+      "MIG-24": "MIG-23",
+      "MIG-22": "MIG-21",
+      "MIG-19": "MIG-20",
+      "MIG-16": "MIG-18",
+      "MIG-14": "MIG-17",
+      "MIG-11": "MIG-15",
+      "MIG-8": "MIG-13",
+      "MIG-7": "MIG-12",
+      "MIG-6": "MIG-10",
+      "MIG-5": "MIG-9"
+    }
+  }
+}

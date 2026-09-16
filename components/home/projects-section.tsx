@@ -5,7 +5,11 @@ import { badgeClasses } from "@/components/home/badge-classes";
 import { SectionHeading } from "@/components/home/section-heading";
 import { publishedProjects } from "@/data/site-content";
 
-const featuredProjects = publishedProjects.slice(0, 3);
+import { BeginnerTutorialCard } from "@/components/tutorials/beginner-tutorial-card";
+
+import { beginnerTutorialEnabled } from "@/data/site-features";
+
+const featuredProjects = publishedProjects.slice(0, 2);
 
 export function ProjectsSection() {
   return (
@@ -15,7 +19,8 @@ export function ProjectsSection() {
         description="Every project has a clear goal, a safe first step, and a visible result."
       />
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className={`grid gap-4 md:grid-cols-2 ${beginnerTutorialEnabled ? "lg:grid-cols-3" : ""}`}>
+        {beginnerTutorialEnabled && <BeginnerTutorialCard />}
         {featuredProjects.map((project) => (
           <article
             key={project.slug}

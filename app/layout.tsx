@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
 export const metadata: Metadata = {
-  title: "Learn Robotics",
+  title: {
+    default: "Learn Robotics — Find your way into robotics",
+    template: "%s · Learn Robotics",
+  },
   description:
-    "A robotics learning path with curriculum milestones, trusted resources, and follow-along projects.",
+    "Explore the connected subjects of robotics. Find free learning resources, understand the research, and discover something to build.",
 };
-
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-zinc-50 text-zinc-950 antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

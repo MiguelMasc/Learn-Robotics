@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 
+import { beginnerTutorialEnabled } from "@/data/site-features";
+
 export function HeroSection() {
   return (
     <section
@@ -35,11 +37,11 @@ export function HeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="#start"
+              href={beginnerTutorialEnabled ? "/tutorials/first-robot" : "#start"}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-amber-300 px-6 py-2 text-sm font-semibold text-zinc-950 transition-colors hover:bg-amber-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
-              Find your starting point
-              <ArrowDown className="size-4" aria-hidden="true" />
+              {beginnerTutorialEnabled ? "Start your first simulation" : "Find your starting point"}
+              {beginnerTutorialEnabled ? <ArrowRight className="size-4" aria-hidden="true" /> : <ArrowDown className="size-4" aria-hidden="true" />}
             </Link>
             <Link
               href="/projects"
