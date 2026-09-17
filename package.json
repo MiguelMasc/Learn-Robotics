@@ -12,7 +12,9 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "node --test tests/*.test.mjs",
-    "map:generate": "node scripts/generate-atlas-layouts.mjs"
+    "map:generate": "node scripts/generate-atlas-layouts.mjs",
+    "prebuild": "node -e \"require('node:fs').rmSync('.next', { recursive: true, force: true })\"",
+    "postbuild": "node scripts/check-built-styles.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

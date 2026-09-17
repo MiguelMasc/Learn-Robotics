@@ -73,4 +73,6 @@ The beginner tutorial flag in `data/site-features.ts` restores its route only; a
 
 ## Deployment
 
-Deploy as a Next.js application on a compatible host, using `npm run build`. No deployment was performed as part of this implementation. Set the eventual public domain and social/canonical metadata when a production host is chosen.
+Deploy as a Next.js application on a compatible host, using `npm run build`. Production is hosted at https://learn-robotics-five.vercel.app/ and deploys from `main` on Vercel. `vercel.json` explicitly runs `npm run build`, including the prebuild cleanup and postbuild stylesheet check.
+
+The build removes `.next` before compiling so a restored build cache cannot pair new page markup with old CSS. The postbuild check inspects the stylesheets linked from the generated homepage and fails if explorer, dialog, or curriculum layout rules are missing. Browser verification also checks computed desktop and mobile layouts, rather than only content and overflow. This guards against the missing-styles regression seen in the September 16 deployment.
