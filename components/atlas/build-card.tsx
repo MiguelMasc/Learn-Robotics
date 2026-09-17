@@ -15,12 +15,6 @@ export function BuildCard({ build }: { build: (typeof builds)[number] }) {
           {build.title}
           <ArrowUpRight size={21} />
         </h3>
-        <p>
-          {build.kind === "proposal"
-            ? "Untested proposal. "
-            : "Publisher-documented guide. "}
-          {build.summary}
-        </p>
       </div>
     </Link>
   );

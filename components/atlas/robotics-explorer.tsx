@@ -46,13 +46,7 @@ export function RoboticsExplorer() {
         </Link>
       </div>
       {view === "subjects" ? (
-        <>
-          <Atlas />
-          <p className="map-footnote">
-            Curious how it all connects? Choose a subject to look closer. Drag
-            the map to explore, or use the controls to zoom.
-          </p>
-        </>
+        <Atlas />
       ) : (
         <>
           <nav className="journey-stages" aria-label="Learning stages">
@@ -69,7 +63,6 @@ export function RoboticsExplorer() {
                   </span>
                   <span>
                     <strong>{s.title}</strong>
-                    <small>{s.period}</small>
                   </span>
                 </button>
               );
@@ -79,7 +72,6 @@ export function RoboticsExplorer() {
             <div className="journey-main">
               <div className="journey-intro">
                 <h3>{current.title}</h3>
-                <p>{current.description}</p>
               </div>
               <div className="journey-topics">
                 {subjects.map((subject) => {
@@ -109,7 +101,6 @@ export function RoboticsExplorer() {
                         </span>
                         <h4>{subject.title}</h4>
                       </div>
-                      <p>{subject.description}</p>
                       {entries.map((t) => (
                         <button
                           key={t.id}
@@ -174,10 +165,6 @@ export function RoboticsExplorer() {
               />
             )}
           </div>
-          <p className="map-footnote">
-            There’s no rush, and no single right path. Start wherever you feel
-            comfortable. Each topic will show you what’s helpful to know first.
-          </p>
         </>
       )}
     </div>

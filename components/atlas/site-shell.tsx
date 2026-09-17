@@ -32,7 +32,6 @@ export function SiteFooter() {
         <Link className="wordmark" href="/">
           Learn Robotics<span className="brand-dot">.</span>
         </Link>
-        <p>A field to explore. A place to begin.</p>
         <Link href="/about">
           How this collection works <ArrowUpRight size={16} />
         </Link>

@@ -14,10 +14,6 @@ export default function Page() {
             <br />
             <span>A world of robots.</span>
           </h1>
-          <p>
-            Ever wondered how a robot finds its way, moves its hands, or learns
-            something new? Discover the ideas behind it, one step at a time.
-          </p>
           <a className="button primary" href="#explore">
             Find your starting point <ArrowDown size={18} />
           </a>
@@ -36,10 +32,6 @@ export default function Page() {
         <div className="shell">
           <div className="section-heading">
             <h2>Where would you like to begin?</h2>
-            <p>
-              From the first “how does that work?” to ideas of your own. Take a
-              look around—you don’t need to know anything yet.
-            </p>
           </div>
           <RoboticsExplorer />
           <noscript>
@@ -67,10 +59,6 @@ export default function Page() {
             <br />
             when you build.
           </h2>
-          <p>
-            See these subjects come together in practical experiments and small
-            robots.
-          </p>
           <Link className="text-link" href="/projects">
             Explore the build guides <ArrowRight size={18} />
           </Link>
@@ -84,7 +72,6 @@ export default function Page() {
             <h3>
               A robot that follows a line <ArrowRight size={20} />
             </h3>
-            <p>A publisher-documented guide to line following.</p>
           </div>
         </Link>
       </section>

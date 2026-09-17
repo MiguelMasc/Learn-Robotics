@@ -10,10 +10,6 @@ export default function About() {
           ← Back to the map
         </Link>
         <h1>A map for curious people.</h1>
-        <p className="lead">
-          Robotics is a field of connected ideas. This site helps you see what
-          is out there and choose your own way into it.
-        </p>
         <h2>You choose where to begin</h2>
         <p>
           You do not need a robotics background to explore. Start with a
