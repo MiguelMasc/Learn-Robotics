@@ -301,7 +301,6 @@ export function Atlas() {
         <div className="preview-color" style={{ background: parent.color }} />
         <div className="preview-content" key={selected}>
           <h3>{entry.title}</h3>
-          <p>{entry.description}</p>
           {subject && (
             <ul className="preview-topics">
               {subject.children.map((id) => (

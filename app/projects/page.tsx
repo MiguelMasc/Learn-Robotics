@@ -8,16 +8,8 @@ export default function Projects() {
     <Shell>
       <div className="shell collection-page">
         <h1>Put an idea in motion.</h1>
-        <p className="lead">
-          Small builds that bring the subjects together. Find a documented
-          experiment, or explore a design that is still taking shape.
-        </p>
         <section>
           <h2>Follow a published guide</h2>
-          <p className="section-description">
-            Free instructions from the original creators. Hardware costs vary;
-            these builds have not been independently tested here.
-          </p>
           <div className="build-grid">
             {builds
               .filter((b) => b.kind === "external")
@@ -27,11 +19,7 @@ export default function Projects() {
           </div>
         </section>
         <section>
-          <h2>From the sketchbook</h2>
-          <p className="section-description">
-            Original, untested proposals. These are design briefs with open
-            decisions, not finished build instructions.
-          </p>
+          <h2>Untested build ideas</h2>
           <div className="build-grid">
             {builds
               .filter((b) => b.kind === "proposal")

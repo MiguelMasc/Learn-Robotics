@@ -164,11 +164,8 @@ svg {
   z-index: -1;
   transform: rotate(-1deg);
 }
-.hero-copy > p {
-  font-size: 18px;
-  line-height: 1.75;
-  max-width: 430px;
-  margin: 28px 0 30px;
+.hero-copy > .button {
+  margin-top: 36px;
 }
 .button {
   display: inline-flex;
@@ -493,9 +490,8 @@ svg {
   align-items: center;
   padding-block: 90px;
 }
-.home-build > div p {
-  margin: 22px 0;
-  max-width: 380px;
+.home-build > div > .text-link {
+  margin-top: 24px;
 }
 .text-link {
   display: inline-flex;
@@ -602,6 +598,9 @@ svg {
 }
 .collection-page section {
   margin-top: 64px;
+}
+.collection-page section > h2 {
+  margin-bottom: 25px;
 }
 .section-description {
   margin: 16px 0 25px;
@@ -1547,6 +1546,7 @@ body {
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 .subject-symbol {
   display: inline-grid;
@@ -1906,6 +1906,7 @@ body {
   line-height: 1.85;
 }
 .track-grid {
+  margin-top: 36px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 60px;

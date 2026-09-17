@@ -37,12 +37,6 @@ export default async function BuildPage({
         </nav>
         <div className="detail-heading">
           <h1>{build.title}</h1>
-          <p className="lead">
-            {build.kind === "proposal"
-              ? "Untested proposal. "
-              : "Publisher-documented guide. "}
-            {build.summary}
-          </p>
         </div>
         <div className="detail-columns">
           <div>

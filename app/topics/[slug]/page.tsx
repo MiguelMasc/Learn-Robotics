@@ -13,7 +13,6 @@ import {
   findTopic,
 } from "@/data/atlas";
 import builds from "@/data/builds.json";
-import { stages } from "@/data/journey";
 export function generateStaticParams() {
   return [...subjects, ...topics].map((t) => ({ slug: t.id }));
 }
@@ -71,7 +70,6 @@ export default async function TopicPage({
           style={{ "--subject-color": parent.color } as React.CSSProperties}
         >
           <h1>{entry.title}</h1>
-          <p className="lead">{entry.description}</p>
         </div>
         <div className="detail-columns">
           <div>
@@ -85,7 +83,6 @@ export default async function TopicPage({
                         {t.title}
                         <ArrowRight size={19} />
                       </h3>
-                      <p>{t.description}</p>
                     </Link>
                   ))}
                 </div>
@@ -94,14 +91,6 @@ export default async function TopicPage({
             {topic && (
               <section className="topic-learning">
                 <h2>What you’ll learn</h2>
-                <p className="section-description">
-                  {stages[topic.stage].period} ·{" "}
-                  {topic.kind === "core"
-                    ? "Core foundation"
-                    : topic.kind === "elective"
-                      ? "Specialist elective"
-                      : "Graduate practice"}
-                </p>
                 <ul className="outcome-list">
                   {topic.outcomes.map((outcome) => (
                     <li key={outcome}>{outcome}</li>
@@ -235,7 +224,6 @@ export default async function TopicPage({
             {topic && topic.foundations.length > 0 && (
               <div className="sidebar-card">
                 <h2>Fill in a gap</h2>
-                <p>Dip into the math or physics when you need it.</p>
                 <div className="related-links">
                   {topic.foundations.map((id) => (
                     <a

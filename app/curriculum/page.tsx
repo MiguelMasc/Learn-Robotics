@@ -22,11 +22,6 @@ export default function CurriculumPage() {
             <br />
             to roboticist.
           </h1>
-          <p className="lead">
-            What would you encounter between high school and a master’s in
-            robotics? These six stages map the foundations, the shared core, and
-            the branches you can make your own.
-          </p>
         </div>
         <div className="curriculum-context">
           <p>
@@ -61,9 +56,6 @@ export default function CurriculumPage() {
                 </span>
                 <div>
                   <h2>{stage.title}</h2>
-                  <p>
-                    {stage.period} · {stage.description}
-                  </p>
                 </div>
               </div>
               <div className="curriculum-subjects">
@@ -117,16 +109,10 @@ export default function CurriculumPage() {
         </div>
         <section className="specializations">
           <h2>Choose a direction to go deeper.</h2>
-          <p>
-            These are example concentrations. Follow the prerequisites within
-            your chosen branch, and pair advanced electives with a sustained
-            project.
-          </p>
           <div className="track-grid">
             {tracks.map((track) => (
               <article key={track.title}>
                 <h3>{track.title}</h3>
-                <p>{track.description}</p>
                 <div className="related-links">
                   {track.topics.map((id) => (
                     <Link key={id} href={`/topics/${id}`}>
