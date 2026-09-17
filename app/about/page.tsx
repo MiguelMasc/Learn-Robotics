@@ -22,12 +22,14 @@ export default function About() {
           broader collection when you want to go further. Resource notes explain
           the knowledge or equipment a particular source assumes.
         </p>
-        <h2>A small collection with room to grow</h2>
+        <h2>From foundations to graduate work</h2>
         <p>
-          This first edition covers mechanical design, electronics and sensing,
-          programming, and motion and control. It is a foundation for
-          exploration, not a complete account of robotics. Perception, mapping,
-          planning and learning are areas for future expansion.
+          The map spans mathematics and physics, programming, mechanics,
+          electronics, control, perception, planning, learning, human–robot
+          systems, specialist platforms and research. The learning journey
+          organizes these subjects from high school foundations to
+          master’s-level work. It is a guide to the field, not an accredited
+          program or a claim that every research niche is covered.
         </p>
         <h2>Free learning comes first</h2>
         <p>
@@ -56,8 +58,10 @@ export default function About() {
         <h2>A shared resource</h2>
         <p>
           The site currently has no accounts, saved progress or personalized
-          paths. Everyone explores the same collection. The map shows
-          relationships, not a required sequence.
+          paths. Everyone explores the same collection. The subject map shows
+          relationships; the learning journey suggests an order and makes
+          prerequisites explicit. Graduate electives are branches to choose
+          among, not a checklist everyone must complete.
         </p>
         <Link className="button primary" href="/#explore">
           Find a subject →

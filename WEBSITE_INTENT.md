@@ -1,6 +1,6 @@
 # Learn Robotics — Website Intent
 
-Status: The first complete implementation is built and verified. Implementation was explicitly authorized by the owner. See IMPLEMENTATION_STATUS.md for delivered scope and checks.
+Status: The owner has now requested the complete field map from high school through master’s-level robotics; this expands the earlier introductory release. Implementation was explicitly authorized by the owner. See IMPLEMENTATION_STATUS.md for delivered scope and checks.
 
 ## How we will use this document
 
@@ -192,3 +192,15 @@ replace a confirmed decision when a later answer changes it; note the revision h
 | Complete the first implementation | Approved discovery decisions translated into a working site | Four subjects, twelve topics, curated references, four builds, responsive map, and verification recorded in IMPLEMENTATION_STATUS.md |
 
 | Limit supporting labels | Owner requested a maximum of one subtitle, label, or caption per object/region | Remove publisher eyebrows and repeated badges/captions; use a title and one supporting text block. Preserve essential readiness and requirements in the body text. |
+
+## Scope expansion — September 16, 2026
+
+The owner requested: “implement a complete map of robotics. If a person were to go from high school graduate to masters in robotics what would they see?” This supersedes the four-subject limit and the decision to hide any learning sequence. The older 31-course dataset remains a draft; the new `/curriculum` route is an independent synthesis of the expanded topic directory.
+
+The implementation provides 11 subjects, 62 developed topics, six learning stages, explicit prerequisites, learning outcomes, suggested exercises, six example specialization tracks and 53 shared references. The homepage supports both a learning journey and a subject relationship graph. Degree-year labels indicate approximate depth, not a required duration. Advanced branches are labeled electives, and thesis and professional systems-project routes are distinguished. University catalogs and primary learning resources inform the synthesis; it is not a university’s exact degree plan.
+
+The warm visual style, resource-directory topic pages, free-reading preference, shared static content and existing build-readiness distinctions continue to apply. Accounts, saved progress and the beginner tutorial are still outside the active scope.
+
+## Visual refinement — open layouts for newcomers
+
+The owner clarified that the audience is non-technical and accustomed to open layouts. The homepage now prioritizes generous spacing, larger text, soft sage and cream colors, simple subject and stage icons, and everyday language. Topic details appear in an accessible modal only after selection, replacing the permanently visible dense sidebar in the learning journey. The complete curriculum uses open columns and larger chapter spacing. The full topic coverage and subject graph remain available.

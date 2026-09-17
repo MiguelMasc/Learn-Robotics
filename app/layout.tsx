@@ -6,13 +6,13 @@ export const metadata: Metadata = {
     template: "%s · Learn Robotics",
   },
   description:
-    "Explore the connected subjects of robotics. Find free learning resources, understand the research, and discover something to build.",
+    "Explore robotics from high school foundations to master’s-level research. Find connected subjects, prerequisites, free resources and practical projects.",
 };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

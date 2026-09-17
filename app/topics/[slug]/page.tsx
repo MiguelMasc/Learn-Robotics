@@ -13,6 +13,7 @@ import {
   findTopic,
 } from "@/data/atlas";
 import builds from "@/data/builds.json";
+import { stages } from "@/data/journey";
 export function generateStaticParams() {
   return [...subjects, ...topics].map((t) => ({ slug: t.id }));
 }
@@ -90,6 +91,32 @@ export default async function TopicPage({
                 </div>
               </section>
             )}
+            {topic && (
+              <section className="topic-learning">
+                <h2>What you’ll learn</h2>
+                <p className="section-description">
+                  {stages[topic.stage].period} ·{" "}
+                  {topic.kind === "core"
+                    ? "Core foundation"
+                    : topic.kind === "elective"
+                      ? "Specialist elective"
+                      : "Graduate practice"}
+                </p>
+                <ul className="outcome-list">
+                  {topic.outcomes.map((outcome) => (
+                    <li key={outcome}>{outcome}</li>
+                  ))}
+                </ul>
+                <div className="journey-milestone">
+                  <h3>Put it into practice</h3>
+                  <p>{topic.exercise}</p>
+                  <p className="small-note">
+                    Suggested exercise; adapt the scope to your equipment or use
+                    simulation.
+                  </p>
+                </div>
+              </section>
+            )}
             <section id="resources">
               <h2>A few good starting points</h2>
               <div className="resource-list">
@@ -164,6 +191,32 @@ export default async function TopicPage({
             )}
           </div>
           <aside className="detail-sidebar">
+            {topic && (
+              <div className="sidebar-card">
+                <h2>Before this topic</h2>
+                {topic.prerequisites.length ? (
+                  <div className="related-links">
+                    {topic.prerequisites.map((id) => (
+                      <Link key={id} href={`/topics/${id}`}>
+                        {findTopic(id)!.title}
+                        <ArrowRight size={15} />
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <p>
+                    No earlier robotics topics needed. This is a place to start.
+                  </p>
+                )}
+                <Link
+                  className="text-link journey-return"
+                  href={`/curriculum#stage-${topic.stage}`}
+                >
+                  Find it in the journey <ArrowRight size={15} />
+                </Link>
+              </div>
+            )}
+
             <div className="sidebar-card orientation-card">
               <h2>Get your bearings</h2>
               <p>
