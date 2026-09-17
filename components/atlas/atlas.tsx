@@ -27,8 +27,10 @@ import {
   ExternalLink,
 } from "lucide-react";
 import "@xyflow/react/dist/style.css";
-import layouts from "@/data/atlas-layouts.json";
-import mobileLayouts from "@/data/atlas-layouts-mobile.json";
+import defaultLayout from "@/data/atlas-layouts.json";
+import type { AtlasLayout } from "@/lib/atlas-layout.mjs";
+import atlasData from "@/data/atlas.json";
+import defaultMobileLayout from "@/data/atlas-layouts-mobile.json";
 const compactQuery = "(max-width: 540px)";
 const subscribeCompact = (callback: () => void) => {
   const query = window.matchMedia(compactQuery);
@@ -76,7 +78,9 @@ function AtlasNode({ data }: NodeProps) {
           aria-expanded={!!data.expanded}
           aria-label={`${data.expanded ? "Collapse" : "Expand"} ${data.title}`}
         >
-          <span>{data.expanded ? "Hide topics" : "3 topics"}</span>
+          <span>
+            {data.expanded ? "Hide topics" : `${data.topicCount} topics`}
+          </span>
           {data.expanded ? <Minus size={15} /> : <Plus size={15} />}
         </button>
       )}
@@ -93,37 +97,64 @@ export function Atlas() {
     getServerCompact,
   );
   const [mask, setMask] = useState(0);
-  const [selected, setSelected] = useState("mechanical-design");
+  const [selected, setSelected] = useState("mathematics-physics");
+  const [focusKey, setFocusKey] = useState("");
   const [instance, setInstance] = useState<ReactFlowInstance | null>(null);
-  const focusKey = compact ? selected : "";
+  const [computed, setComputed] = useState<{
+    mask: number;
+    compact: boolean;
+    layout: AtlasLayout;
+  } | null>(null);
+  const [layoutError, setLayoutError] = useState(false);
+  const layout =
+    mask === 0
+      ? compact
+        ? defaultMobileLayout
+        : defaultLayout
+      : (computed?.layout ?? defaultLayout);
+  const pending =
+    mask !== 0 && (computed?.mask !== mask || computed?.compact !== compact);
   useEffect(() => {
-    let secondFrame = 0;
-    const frame = requestAnimationFrame(() => {
-      secondFrame = requestAnimationFrame(() =>
-        compact && mask !== 0
-          ? (() => {
-              const node = mobileLayouts[
-                String(mask) as keyof typeof mobileLayouts
-              ].nodes.find((n) => n.id === focusKey);
-              if (node)
-                instance?.setCenter(
-                  node.x + node.width / 2,
-                  node.y + node.height / 2,
-                  { zoom: 0.95, duration: 0 },
-                );
-            })()
-          : instance?.fitView({ padding: 0.16, maxZoom: 1, duration: 0 }),
-      );
-    });
+    if (mask === 0) return;
+    let cancelled = false;
+    import("@/lib/atlas-layout.mjs")
+      .then(({ layoutAtlas }) =>
+        layoutAtlas(
+          subjects,
+          atlasData.relationships,
+          subjects.filter((_, i) => mask & (1 << i)).map((s) => s.id),
+          compact,
+        ),
+      )
+      .then((layout) => {
+        if (!cancelled) {
+          setComputed({ mask, compact, layout });
+          setLayoutError(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLayoutError(true);
+      });
     return () => {
-      cancelAnimationFrame(frame);
-      cancelAnimationFrame(secondFrame);
+      cancelled = true;
     };
-  }, [mask, instance, compact, focusKey]);
-  const layout = (compact ? mobileLayouts : layouts)[
-    String(mask) as keyof typeof layouts
-  ];
-  const select = useCallback((id: string) => setSelected(id), []);
+  }, [mask, compact]);
+  useEffect(() => {
+    if (pending) return;
+    const frame = requestAnimationFrame(() => {
+      const node = layout.nodes.find((n) => n.id === focusKey);
+      if (node)
+        instance?.setCenter(node.x + node.width / 2, node.y + node.height / 2, {
+          zoom: compact ? 0.85 : 0.95,
+        });
+      else instance?.fitView({ padding: 0.12, maxZoom: 1 });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [layout, instance, compact, focusKey, pending]);
+  const select = useCallback((id: string) => {
+    setSelected(id);
+    setFocusKey(id);
+  }, []);
   const nodes = useMemo(
     () =>
       layout.nodes.map((n) => {
@@ -142,13 +173,14 @@ export function Atlas() {
           data: {
             title: (s ?? topic)!.title,
             major: !!s,
+            topicCount: s?.children.length,
             color: parent.color,
             active: selected === n.id,
             expanded: !!(mask & (1 << index)),
             select: () => select(n.id),
             toggle: () => {
               setMask((m) => m ^ (1 << index));
-              setSelected(n.id);
+              select(n.id);
             },
           },
         };
@@ -180,7 +212,9 @@ export function Atlas() {
   const intro = resources[subject?.orientation ?? topic!.orientation];
   function reset() {
     setMask(0);
-    setSelected("mechanical-design");
+    setSelected("mathematics-physics");
+    setFocusKey("");
+    setLayoutError(false);
     requestAnimationFrame(() =>
       instance?.fitView({ padding: 0.2, duration: 0 }),
     );
@@ -189,14 +223,40 @@ export function Atlas() {
     <div className="atlas-layout">
       <div className="canvas-wrap">
         <div className="canvas-toolbar">
+          <label className="subject-jump">
+            Jump to
+            <select
+              aria-label="Jump to subject"
+              value={parent.id}
+              onChange={(e) => select(e.target.value)}
+            >
+              {subjects.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </label>
           <button onClick={reset} className="quiet-button">
             <RotateCcw size={14} />
             Reset
           </button>
         </div>
+        {pending && !layoutError && (
+          <p className="layout-status" role="status">
+            Arranging topics…
+          </p>
+        )}
+        {layoutError && (
+          <p className="layout-status" role="alert">
+            The map could not be arranged. Use Reset to retry, or explore the
+            topic links alongside it.
+          </p>
+        )}
         <div
           className="map-canvas"
           aria-label="Interactive map of robotics subjects"
+          aria-busy={pending && !layoutError}
         >
           <ReactFlow
             nodes={nodes}
@@ -207,7 +267,7 @@ export function Atlas() {
             onNodeClick={(_, node) => select(node.id)}
             fitView
             fitViewOptions={{ padding: 0.16, maxZoom: 1 }}
-            minZoom={0.2}
+            minZoom={0.1}
             maxZoom={1.6}
             nodesDraggable={false}
             nodesConnectable={false}

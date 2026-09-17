@@ -1,27 +1,21 @@
 {
   "subjects": [
     {
-      "id": "mechanical-design",
-      "title": "Mechanical design",
-      "description": "Give a robot its shape, strength and ways to move.",
-      "color": "#c99457",
-      "orientation": "mechanisms",
+      "id": "mathematics-physics",
+      "title": "Mathematics & physics",
+      "description": "The language of geometry, uncertainty, motion and change.",
+      "color": "#bca05e",
+      "orientation": "algebra",
       "children": [
-        "structures-materials",
-        "mechanisms-drivetrains",
-        "cad-fabrication"
-      ]
-    },
-    {
-      "id": "electronics-sensing",
-      "title": "Electronics & sensing",
-      "description": "Bring power in and turn the physical world into signals.",
-      "color": "#849778",
-      "orientation": "circuits",
-      "children": [
-        "circuits-power",
-        "microcontrollers",
-        "sensors-measurement"
+        "algebra-trigonometry",
+        "physics-mechanics",
+        "calculus",
+        "linear-algebra",
+        "multivariable-calculus",
+        "differential-equations",
+        "probability-statistics",
+        "numerical-optimization",
+        "discrete-math"
       ]
     },
     {
@@ -33,7 +27,38 @@
       "children": [
         "programming-fundamentals",
         "sensor-data",
-        "robot-software"
+        "robot-software",
+        "algorithms-data",
+        "software-engineering",
+        "simulation"
+      ]
+    },
+    {
+      "id": "mechanical-design",
+      "title": "Mechanical design",
+      "description": "Give a robot its shape, strength and ways to move.",
+      "color": "#c99457",
+      "orientation": "mechanisms",
+      "children": [
+        "structures-materials",
+        "mechanisms-drivetrains",
+        "cad-fabrication",
+        "rigid-body-dynamics",
+        "compliant-design"
+      ]
+    },
+    {
+      "id": "electronics-sensing",
+      "title": "Electronics & sensing",
+      "description": "Bring power in and turn the physical world into signals.",
+      "color": "#849778",
+      "orientation": "circuits",
+      "children": [
+        "circuits-power",
+        "microcontrollers",
+        "sensors-measurement",
+        "signals-systems",
+        "embedded-realtime"
       ]
     },
     {
@@ -45,7 +70,95 @@
       "children": [
         "actuators",
         "motion-models",
-        "feedback-pid"
+        "feedback-pid",
+        "kinematics",
+        "linear-control",
+        "system-identification",
+        "optimal-control",
+        "nonlinear-control"
+      ]
+    },
+    {
+      "id": "perception-estimation",
+      "title": "Perception & estimation",
+      "description": "Turn imperfect observations into a useful understanding of the world.",
+      "color": "#6d9e9a",
+      "orientation": "sensors",
+      "children": [
+        "computer-vision",
+        "state-estimation",
+        "geometry-3d",
+        "slam",
+        "advanced-perception"
+      ]
+    },
+    {
+      "id": "planning-navigation",
+      "title": "Planning & navigation",
+      "description": "Choose actions, avoid obstacles and find a way to the goal.",
+      "color": "#9a91b0",
+      "orientation": "planning",
+      "children": [
+        "motion-planning",
+        "mobile-navigation",
+        "task-planning",
+        "belief-planning",
+        "multi-robot"
+      ]
+    },
+    {
+      "id": "robot-learning",
+      "title": "Robot learning",
+      "description": "Learn representations, predictions and behavior from experience.",
+      "color": "#b1849b",
+      "orientation": "statlearning",
+      "children": [
+        "machine-learning",
+        "deep-learning",
+        "reinforcement-learning",
+        "imitation-learning",
+        "sim-to-real"
+      ]
+    },
+    {
+      "id": "human-systems",
+      "title": "Humans & robot systems",
+      "description": "Build dependable robots that work with people and real constraints.",
+      "color": "#8b9b64",
+      "orientation": "hri",
+      "children": [
+        "human-robot-interaction",
+        "safety-ethics",
+        "systems-engineering",
+        "verification",
+        "haptics-teleoperation"
+      ]
+    },
+    {
+      "id": "robot-platforms",
+      "title": "Robot platforms",
+      "description": "See how the same ideas change across arms, legs, wheels and wings.",
+      "color": "#b28d73",
+      "orientation": "modern",
+      "children": [
+        "manipulation-grasping",
+        "legged-robotics",
+        "aerial-robotics",
+        "field-robotics",
+        "medical-assistive"
+      ]
+    },
+    {
+      "id": "research-practice",
+      "title": "Research & integration",
+      "description": "Turn separate components into evidence, working systems and new knowledge.",
+      "color": "#798d9d",
+      "orientation": "systems",
+      "children": [
+        "experimental-methods",
+        "capstone",
+        "research-methods",
+        "masters-project"
       ]
     }
   ],
@@ -74,7 +187,18 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 1,
+      "prerequisites": [
+        "physics-mechanics"
+      ],
+      "outcomes": [
+        "Explain stress, strain and stiffness",
+        "Choose materials for mass and load",
+        "Estimate a frame’s deflection"
+      ],
+      "exercise": "Compare two beam cross-sections under the same load and explain the weight tradeoff.",
+      "kind": "core"
     },
     {
       "id": "mechanisms-drivetrains",
@@ -100,7 +224,18 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 1,
+      "prerequisites": [
+        "physics-mechanics"
+      ],
+      "outcomes": [
+        "Relate gearing to speed and torque",
+        "Compare belts, gears and linkages",
+        "Estimate drivetrain efficiency"
+      ],
+      "exercise": "Design a drivetrain ratio for a target speed and incline.",
+      "kind": "core"
     },
     {
       "id": "cad-fabrication",
@@ -126,7 +261,18 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 1,
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "outcomes": [
+        "Create constrained sketches and assemblies",
+        "Specify tolerances and clearances",
+        "Choose a fabrication process"
+      ],
+      "exercise": "Model a sensor bracket, dimension it, and check interference in an assembly.",
+      "kind": "core"
     },
     {
       "id": "circuits-power",
@@ -152,7 +298,18 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 1,
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "outcomes": [
+        "Apply Ohm’s and Kirchhoff’s laws",
+        "Budget current, voltage and battery energy",
+        "Measure a low-voltage circuit"
+      ],
+      "exercise": "Draw a fused low-voltage robot power diagram and calculate expected runtime.",
+      "kind": "core"
     },
     {
       "id": "microcontrollers",
@@ -178,7 +335,19 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 2,
+      "prerequisites": [
+        "circuits-power",
+        "programming-fundamentals"
+      ],
+      "outcomes": [
+        "Read digital and analog signals",
+        "Use timers, PWM and interrupts",
+        "Connect peripherals over I²C, SPI and UART"
+      ],
+      "exercise": "Read a sensor at a fixed interval and log missed deadlines.",
+      "kind": "core"
     },
     {
       "id": "sensors-measurement",
@@ -204,7 +373,19 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 2,
+      "prerequisites": [
+        "circuits-power",
+        "probability-statistics"
+      ],
+      "outcomes": [
+        "Compare encoder, IMU and range sensing",
+        "Calibrate offset and scale",
+        "Quantify noise and sampling limits"
+      ],
+      "exercise": "Calibrate a sensor against a reference and plot its residual error.",
+      "kind": "core"
     },
     {
       "id": "programming-fundamentals",
@@ -227,7 +408,16 @@
       ],
       "orientation": "beginner",
       "establishedSource": "python",
-      "foundations": []
+      "foundations": [],
+      "stage": 0,
+      "prerequisites": [],
+      "outcomes": [
+        "Use variables, functions and loops",
+        "Represent state with data structures",
+        "Debug and test a small program"
+      ],
+      "exercise": "Write a Python program that simulates a robot moving through a grid.",
+      "kind": "core"
     },
     {
       "id": "sensor-data",
@@ -253,7 +443,19 @@
       "foundations": [
         "algebra",
         "linear"
-      ]
+      ],
+      "stage": 2,
+      "prerequisites": [
+        "programming-fundamentals",
+        "linear-algebra"
+      ],
+      "outcomes": [
+        "Load and visualize measurements",
+        "Vectorize calculations with arrays",
+        "Identify missing samples and outliers"
+      ],
+      "exercise": "Plot a sensor log and compare raw data to a moving average.",
+      "kind": "core"
     },
     {
       "id": "robot-software",
@@ -276,7 +478,19 @@
       ],
       "orientation": "ros",
       "establishedSource": "ros",
-      "foundations": []
+      "foundations": [],
+      "stage": 3,
+      "prerequisites": [
+        "software-engineering",
+        "microcontrollers"
+      ],
+      "outcomes": [
+        "Connect nodes with ROS 2 messages",
+        "Use transforms, timestamps and logs",
+        "Separate sensing, decisions and actuation"
+      ],
+      "exercise": "Create a simulated publisher and controller, then record and replay their messages.",
+      "kind": "core"
     },
     {
       "id": "actuators",
@@ -302,7 +516,19 @@
       "foundations": [
         "algebra",
         "physics"
-      ]
+      ],
+      "stage": 2,
+      "prerequisites": [
+        "mechanisms-drivetrains",
+        "circuits-power"
+      ],
+      "outcomes": [
+        "Compare torque-speed characteristics",
+        "Control motors through appropriate drivers",
+        "Measure encoder speed and current"
+      ],
+      "exercise": "Model a motor’s speed response and choose gearing for a given load.",
+      "kind": "core"
     },
     {
       "id": "motion-models",
@@ -328,7 +554,19 @@
       "foundations": [
         "algebra",
         "linear"
-      ]
+      ],
+      "stage": 2,
+      "prerequisites": [
+        "linear-algebra",
+        "physics-mechanics"
+      ],
+      "outcomes": [
+        "Represent position and orientation",
+        "Derive differential-drive motion",
+        "Integrate wheel odometry"
+      ],
+      "exercise": "Simulate a wheeled robot driving a square and explain why odometry drifts.",
+      "kind": "core"
     },
     {
       "id": "feedback-pid",
@@ -354,7 +592,1737 @@
       "foundations": [
         "algebra",
         "linear"
-      ]
+      ],
+      "stage": 3,
+      "prerequisites": [
+        "differential-equations",
+        "actuators"
+      ],
+      "outcomes": [
+        "Explain feedback and tracking error",
+        "Tune proportional, integral and derivative terms",
+        "Recognize saturation and integral windup"
+      ],
+      "exercise": "Tune a simulated speed controller; plot overshoot and settling time for a load change.",
+      "kind": "core"
+    },
+    {
+      "id": "algebra-trigonometry",
+      "subject": "mathematics-physics",
+      "stage": 0,
+      "title": "Algebra, trigonometry & units",
+      "description": "Rearrange equations and reason with units. Use vectors, angles, sine and cosine.",
+      "prerequisites": [],
+      "resources": [
+        "algebra",
+        "physics"
+      ],
+      "orientation": "algebra",
+      "outcomes": [
+        "Rearrange equations and reason with units",
+        "Use vectors, angles, sine and cosine",
+        "Read graphs and estimate orders of magnitude"
+      ],
+      "exercise": "Calculate wheel travel from radius and rotation; check the result in meters.",
+      "kind": "core",
+      "established": "Geometry converts wheel rotations into distance.",
+      "research": "These foundations support geometric robot models.",
+      "question": "When is a simple geometric model accurate enough?",
+      "establishedSource": "algebra",
+      "researchSource": "physics",
+      "related": [
+        "cad-fabrication",
+        "circuits-power",
+        "physics-mechanics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "physics-mechanics",
+      "subject": "mathematics-physics",
+      "stage": 0,
+      "title": "Forces, energy & motion",
+      "description": "Draw free-body diagrams. Connect force, torque, work and energy.",
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "resources": [
+        "physics",
+        "mechanics"
+      ],
+      "orientation": "physics",
+      "outcomes": [
+        "Draw free-body diagrams",
+        "Connect force, torque, work and energy",
+        "Explain friction and conservation laws"
+      ],
+      "exercise": "Estimate the torque needed to move a cart up a ramp and state your assumptions.",
+      "kind": "core",
+      "established": "Force and energy estimates guide motor sizing.",
+      "research": "Contact and friction remain important sources of modeling uncertainty.",
+      "question": "How well can a friction model predict a changing surface?",
+      "establishedSource": "physics",
+      "researchSource": "mechanics",
+      "related": [
+        "structures-materials",
+        "mechanisms-drivetrains",
+        "motion-models"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "calculus",
+      "subject": "mathematics-physics",
+      "stage": 1,
+      "title": "Calculus",
+      "description": "Differentiate position to obtain velocity. Integrate velocity to recover displacement.",
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "resources": [
+        "calculus",
+        "physics"
+      ],
+      "orientation": "calculus",
+      "outcomes": [
+        "Differentiate position to obtain velocity",
+        "Integrate velocity to recover displacement",
+        "Use series to approximate nonlinear functions"
+      ],
+      "exercise": "Compare analytic and numerical velocity for a simulated wheel trajectory.",
+      "kind": "core",
+      "established": "Calculus describes changing motion.",
+      "research": "Numerical approximations trade computation against accuracy.",
+      "question": "How does approximation error accumulate over time?",
+      "establishedSource": "calculus",
+      "researchSource": "physics",
+      "related": [
+        "multivariable-calculus",
+        "differential-equations",
+        "probability-statistics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "linear-algebra",
+      "subject": "mathematics-physics",
+      "stage": 1,
+      "title": "Linear algebra",
+      "description": "Solve systems with matrices. Work with bases, eigenvectors and singular values.",
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "resources": [
+        "linear",
+        "numpy"
+      ],
+      "orientation": "linear",
+      "outcomes": [
+        "Solve systems with matrices",
+        "Work with bases, eigenvectors and singular values",
+        "Use least squares for noisy measurements"
+      ],
+      "exercise": "Fit a line to noisy range measurements and inspect the residuals.",
+      "kind": "core",
+      "established": "Matrices encode rotations and solve estimation problems.",
+      "research": "Large estimation systems depend on efficient numerical linear algebra.",
+      "question": "How can you detect an ill-conditioned estimate?",
+      "establishedSource": "linear",
+      "researchSource": "numpy",
+      "related": [
+        "sensor-data",
+        "motion-models",
+        "multivariable-calculus"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "multivariable-calculus",
+      "subject": "mathematics-physics",
+      "stage": 2,
+      "title": "Multivariable & vector calculus",
+      "description": "Compute gradients and Jacobians. Apply the multivariable chain rule.",
+      "prerequisites": [
+        "calculus",
+        "linear-algebra"
+      ],
+      "resources": [
+        "multivariable",
+        "convex"
+      ],
+      "orientation": "multivariable",
+      "outcomes": [
+        "Compute gradients and Jacobians",
+        "Apply the multivariable chain rule",
+        "Interpret constrained extrema"
+      ],
+      "exercise": "Differentiate a two-joint arm’s endpoint coordinates and verify with finite differences.",
+      "kind": "core",
+      "established": "Jacobians connect joint motion to endpoint motion.",
+      "research": "Differentiable models allow optimization through complex systems.",
+      "question": "Where do useful derivatives fail at contact transitions?",
+      "establishedSource": "multivariable",
+      "researchSource": "convex",
+      "related": [
+        "numerical-optimization",
+        "kinematics",
+        "algebra-trigonometry"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "differential-equations",
+      "subject": "mathematics-physics",
+      "stage": 2,
+      "title": "Differential equations",
+      "description": "Solve first- and second-order dynamics. Interpret eigenvalues and transients.",
+      "prerequisites": [
+        "calculus",
+        "linear-algebra"
+      ],
+      "resources": [
+        "ode",
+        "underactuated"
+      ],
+      "orientation": "ode",
+      "outcomes": [
+        "Solve first- and second-order dynamics",
+        "Interpret eigenvalues and transients",
+        "Simulate a state evolving over time"
+      ],
+      "exercise": "Simulate a spring–mass–damper and compare numerical and analytic responses.",
+      "kind": "core",
+      "established": "Differential equations predict mechanical and electrical transients.",
+      "research": "Nonlinear dynamics reveal behavior beyond linear approximations.",
+      "question": "When does a local approximation stop predicting the motion?",
+      "establishedSource": "ode",
+      "researchSource": "underactuated",
+      "related": [
+        "feedback-pid",
+        "rigid-body-dynamics",
+        "signals-systems"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "probability-statistics",
+      "subject": "mathematics-physics",
+      "stage": 2,
+      "title": "Probability & statistics",
+      "description": "Apply conditional probability and Bayes’ rule. Describe covariance and random variables.",
+      "prerequisites": [
+        "calculus",
+        "linear-algebra"
+      ],
+      "resources": [
+        "probability",
+        "statlearning"
+      ],
+      "orientation": "probability",
+      "outcomes": [
+        "Apply conditional probability and Bayes’ rule",
+        "Describe covariance and random variables",
+        "Estimate uncertainty and confidence intervals"
+      ],
+      "exercise": "Estimate sensor bias and noise from repeated measurements; report uncertainty.",
+      "kind": "core",
+      "established": "Probability quantifies measurement uncertainty.",
+      "research": "Statistical models must contend with data that differs from training conditions.",
+      "question": "How can you detect when uncertainty estimates are overconfident?",
+      "establishedSource": "probability",
+      "researchSource": "statlearning",
+      "related": [
+        "sensors-measurement",
+        "system-identification",
+        "state-estimation"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "numerical-optimization",
+      "subject": "mathematics-physics",
+      "stage": 3,
+      "title": "Numerical methods & optimization",
+      "description": "Solve least-squares and constrained problems. Use gradients and numerical integration.",
+      "prerequisites": [
+        "multivariable-calculus",
+        "programming-fundamentals"
+      ],
+      "resources": [
+        "convex",
+        "numpy"
+      ],
+      "orientation": "convex",
+      "outcomes": [
+        "Solve least-squares and constrained problems",
+        "Use gradients and numerical integration",
+        "Recognize conditioning and local minima"
+      ],
+      "exercise": "Optimize a smooth path around an obstacle and compare several initial guesses.",
+      "kind": "core",
+      "established": "Optimization fits models and computes feasible trajectories.",
+      "research": "Real-time nonlinear solvers support increasingly complex robot behavior.",
+      "question": "How do you trade solution quality against a hard time limit?",
+      "establishedSource": "convex",
+      "researchSource": "numpy",
+      "related": [
+        "optimal-control",
+        "nonlinear-control",
+        "slam"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "discrete-math",
+      "subject": "mathematics-physics",
+      "stage": 1,
+      "title": "Discrete mathematics & logic",
+      "description": "Use sets, logic and proof by induction. Model relationships with graphs.",
+      "prerequisites": [
+        "algebra-trigonometry"
+      ],
+      "resources": [
+        "algorithms",
+        "planning"
+      ],
+      "orientation": "algorithms",
+      "outcomes": [
+        "Use sets, logic and proof by induction",
+        "Model relationships with graphs",
+        "Count possibilities and reason about complexity"
+      ],
+      "exercise": "Represent rooms as a graph and explain why breadth-first search finds a shortest unweighted path.",
+      "kind": "core",
+      "established": "Graphs represent routes and symbolic task states.",
+      "research": "Combinatorial planning scales poorly as choices grow.",
+      "question": "What useful structure can reduce a planning search?",
+      "establishedSource": "algorithms",
+      "researchSource": "planning",
+      "related": [
+        "algorithms-data",
+        "algebra-trigonometry",
+        "physics-mechanics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "rigid-body-dynamics",
+      "subject": "mechanical-design",
+      "stage": 2,
+      "title": "Rigid-body dynamics",
+      "description": "Use inertia, momentum and energy. Derive Newton–Euler or Lagrange equations.",
+      "prerequisites": [
+        "differential-equations",
+        "physics-mechanics"
+      ],
+      "resources": [
+        "modern",
+        "underactuated"
+      ],
+      "orientation": "modern",
+      "outcomes": [
+        "Use inertia, momentum and energy",
+        "Derive Newton–Euler or Lagrange equations",
+        "Account for coupled joint motion"
+      ],
+      "exercise": "Derive and simulate a pendulum, then compare two mass distributions.",
+      "kind": "core",
+      "established": "Dynamics predicts the torques needed to accelerate robot links.",
+      "research": "Contact-rich dynamics couples smooth motion with discrete impacts.",
+      "question": "Which physical effects must a model retain to predict a task?",
+      "establishedSource": "modern",
+      "researchSource": "underactuated",
+      "related": [
+        "compliant-design",
+        "simulation",
+        "nonlinear-control"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "compliant-design",
+      "subject": "mechanical-design",
+      "stage": 4,
+      "title": "Compliance & soft mechanisms",
+      "description": "Explain passive and active compliance. Compare soft and rigid grippers.",
+      "prerequisites": [
+        "structures-materials",
+        "rigid-body-dynamics"
+      ],
+      "resources": [
+        "soft",
+        "manipulation"
+      ],
+      "orientation": "soft",
+      "outcomes": [
+        "Explain passive and active compliance",
+        "Compare soft and rigid grippers",
+        "Model deformation and contact limitations"
+      ],
+      "exercise": "Design a compliant gripper concept and specify a test for its force–displacement response.",
+      "kind": "elective",
+      "established": "Compliance helps accommodate shape and alignment errors.",
+      "research": "Soft bodies and tactile sensing extend contact-rich manipulation.",
+      "question": "How can a deformable robot estimate its own shape?",
+      "establishedSource": "soft",
+      "researchSource": "manipulation",
+      "related": [
+        "structures-materials",
+        "mechanisms-drivetrains",
+        "cad-fabrication"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "signals-systems",
+      "subject": "electronics-sensing",
+      "stage": 2,
+      "title": "Signals, sampling & filtering",
+      "description": "Interpret frequency spectra and transfer functions. Explain aliasing and sample rate selection.",
+      "prerequisites": [
+        "differential-equations"
+      ],
+      "resources": [
+        "signals",
+        "numpy"
+      ],
+      "orientation": "signals",
+      "outcomes": [
+        "Interpret frequency spectra and transfer functions",
+        "Explain aliasing and sample rate selection",
+        "Design and evaluate basic filters"
+      ],
+      "exercise": "Sample a sinusoid below and above the Nyquist rate and demonstrate aliasing.",
+      "kind": "core",
+      "established": "Filtering suppresses noise while changing signal delay.",
+      "research": "Perception and feedback must balance filtering with latency.",
+      "question": "How much delay can a controller tolerate?",
+      "establishedSource": "signals",
+      "researchSource": "numpy",
+      "related": [
+        "state-estimation",
+        "circuits-power",
+        "microcontrollers"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "embedded-realtime",
+      "subject": "electronics-sensing",
+      "stage": 4,
+      "title": "Embedded & real-time systems",
+      "description": "Schedule work within timing budgets. Reason about concurrency and watchdogs.",
+      "prerequisites": [
+        "microcontrollers",
+        "software-engineering"
+      ],
+      "resources": [
+        "micro",
+        "ros",
+        "signals"
+      ],
+      "orientation": "micro",
+      "outcomes": [
+        "Schedule work within timing budgets",
+        "Reason about concurrency and watchdogs",
+        "Measure jitter and communication failures"
+      ],
+      "exercise": "Simulate a control loop with delayed messages and test a watchdog response.",
+      "kind": "elective",
+      "established": "Embedded systems enforce predictable sensing and actuation timing.",
+      "research": "Distributed robot software must maintain timing across multiple processors.",
+      "question": "What happens when a safety-critical message arrives late?",
+      "establishedSource": "micro",
+      "researchSource": "signals",
+      "related": [
+        "circuits-power",
+        "microcontrollers",
+        "sensors-measurement"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "algorithms-data",
+      "subject": "programming",
+      "stage": 2,
+      "title": "Algorithms & data structures",
+      "description": "Choose queues, heaps, trees and graphs. Analyze runtime and memory growth.",
+      "prerequisites": [
+        "programming-fundamentals",
+        "discrete-math"
+      ],
+      "resources": [
+        "algorithms",
+        "planning"
+      ],
+      "orientation": "algorithms",
+      "outcomes": [
+        "Choose queues, heaps, trees and graphs",
+        "Analyze runtime and memory growth",
+        "Implement graph search"
+      ],
+      "exercise": "Compare Dijkstra’s algorithm and A* on the same grid and count expanded states.",
+      "kind": "core",
+      "established": "Efficient data structures make planning tractable.",
+      "research": "Large search spaces motivate approximation and problem-specific heuristics.",
+      "question": "When is an approximate answer good enough?",
+      "establishedSource": "algorithms",
+      "researchSource": "planning",
+      "related": [
+        "slam",
+        "motion-planning",
+        "programming-fundamentals"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "software-engineering",
+      "subject": "programming",
+      "stage": 1,
+      "title": "Linux, C++ & software engineering",
+      "description": "Use Linux, Git and automated tests. Understand compiled code, ownership and memory.",
+      "prerequisites": [
+        "programming-fundamentals"
+      ],
+      "resources": [
+        "tooling",
+        "cpp",
+        "git",
+        "ros"
+      ],
+      "orientation": "tooling",
+      "outcomes": [
+        "Use Linux, Git and automated tests",
+        "Understand compiled code, ownership and memory",
+        "Debug interfaces and document reproducible builds"
+      ],
+      "exercise": "Package a small Python or C++ robot model with tests and reproducible setup instructions.",
+      "kind": "core",
+      "established": "Robot teams depend on versioned, tested software interfaces.",
+      "research": "Reliable distributed software needs observability and reproducibility.",
+      "question": "How can a failure be reproduced from a field log?",
+      "establishedSource": "tooling",
+      "researchSource": "ros",
+      "related": [
+        "robot-software",
+        "embedded-realtime",
+        "experimental-methods"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "simulation",
+      "subject": "programming",
+      "stage": 3,
+      "title": "Robot modeling & simulation",
+      "description": "Describe links and joints in a robot model. Configure collision, contact and sensor models.",
+      "prerequisites": [
+        "robot-software",
+        "rigid-body-dynamics"
+      ],
+      "resources": [
+        "mujoco",
+        "drake",
+        "moveit"
+      ],
+      "orientation": "mujoco",
+      "outcomes": [
+        "Describe links and joints in a robot model",
+        "Configure collision, contact and sensor models",
+        "Compare simulated and measured behavior"
+      ],
+      "exercise": "Create a simulated two-link arm and measure how time step changes its behavior.",
+      "kind": "core",
+      "established": "Simulation supports development before hardware integration.",
+      "research": "Contact modeling and model calibration remain central to transfer.",
+      "question": "Which simulator errors matter for the intended task?",
+      "establishedSource": "mujoco",
+      "researchSource": "moveit",
+      "related": [
+        "sim-to-real",
+        "programming-fundamentals",
+        "sensor-data"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "kinematics",
+      "subject": "motion-control",
+      "stage": 3,
+      "title": "Forward & inverse kinematics",
+      "description": "Compose 3D transforms and rotations. Solve forward and inverse kinematics.",
+      "prerequisites": [
+        "motion-models",
+        "multivariable-calculus"
+      ],
+      "resources": [
+        "modern",
+        "toolbox"
+      ],
+      "orientation": "modern",
+      "outcomes": [
+        "Compose 3D transforms and rotations",
+        "Solve forward and inverse kinematics",
+        "Interpret Jacobians and singularities"
+      ],
+      "exercise": "Compute the reachable workspace of a two-link arm and identify singular configurations.",
+      "kind": "core",
+      "established": "Kinematics converts end-effector goals to joint configurations.",
+      "research": "Constrained inverse kinematics handles redundant robots and obstacles.",
+      "question": "How should a robot choose among many valid joint configurations?",
+      "establishedSource": "modern",
+      "researchSource": "toolbox",
+      "related": [
+        "geometry-3d",
+        "motion-planning",
+        "manipulation-grasping"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "linear-control",
+      "subject": "motion-control",
+      "stage": 3,
+      "title": "Linear systems & state-space control",
+      "description": "Analyze stability and frequency response. Check controllability and observability.",
+      "prerequisites": [
+        "differential-equations",
+        "linear-algebra",
+        "feedback-pid"
+      ],
+      "resources": [
+        "signals",
+        "underactuated"
+      ],
+      "orientation": "signals",
+      "outcomes": [
+        "Analyze stability and frequency response",
+        "Check controllability and observability",
+        "Design state feedback and an observer"
+      ],
+      "exercise": "Stabilize a linearized inverted pendulum and measure robustness to parameter error.",
+      "kind": "core",
+      "established": "Linear feedback regulates systems around operating points.",
+      "research": "Model-based design must account for unmodeled dynamics.",
+      "question": "How far from the operating point is the design still useful?",
+      "establishedSource": "signals",
+      "researchSource": "underactuated",
+      "related": [
+        "system-identification",
+        "optimal-control",
+        "nonlinear-control"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "system-identification",
+      "subject": "motion-control",
+      "stage": 4,
+      "title": "System identification",
+      "description": "Design informative input experiments. Fit dynamic model parameters.",
+      "prerequisites": [
+        "linear-control",
+        "probability-statistics"
+      ],
+      "resources": [
+        "underactuated",
+        "signals"
+      ],
+      "orientation": "underactuated",
+      "outcomes": [
+        "Design informative input experiments",
+        "Fit dynamic model parameters",
+        "Validate a model on held-out trajectories"
+      ],
+      "exercise": "Identify a motor model from simulated input-output data and test it on a different command.",
+      "kind": "core",
+      "established": "Identified models improve controller tuning.",
+      "research": "Data-driven models trade expressive power against interpretability.",
+      "question": "How can a robot learn dynamics without unsafe experiments?",
+      "establishedSource": "underactuated",
+      "researchSource": "signals",
+      "related": [
+        "sim-to-real",
+        "actuators",
+        "motion-models"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "optimal-control",
+      "subject": "motion-control",
+      "stage": 5,
+      "title": "Optimal control & MPC",
+      "description": "Derive an LQR controller. Formulate finite-horizon trajectory optimization.",
+      "prerequisites": [
+        "linear-control",
+        "numerical-optimization"
+      ],
+      "resources": [
+        "underactuated",
+        "convex"
+      ],
+      "orientation": "underactuated",
+      "outcomes": [
+        "Derive an LQR controller",
+        "Formulate finite-horizon trajectory optimization",
+        "Use model predictive control with constraints"
+      ],
+      "exercise": "Compare PID and constrained MPC on the same simulated tracking problem.",
+      "kind": "elective",
+      "established": "Optimal control balances competing costs under dynamics.",
+      "research": "Fast trajectory optimization supports agile movement.",
+      "question": "Can a controller stay feasible when its model is wrong?",
+      "establishedSource": "underactuated",
+      "researchSource": "convex",
+      "related": [
+        "legged-robotics",
+        "actuators",
+        "motion-models"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "nonlinear-control",
+      "subject": "motion-control",
+      "stage": 5,
+      "title": "Nonlinear & robust control",
+      "description": "Analyze Lyapunov stability. Reason about uncertainty and robustness.",
+      "prerequisites": [
+        "linear-control",
+        "rigid-body-dynamics",
+        "numerical-optimization"
+      ],
+      "resources": [
+        "underactuated",
+        "drake"
+      ],
+      "orientation": "underactuated",
+      "outcomes": [
+        "Analyze Lyapunov stability",
+        "Reason about uncertainty and robustness",
+        "Study hybrid dynamics and contact modes"
+      ],
+      "exercise": "Construct a Lyapunov argument for a simple nonlinear system and test its region of attraction.",
+      "kind": "elective",
+      "established": "Nonlinear methods address behavior beyond a single operating point.",
+      "research": "Verification seeks guarantees for complex physical systems.",
+      "question": "Which guarantees survive unmodeled impacts and delays?",
+      "establishedSource": "underactuated",
+      "researchSource": "drake",
+      "related": [
+        "actuators",
+        "motion-models",
+        "feedback-pid"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "computer-vision",
+      "subject": "perception-estimation",
+      "stage": 3,
+      "title": "Image processing & computer vision",
+      "description": "Apply image filtering and feature extraction. Understand camera projection.",
+      "prerequisites": [
+        "sensor-data",
+        "linear-algebra"
+      ],
+      "resources": [
+        "opencv",
+        "vision"
+      ],
+      "orientation": "opencv",
+      "outcomes": [
+        "Apply image filtering and feature extraction",
+        "Understand camera projection",
+        "Calibrate a camera and quantify reprojection error"
+      ],
+      "exercise": "Calibrate a virtual or physical camera and compare estimated intrinsics to a reference.",
+      "kind": "core",
+      "established": "Vision provides measurements of objects and scene geometry.",
+      "research": "Learned representations complement geometric methods.",
+      "question": "How can perception remain reliable under changing light and texture?",
+      "establishedSource": "opencv",
+      "researchSource": "vision",
+      "related": [
+        "geometry-3d",
+        "state-estimation",
+        "slam"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "state-estimation",
+      "subject": "perception-estimation",
+      "stage": 3,
+      "title": "State estimation & sensor fusion",
+      "description": "Implement Bayesian predict-update steps. Apply Kalman and extended Kalman filters.",
+      "prerequisites": [
+        "probability-statistics",
+        "motion-models",
+        "signals-systems"
+      ],
+      "resources": [
+        "sensors",
+        "gtsam"
+      ],
+      "orientation": "sensors",
+      "outcomes": [
+        "Implement Bayesian predict-update steps",
+        "Apply Kalman and extended Kalman filters",
+        "Fuse sensors with different uncertainty"
+      ],
+      "exercise": "Fuse noisy wheel and position measurements; compare estimated error to reported covariance.",
+      "kind": "core",
+      "established": "Sensor fusion improves robot state estimates.",
+      "research": "Factor graphs combine many measurements across time.",
+      "question": "How can a robot detect a confidently wrong estimate?",
+      "establishedSource": "sensors",
+      "researchSource": "gtsam",
+      "related": [
+        "slam",
+        "belief-planning",
+        "aerial-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "geometry-3d",
+      "subject": "perception-estimation",
+      "stage": 4,
+      "title": "3D vision & point clouds",
+      "description": "Recover geometry with stereo or depth. Register point clouds and estimate pose.",
+      "prerequisites": [
+        "computer-vision",
+        "kinematics"
+      ],
+      "resources": [
+        "manipulation",
+        "opencv"
+      ],
+      "orientation": "manipulation",
+      "outcomes": [
+        "Recover geometry with stereo or depth",
+        "Register point clouds and estimate pose",
+        "Reject outliers and analyze degeneracy"
+      ],
+      "exercise": "Align two synthetic point clouds with ICP and show a case where it fails.",
+      "kind": "core",
+      "established": "Depth data supports obstacle detection and object pose estimation.",
+      "research": "Partial observations challenge geometric reconstruction.",
+      "question": "How much geometry can be inferred from an incomplete view?",
+      "establishedSource": "manipulation",
+      "researchSource": "opencv",
+      "related": [
+        "advanced-perception",
+        "computer-vision",
+        "state-estimation"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "slam",
+      "subject": "perception-estimation",
+      "stage": 4,
+      "title": "Localization & SLAM",
+      "description": "Build occupancy and landmark maps. Connect odometry, loop closure and graph optimization.",
+      "prerequisites": [
+        "state-estimation",
+        "algorithms-data",
+        "numerical-optimization"
+      ],
+      "resources": [
+        "sensors",
+        "gtsam",
+        "nav2"
+      ],
+      "orientation": "sensors",
+      "outcomes": [
+        "Build occupancy and landmark maps",
+        "Connect odometry, loop closure and graph optimization",
+        "Evaluate drift and map consistency"
+      ],
+      "exercise": "Compare dead reckoning and landmark-based localization in a simulated loop.",
+      "kind": "core",
+      "established": "Mapping and localization support autonomous navigation.",
+      "research": "Long-term mapping must handle changes and ambiguous revisits.",
+      "question": "When should a robot trust a loop closure?",
+      "establishedSource": "sensors",
+      "researchSource": "nav2",
+      "related": [
+        "advanced-perception",
+        "mobile-navigation",
+        "computer-vision"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "advanced-perception",
+      "subject": "perception-estimation",
+      "stage": 5,
+      "title": "Visual-inertial & semantic perception",
+      "description": "Combine visual and inertial constraints. Connect semantic and geometric maps.",
+      "prerequisites": [
+        "slam",
+        "geometry-3d",
+        "deep-learning"
+      ],
+      "resources": [
+        "gtsam",
+        "vision",
+        "manipulation"
+      ],
+      "orientation": "gtsam",
+      "outcomes": [
+        "Combine visual and inertial constraints",
+        "Connect semantic and geometric maps",
+        "Evaluate robustness beyond a benchmark"
+      ],
+      "exercise": "Design a visual-inertial evaluation with motion blur, missing frames and uncertainty metrics.",
+      "kind": "elective",
+      "established": "Multiple sensing modalities help reconstruct motion and scene structure.",
+      "research": "Semantic understanding extends geometry to task-relevant meaning.",
+      "question": "How should conflicting geometry and semantics be reconciled?",
+      "establishedSource": "gtsam",
+      "researchSource": "manipulation",
+      "related": [
+        "computer-vision",
+        "state-estimation",
+        "geometry-3d"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "motion-planning",
+      "subject": "planning-navigation",
+      "stage": 3,
+      "title": "Search & motion planning",
+      "description": "Represent configuration spaces and collisions. Compare graph search, RRT and PRM.",
+      "prerequisites": [
+        "algorithms-data",
+        "kinematics"
+      ],
+      "resources": [
+        "planning",
+        "moveit"
+      ],
+      "orientation": "planning",
+      "outcomes": [
+        "Represent configuration spaces and collisions",
+        "Compare graph search, RRT and PRM",
+        "Distinguish a path from a time-parameterized trajectory"
+      ],
+      "exercise": "Plan a collision-free route for a planar arm and check the swept motion between samples.",
+      "kind": "core",
+      "established": "Motion planners find feasible paths around obstacles.",
+      "research": "High-dimensional and changing environments challenge planning efficiency.",
+      "question": "How do you certify that an interpolated path is collision-free?",
+      "establishedSource": "planning",
+      "researchSource": "moveit",
+      "related": [
+        "mobile-navigation",
+        "task-planning",
+        "manipulation-grasping"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "mobile-navigation",
+      "subject": "planning-navigation",
+      "stage": 4,
+      "title": "Autonomous navigation",
+      "description": "Connect mapping, localization and planning. Use costmaps and local obstacle avoidance.",
+      "prerequisites": [
+        "slam",
+        "motion-planning",
+        "robot-software"
+      ],
+      "resources": [
+        "nav2",
+        "sensors"
+      ],
+      "orientation": "nav2",
+      "outcomes": [
+        "Connect mapping, localization and planning",
+        "Use costmaps and local obstacle avoidance",
+        "Evaluate recovery behavior"
+      ],
+      "exercise": "Navigate a simulated robot through a mapped space and introduce a blocked corridor.",
+      "kind": "core",
+      "established": "Navigation stacks connect global goals with local feedback.",
+      "research": "Changing environments require recovery from perception and planning failures.",
+      "question": "When should a robot stop, replan or ask for help?",
+      "establishedSource": "nav2",
+      "researchSource": "sensors",
+      "related": [
+        "multi-robot",
+        "field-robotics",
+        "motion-planning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "task-planning",
+      "subject": "planning-navigation",
+      "stage": 4,
+      "title": "Task planning & decision-making",
+      "description": "Build state machines and behavior trees. Model actions with preconditions and effects.",
+      "prerequisites": [
+        "motion-planning",
+        "probability-statistics"
+      ],
+      "resources": [
+        "planning",
+        "manipulation",
+        "nav2"
+      ],
+      "orientation": "planning",
+      "outcomes": [
+        "Build state machines and behavior trees",
+        "Model actions with preconditions and effects",
+        "Reason about decisions under uncertainty"
+      ],
+      "exercise": "Implement a pick-and-place task with explicit recovery for a failed grasp.",
+      "kind": "core",
+      "established": "Task-level logic sequences robot skills.",
+      "research": "Task and motion planning couples symbolic goals to physical feasibility.",
+      "question": "How should a planner reason about an action that might fail?",
+      "establishedSource": "planning",
+      "researchSource": "nav2",
+      "related": [
+        "belief-planning",
+        "multi-robot",
+        "imitation-learning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "belief-planning",
+      "subject": "planning-navigation",
+      "stage": 5,
+      "title": "Planning under uncertainty",
+      "description": "Model MDPs and POMDPs. Reason about belief states and information gain.",
+      "prerequisites": [
+        "task-planning",
+        "state-estimation",
+        "numerical-optimization"
+      ],
+      "resources": [
+        "planning",
+        "underactuated"
+      ],
+      "orientation": "planning",
+      "outcomes": [
+        "Model MDPs and POMDPs",
+        "Reason about belief states and information gain",
+        "Balance exploration, risk and task reward"
+      ],
+      "exercise": "Compare a direct route to a longer route with better localization landmarks.",
+      "kind": "elective",
+      "established": "Belief-space reasoning accounts for uncertainty in action selection.",
+      "research": "Information gathering can be part of the control objective.",
+      "question": "When is it worth moving just to see better?",
+      "establishedSource": "planning",
+      "researchSource": "underactuated",
+      "related": [
+        "motion-planning",
+        "mobile-navigation",
+        "task-planning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "multi-robot",
+      "subject": "planning-navigation",
+      "stage": 5,
+      "title": "Multi-robot coordination",
+      "description": "Allocate tasks across robots. Avoid conflicts in shared space.",
+      "prerequisites": [
+        "mobile-navigation",
+        "task-planning"
+      ],
+      "resources": [
+        "planning",
+        "ros"
+      ],
+      "orientation": "planning",
+      "outcomes": [
+        "Allocate tasks across robots",
+        "Avoid conflicts in shared space",
+        "Reason about communication and consensus"
+      ],
+      "exercise": "Schedule three simulated robots through a shared intersection and test communication loss.",
+      "kind": "elective",
+      "established": "Robot fleets coordinate shared workspaces and resources.",
+      "research": "Decentralized planning must handle partial information and changing membership.",
+      "question": "How can a fleet coordinate when communication is unreliable?",
+      "establishedSource": "planning",
+      "researchSource": "ros",
+      "related": [
+        "motion-planning",
+        "mobile-navigation",
+        "task-planning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "machine-learning",
+      "subject": "robot-learning",
+      "stage": 3,
+      "title": "Machine learning foundations",
+      "description": "Train regression and classification models. Separate training, validation and test data.",
+      "prerequisites": [
+        "probability-statistics",
+        "numerical-optimization"
+      ],
+      "resources": [
+        "statlearning",
+        "ml"
+      ],
+      "orientation": "statlearning",
+      "outcomes": [
+        "Train regression and classification models",
+        "Separate training, validation and test data",
+        "Recognize overfitting and data leakage"
+      ],
+      "exercise": "Predict a robot’s energy use from synthetic logs and compare against a constant baseline.",
+      "kind": "core",
+      "established": "Learned models predict quantities that are difficult to model explicitly.",
+      "research": "Distribution shift makes deployment harder than benchmark evaluation.",
+      "question": "How can a model recognize inputs it has not learned to handle?",
+      "establishedSource": "statlearning",
+      "researchSource": "ml",
+      "related": [
+        "deep-learning",
+        "reinforcement-learning",
+        "sim-to-real"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "deep-learning",
+      "subject": "robot-learning",
+      "stage": 4,
+      "title": "Deep learning & representations",
+      "description": "Explain backpropagation and optimization. Train neural visual representations.",
+      "prerequisites": [
+        "machine-learning"
+      ],
+      "resources": [
+        "vision",
+        "ml"
+      ],
+      "orientation": "vision",
+      "outcomes": [
+        "Explain backpropagation and optimization",
+        "Train neural visual representations",
+        "Measure generalization and calibration"
+      ],
+      "exercise": "Train a small image classifier and evaluate it under a lighting change.",
+      "kind": "core",
+      "established": "Deep networks turn high-dimensional observations into usable features.",
+      "research": "Representation learning seeks features that transfer across tasks.",
+      "question": "Which parts of a learned representation transfer to a new robot?",
+      "establishedSource": "vision",
+      "researchSource": "ml",
+      "related": [
+        "advanced-perception",
+        "imitation-learning",
+        "machine-learning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "reinforcement-learning",
+      "subject": "robot-learning",
+      "stage": 5,
+      "title": "Reinforcement learning",
+      "description": "Formulate states, actions and rewards. Compare value and policy methods.",
+      "prerequisites": [
+        "machine-learning",
+        "linear-control"
+      ],
+      "resources": [
+        "rl",
+        "underactuated"
+      ],
+      "orientation": "rl",
+      "outcomes": [
+        "Formulate states, actions and rewards",
+        "Compare value and policy methods",
+        "Evaluate sample efficiency and reward exploitation"
+      ],
+      "exercise": "Train a simulated control policy across several seeds and compare it with a classical controller.",
+      "kind": "elective",
+      "established": "Reinforcement learning optimizes behavior through interaction.",
+      "research": "Reliable transfer and efficient exploration remain research challenges.",
+      "question": "How can a policy learn without exploiting a simulator artifact?",
+      "establishedSource": "rl",
+      "researchSource": "underactuated",
+      "related": [
+        "machine-learning",
+        "deep-learning",
+        "imitation-learning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "imitation-learning",
+      "subject": "robot-learning",
+      "stage": 5,
+      "title": "Imitation & generalist robot policies",
+      "description": "Learn behavior from demonstrations. Analyze covariate shift and dataset coverage.",
+      "prerequisites": [
+        "deep-learning",
+        "task-planning"
+      ],
+      "resources": [
+        "manipulation",
+        "ml"
+      ],
+      "orientation": "manipulation",
+      "outcomes": [
+        "Learn behavior from demonstrations",
+        "Analyze covariate shift and dataset coverage",
+        "Evaluate language-conditioned or multitask policies"
+      ],
+      "exercise": "Train behavior cloning on a simulated reaching task and test perturbed starting states.",
+      "kind": "elective",
+      "established": "Demonstrations provide examples of useful robot behavior.",
+      "research": "Broader policies aim to connect perception, language and diverse actions.",
+      "question": "How can a robot recognize when a demonstration does not cover the situation?",
+      "establishedSource": "manipulation",
+      "researchSource": "ml",
+      "related": [
+        "machine-learning",
+        "deep-learning",
+        "reinforcement-learning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "sim-to-real",
+      "subject": "robot-learning",
+      "stage": 5,
+      "title": "Sim-to-real & adaptation",
+      "description": "Identify the reality gap. Compare domain randomization and adaptation.",
+      "prerequisites": [
+        "simulation",
+        "machine-learning",
+        "system-identification"
+      ],
+      "resources": [
+        "mujoco",
+        "manipulation",
+        "underactuated"
+      ],
+      "orientation": "mujoco",
+      "outcomes": [
+        "Identify the reality gap",
+        "Compare domain randomization and adaptation",
+        "Design transfer tests with held-out conditions"
+      ],
+      "exercise": "Vary friction, mass and sensing delay in simulation and measure policy sensitivity.",
+      "kind": "elective",
+      "established": "Model calibration and variation tests expose brittle behavior.",
+      "research": "Transfer methods seek performance across different dynamics and environments.",
+      "question": "Which simulated variations predict real-world failures?",
+      "establishedSource": "mujoco",
+      "researchSource": "underactuated",
+      "related": [
+        "machine-learning",
+        "deep-learning",
+        "reinforcement-learning"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "human-robot-interaction",
+      "subject": "human-systems",
+      "stage": 3,
+      "title": "Human–robot interaction",
+      "description": "Translate human needs into interaction requirements. Design understandable robot behavior.",
+      "prerequisites": [
+        "programming-fundamentals",
+        "probability-statistics"
+      ],
+      "resources": [
+        "hri",
+        "systems"
+      ],
+      "orientation": "hri",
+      "outcomes": [
+        "Translate human needs into interaction requirements",
+        "Design understandable robot behavior",
+        "Measure usability and appropriate trust"
+      ],
+      "exercise": "Prototype a robot status interface and define a small, consent-based usability study.",
+      "kind": "core",
+      "established": "Interaction design helps people understand and direct robot behavior.",
+      "research": "Human–robot teams must coordinate intent and responsibility.",
+      "question": "How should a robot communicate uncertainty without overwhelming its user?",
+      "establishedSource": "hri",
+      "researchSource": "systems",
+      "related": [
+        "haptics-teleoperation",
+        "medical-assistive",
+        "safety-ethics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "safety-ethics",
+      "subject": "human-systems",
+      "stage": 1,
+      "title": "Safety, ethics & societal impact",
+      "description": "Identify hazards and reduce exposure. Reason about privacy, accessibility and responsibility.",
+      "prerequisites": [
+        "physics-mechanics"
+      ],
+      "resources": [
+        "hri",
+        "systems"
+      ],
+      "orientation": "hri",
+      "outcomes": [
+        "Identify hazards and reduce exposure",
+        "Reason about privacy, accessibility and responsibility",
+        "Distinguish a demo from evidence of safe operation"
+      ],
+      "exercise": "Write a hazard log for a tabletop robot, including stop behavior and test boundaries.",
+      "kind": "core",
+      "established": "Risk assessment and human-centered design inform responsible engineering.",
+      "research": "Trustworthy autonomy requires evidence about people and deployment conditions.",
+      "question": "Who bears the cost when an autonomous system fails?",
+      "establishedSource": "hri",
+      "researchSource": "systems",
+      "related": [
+        "systems-engineering",
+        "medical-assistive",
+        "human-robot-interaction"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "systems-engineering",
+      "subject": "human-systems",
+      "stage": 4,
+      "title": "Systems engineering & deployment",
+      "description": "Turn needs into measurable requirements. Budget power, latency, compute and cost.",
+      "prerequisites": [
+        "robot-software",
+        "safety-ethics"
+      ],
+      "resources": [
+        "systems",
+        "ros",
+        "mrsd"
+      ],
+      "orientation": "systems",
+      "outcomes": [
+        "Turn needs into measurable requirements",
+        "Budget power, latency, compute and cost",
+        "Plan integration, maintenance and acceptance tests"
+      ],
+      "exercise": "Create an interface contract and verification matrix for an autonomous delivery robot.",
+      "kind": "core",
+      "established": "Systems engineering aligns components with a complete operational objective.",
+      "research": "Robust field deployments must handle failures across component boundaries.",
+      "question": "How can component-level evidence support a system-level claim?",
+      "establishedSource": "systems",
+      "researchSource": "mrsd",
+      "related": [
+        "verification",
+        "field-robotics",
+        "masters-project"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "verification",
+      "subject": "human-systems",
+      "stage": 5,
+      "title": "Verification & dependable autonomy",
+      "description": "Distinguish verification from validation. Design fault injection and boundary tests.",
+      "prerequisites": [
+        "systems-engineering",
+        "linear-control"
+      ],
+      "resources": [
+        "drake",
+        "systems"
+      ],
+      "orientation": "drake",
+      "outcomes": [
+        "Distinguish verification from validation",
+        "Design fault injection and boundary tests",
+        "Understand runtime monitoring and formal guarantees"
+      ],
+      "exercise": "Inject stale sensor data and actuator saturation into a simulated robot and verify its fallback behavior.",
+      "kind": "elective",
+      "established": "Testing and monitoring find faults before and during operation.",
+      "research": "Formal methods investigate guarantees for hybrid robot behavior.",
+      "question": "What can be guaranteed when perception remains uncertain?",
+      "establishedSource": "drake",
+      "researchSource": "systems",
+      "related": [
+        "human-robot-interaction",
+        "safety-ethics",
+        "systems-engineering"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "haptics-teleoperation",
+      "subject": "human-systems",
+      "stage": 5,
+      "title": "Haptics & teleoperation",
+      "description": "Connect human input to remote motion. Reason about feedback, impedance and delay.",
+      "prerequisites": [
+        "human-robot-interaction",
+        "linear-control"
+      ],
+      "resources": [
+        "hri",
+        "manipulation"
+      ],
+      "orientation": "hri",
+      "outcomes": [
+        "Connect human input to remote motion",
+        "Reason about feedback, impedance and delay",
+        "Evaluate shared autonomy"
+      ],
+      "exercise": "Simulate delayed teleoperation and compare direct control with constrained assistance.",
+      "kind": "elective",
+      "established": "Teleoperation lets people guide robots in remote or difficult tasks.",
+      "research": "Shared autonomy combines human intent with local robot intelligence.",
+      "question": "How should control authority shift between a person and a robot?",
+      "establishedSource": "hri",
+      "researchSource": "manipulation",
+      "related": [
+        "human-robot-interaction",
+        "safety-ethics",
+        "systems-engineering"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "manipulation-grasping",
+      "subject": "robot-platforms",
+      "stage": 4,
+      "title": "Manipulation & grasping",
+      "description": "Analyze grasps, friction cones and force closure. Plan reaching and grasp transitions.",
+      "prerequisites": [
+        "kinematics",
+        "motion-planning",
+        "rigid-body-dynamics"
+      ],
+      "resources": [
+        "manipulation",
+        "modern",
+        "moveit"
+      ],
+      "orientation": "manipulation",
+      "outcomes": [
+        "Analyze grasps, friction cones and force closure",
+        "Plan reaching and grasp transitions",
+        "Compare position, force and impedance control"
+      ],
+      "exercise": "Simulate pick-and-place with several object poses and report success and failure modes.",
+      "kind": "elective",
+      "established": "Robot arms perform structured handling and assembly.",
+      "research": "Dexterous manipulation studies contact changes and uncertain objects.",
+      "question": "How can a robot manipulate an object it has never seen?",
+      "establishedSource": "manipulation",
+      "researchSource": "moveit",
+      "related": [
+        "medical-assistive",
+        "legged-robotics",
+        "aerial-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "legged-robotics",
+      "subject": "robot-platforms",
+      "stage": 5,
+      "title": "Legged robots & humanoids",
+      "description": "Model balance and support contacts. Reason about gaits and hybrid dynamics.",
+      "prerequisites": [
+        "optimal-control",
+        "rigid-body-dynamics"
+      ],
+      "resources": [
+        "underactuated",
+        "mujoco"
+      ],
+      "orientation": "underactuated",
+      "outcomes": [
+        "Model balance and support contacts",
+        "Reason about gaits and hybrid dynamics",
+        "Plan whole-body motion under contact constraints"
+      ],
+      "exercise": "Simulate a hopping model and test recovery from a disturbance.",
+      "kind": "elective",
+      "established": "Legged robots coordinate balance with changing ground contact.",
+      "research": "Whole-body control seeks agile movement on uncertain terrain.",
+      "question": "How can a robot recover when a foothold moves?",
+      "establishedSource": "underactuated",
+      "researchSource": "mujoco",
+      "related": [
+        "manipulation-grasping",
+        "aerial-robotics",
+        "field-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "aerial-robotics",
+      "subject": "robot-platforms",
+      "stage": 4,
+      "title": "Aerial robotics",
+      "description": "Explain thrust, attitude and multirotor dynamics. Connect estimation to flight control.",
+      "prerequisites": [
+        "linear-control",
+        "state-estimation"
+      ],
+      "resources": [
+        "px4",
+        "underactuated"
+      ],
+      "orientation": "px4",
+      "outcomes": [
+        "Explain thrust, attitude and multirotor dynamics",
+        "Connect estimation to flight control",
+        "Evaluate a simulated flight envelope"
+      ],
+      "exercise": "Use a flight simulator to test waypoint tracking under wind and delayed position updates.",
+      "kind": "elective",
+      "established": "Autopilots combine estimation and feedback for controlled flight.",
+      "research": "Agile flight requires perception and control under tight resource constraints.",
+      "question": "How can a vehicle navigate when position sensing is unreliable?",
+      "establishedSource": "px4",
+      "researchSource": "underactuated",
+      "related": [
+        "manipulation-grasping",
+        "legged-robotics",
+        "field-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "field-robotics",
+      "subject": "robot-platforms",
+      "stage": 4,
+      "title": "Field, underwater & space robots",
+      "description": "Compare terrain, buoyancy and communication constraints. Design for limited energy and recovery access.",
+      "prerequisites": [
+        "mobile-navigation",
+        "systems-engineering"
+      ],
+      "resources": [
+        "systems",
+        "sensors",
+        "px4"
+      ],
+      "orientation": "systems",
+      "outcomes": [
+        "Compare terrain, buoyancy and communication constraints",
+        "Design for limited energy and recovery access",
+        "Plan missions under sensing uncertainty"
+      ],
+      "exercise": "Compare requirements for the same inspection mission on land, underwater and in space.",
+      "kind": "elective",
+      "established": "Field robots operate beyond structured indoor workspaces.",
+      "research": "Long-duration autonomy must manage uncertainty and limited intervention.",
+      "question": "How should a robot decide whether it can safely return?",
+      "establishedSource": "systems",
+      "researchSource": "px4",
+      "related": [
+        "manipulation-grasping",
+        "legged-robotics",
+        "aerial-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "medical-assistive",
+      "subject": "robot-platforms",
+      "stage": 5,
+      "title": "Medical & assistive robotics",
+      "description": "Connect human biomechanics to robot requirements. Study rehabilitation, prosthetics and surgical interfaces.",
+      "prerequisites": [
+        "human-robot-interaction",
+        "manipulation-grasping",
+        "safety-ethics"
+      ],
+      "resources": [
+        "hri",
+        "manipulation",
+        "systems"
+      ],
+      "orientation": "hri",
+      "outcomes": [
+        "Connect human biomechanics to robot requirements",
+        "Study rehabilitation, prosthetics and surgical interfaces",
+        "Distinguish engineering evaluation from clinical evidence"
+      ],
+      "exercise": "Write a simulation-only assistive-device study plan with user needs, constraints and evaluation measures.",
+      "kind": "elective",
+      "established": "Assistive robots couple mechanical function with individual human needs.",
+      "research": "Adaptive assistance investigates how support should change over time.",
+      "question": "How can assistance adapt without reducing a person’s agency?",
+      "establishedSource": "hri",
+      "researchSource": "systems",
+      "related": [
+        "manipulation-grasping",
+        "legged-robotics",
+        "aerial-robotics"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "experimental-methods",
+      "subject": "research-practice",
+      "stage": 2,
+      "title": "Experiments & technical communication",
+      "description": "State a testable hypothesis. Use controls, repetitions and uncertainty.",
+      "prerequisites": [
+        "probability-statistics",
+        "software-engineering"
+      ],
+      "resources": [
+        "probability",
+        "tooling",
+        "systems"
+      ],
+      "orientation": "probability",
+      "outcomes": [
+        "State a testable hypothesis",
+        "Use controls, repetitions and uncertainty",
+        "Write a reproducible technical report"
+      ],
+      "exercise": "Compare two sensor filters with repeated trials, plots and a documented dataset.",
+      "kind": "core",
+      "established": "Repeatable experiments turn observations into usable evidence.",
+      "research": "Open data and reproducible tools help test claims across settings.",
+      "question": "Could another team reproduce the conclusion from the report?",
+      "establishedSource": "probability",
+      "researchSource": "systems",
+      "related": [
+        "capstone",
+        "research-methods",
+        "masters-project"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "capstone",
+      "subject": "research-practice",
+      "stage": 4,
+      "title": "Integrated robotics capstone",
+      "description": "Integrate sensing, planning and feedback. Manage interfaces and staged acceptance tests.",
+      "prerequisites": [
+        "robot-software",
+        "feedback-pid",
+        "state-estimation",
+        "motion-planning",
+        "experimental-methods"
+      ],
+      "resources": [
+        "systems",
+        "mrsd",
+        "nav2"
+      ],
+      "orientation": "systems",
+      "outcomes": [
+        "Integrate sensing, planning and feedback",
+        "Manage interfaces and staged acceptance tests",
+        "Present measured performance and failure analysis"
+      ],
+      "exercise": "Build a simulated autonomous mission; deliver code, architecture, evaluation logs and a demonstration.",
+      "kind": "core",
+      "established": "Capstones expose interface and integration problems absent from isolated exercises.",
+      "research": "Field-ready autonomy needs evaluation beyond successful demonstrations.",
+      "question": "Which failure would a polished demonstration conceal?",
+      "establishedSource": "systems",
+      "researchSource": "nav2",
+      "related": [
+        "research-methods",
+        "experimental-methods",
+        "masters-project"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "research-methods",
+      "subject": "research-practice",
+      "stage": 5,
+      "title": "Reading & reproducing research",
+      "description": "Read claims, assumptions and experimental evidence. Reproduce a baseline and run ablations.",
+      "prerequisites": [
+        "capstone",
+        "machine-learning"
+      ],
+      "resources": [
+        "michigan",
+        "manipulation",
+        "underactuated"
+      ],
+      "orientation": "michigan",
+      "outcomes": [
+        "Read claims, assumptions and experimental evidence",
+        "Reproduce a baseline and run ablations",
+        "Identify a narrow unanswered question"
+      ],
+      "exercise": "Reproduce one result from a paper in your chosen track and explain any discrepancy.",
+      "kind": "research",
+      "established": "Replication distinguishes an idea from the conditions needed for it to work.",
+      "research": "Research advances through comparisons, negative results and revised hypotheses.",
+      "question": "What evidence would change your belief in the proposed method?",
+      "establishedSource": "michigan",
+      "researchSource": "underactuated",
+      "related": [
+        "masters-project",
+        "experimental-methods",
+        "capstone"
+      ],
+      "foundations": []
+    },
+    {
+      "id": "masters-project",
+      "subject": "research-practice",
+      "stage": 5,
+      "title": "Master’s thesis or systems project",
+      "description": "Define a research question or engineering requirement. Conduct a sustained investigation with a defensible evaluation.",
+      "prerequisites": [
+        "research-methods",
+        "systems-engineering"
+      ],
+      "resources": [
+        "mrsd",
+        "michigan",
+        "systems"
+      ],
+      "orientation": "mrsd",
+      "outcomes": [
+        "Define a research question or engineering requirement",
+        "Conduct a sustained investigation with a defensible evaluation",
+        "Communicate contributions, limitations and next steps"
+      ],
+      "exercise": "Produce a thesis or project report with a baseline, reproducible artifacts, quantitative results and an oral defense.",
+      "kind": "research",
+      "established": "A graduate project demonstrates independent technical judgment.",
+      "research": "Research degrees may emphasize new knowledge; professional programs may emphasize complete systems.",
+      "question": "What does your work establish that the baseline did not?",
+      "establishedSource": "mrsd",
+      "researchSource": "systems",
+      "related": [
+        "experimental-methods",
+        "capstone",
+        "research-methods"
+      ],
+      "foundations": []
     }
   ],
   "resources": {
@@ -396,7 +2364,7 @@
     },
     "circuits": {
       "id": "circuits",
-      "title": "Voltage, current, resistance and Ohm\u2019s law",
+      "title": "Voltage, current, resistance and Ohm’s law",
       "publisher": "SparkFun",
       "url": "https://learn.sparkfun.com/tutorials/voltage-current-resistance-and-ohms-law/all",
       "format": "Illustrated introduction",
@@ -423,7 +2391,7 @@
     },
     "i2c": {
       "id": "i2c",
-      "title": "I\u00b2C communication",
+      "title": "I²C communication",
       "publisher": "SparkFun",
       "url": "https://learn.sparkfun.com/tutorials/i2c/all",
       "format": "Technical introduction",
@@ -522,7 +2490,7 @@
     },
     "pololu": {
       "id": "pololu",
-      "title": "3pi+ 32U4 robot user\u2019s guide",
+      "title": "3pi+ 32U4 robot user’s guide",
       "publisher": "Pololu",
       "url": "https://www.pololu.com/docs/0J83/all",
       "format": "Hardware guide",
@@ -600,6 +2568,298 @@
       "format": "Video course",
       "description": "Build a foundation in vectors and matrices for motion models and estimation.",
       "assumes": "Algebra"
+    },
+    "calculus": {
+      "id": "calculus",
+      "title": "Single variable calculus",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/",
+      "format": "Course / notes",
+      "description": "Build fluency with derivatives, integrals and series using lectures and worked problems.",
+      "assumes": "Assumes algebra and trigonometry"
+    },
+    "multivariable": {
+      "id": "multivariable",
+      "title": "Multivariable calculus",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/",
+      "format": "Course / notes",
+      "description": "Study partial derivatives, vector calculus and constrained extrema.",
+      "assumes": "Assumes single variable calculus"
+    },
+    "ode": {
+      "id": "ode",
+      "title": "Differential equations",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/",
+      "format": "Course / notes",
+      "description": "Connect differential equations to oscillations, transients and linear systems.",
+      "assumes": "Assumes calculus"
+    },
+    "probability": {
+      "id": "probability",
+      "title": "Probability, statistics & random processes",
+      "publisher": "Hossein Pishro-Nik",
+      "url": "https://probabilitycourse.com/",
+      "format": "Open textbook",
+      "description": "An open textbook for reasoning about noisy measurements and random variables.",
+      "assumes": "Assumes calculus for continuous distributions"
+    },
+    "convex": {
+      "id": "convex",
+      "title": "Convex Optimization",
+      "publisher": "Stephen Boyd & Lieven Vandenberghe",
+      "url": "https://web.stanford.edu/~boyd/cvxbook/",
+      "format": "Open textbook",
+      "description": "Free book and supporting material on formulating and solving convex problems.",
+      "assumes": "Assumes linear algebra and multivariable calculus"
+    },
+    "algorithms": {
+      "id": "algorithms",
+      "title": "Introduction to algorithms",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+      "format": "Course / notes",
+      "description": "Explore data structures, graph search, complexity and dynamic programming.",
+      "assumes": "Assumes programming and discrete mathematics"
+    },
+    "tooling": {
+      "id": "tooling",
+      "title": "The Missing Semester",
+      "publisher": "MIT",
+      "url": "https://missing.csail.mit.edu/",
+      "format": "Course / notes",
+      "description": "Learn shell tools, debugging, version control and reproducible development workflows.",
+      "assumes": "Assumes basic programming"
+    },
+    "signals": {
+      "id": "signals",
+      "title": "Signals and systems",
+      "publisher": "MIT OpenCourseWare",
+      "url": "https://ocw.mit.edu/courses/6-003-signals-and-systems-fall-2011/",
+      "format": "Course / notes",
+      "description": "Study continuous and discrete signals, transforms and system responses.",
+      "assumes": "Assumes calculus and differential equations"
+    },
+    "opencv": {
+      "id": "opencv",
+      "title": "OpenCV tutorials",
+      "publisher": "OpenCV",
+      "url": "https://docs.opencv.org/4.x/d9/df8/tutorial_root.html",
+      "format": "Documentation",
+      "description": "Practical examples for image processing, camera calibration and vision.",
+      "assumes": "Assumes Python or C++ and arrays"
+    },
+    "vision": {
+      "id": "vision",
+      "title": "Deep learning for computer vision",
+      "publisher": "Stanford CS231n",
+      "url": "https://cs231n.stanford.edu/",
+      "format": "Course / notes",
+      "description": "Course materials for learning visual representations and evaluating neural networks.",
+      "assumes": "Assumes linear algebra, calculus, probability and Python"
+    },
+    "gtsam": {
+      "id": "gtsam",
+      "title": "GTSAM tutorials",
+      "publisher": "GTSAM",
+      "url": "https://gtsam.org/tutorials/",
+      "format": "Documentation",
+      "description": "Work with factor graphs for estimation and mapping.",
+      "assumes": "Assumes probability, linear algebra and robot geometry"
+    },
+    "planning": {
+      "id": "planning",
+      "title": "Planning Algorithms",
+      "publisher": "Steven M. LaValle",
+      "url": "https://lavalle.pl/planning/",
+      "format": "Open textbook",
+      "description": "Freely available book covering discrete, geometric and uncertainty-aware planning.",
+      "assumes": "Assumes algorithms, linear algebra and probability"
+    },
+    "nav2": {
+      "id": "nav2",
+      "title": "Navigation2 documentation",
+      "publisher": "Nav2",
+      "url": "https://docs.nav2.org/",
+      "format": "Documentation",
+      "description": "Explore a complete mobile navigation system, its planners and behavior trees.",
+      "assumes": "Assumes ROS 2, coordinate frames and localization"
+    },
+    "manipulation": {
+      "id": "manipulation",
+      "title": "Robotic Manipulation",
+      "publisher": "Russ Tedrake / MIT",
+      "url": "https://manipulation.mit.edu/",
+      "format": "Course / notes",
+      "description": "Notes and exercises connecting geometry, contact, perception and robot learning.",
+      "assumes": "Assumes Python, linear algebra and robotics fundamentals"
+    },
+    "moveit": {
+      "id": "moveit",
+      "title": "MoveIt 2 tutorials",
+      "publisher": "MoveIt",
+      "url": "https://moveit.picknik.ai/main/index.html",
+      "format": "Documentation",
+      "description": "Integrate robot models, collision checking and motion planning.",
+      "assumes": "Assumes ROS 2 and kinematics"
+    },
+    "ml": {
+      "id": "ml",
+      "title": "Machine learning",
+      "publisher": "Stanford CS229",
+      "url": "https://cs229.stanford.edu/",
+      "format": "Course / notes",
+      "description": "Course material covering statistical learning and the mathematical foundations of prediction.",
+      "assumes": "Assumes calculus, linear algebra, probability and programming"
+    },
+    "statlearning": {
+      "id": "statlearning",
+      "title": "An Introduction to Statistical Learning",
+      "publisher": "James, Witten, Hastie, Tibshirani & Taylor",
+      "url": "https://www.statlearning.com/",
+      "format": "Open textbook",
+      "description": "Free book editions and labs for regression, classification and model assessment.",
+      "assumes": "Assumes basic statistics and Python or R"
+    },
+    "rl": {
+      "id": "rl",
+      "title": "Spinning Up in Deep RL",
+      "publisher": "OpenAI",
+      "url": "https://spinningup.openai.com/en/latest/",
+      "format": "Course / notes",
+      "description": "A conceptual introduction to reinforcement learning with reference algorithms.",
+      "assumes": "Assumes machine learning, probability and Python"
+    },
+    "mujoco": {
+      "id": "mujoco",
+      "title": "MuJoCo overview",
+      "publisher": "MuJoCo",
+      "url": "https://mujoco.readthedocs.io/en/stable/overview.html",
+      "format": "Documentation",
+      "description": "Understand the models, contact dynamics and tools of a physics simulator.",
+      "assumes": "Assumes programming and mechanics"
+    },
+    "hri": {
+      "id": "hri",
+      "title": "Human–Robot Interaction",
+      "publisher": "Bartneck, Belpaeme, Eyssel, Kanda, Keijsers & Šabanović",
+      "url": "https://www.human-robot-interaction.org/",
+      "format": "Open textbook",
+      "description": "An open textbook introducing the design and study of robots interacting with people.",
+      "assumes": "No robotics background required for the introduction"
+    },
+    "systems": {
+      "id": "systems",
+      "title": "Systems Engineering Handbook",
+      "publisher": "NASA",
+      "url": "https://www.nasa.gov/reference/systems-engineering-handbook/",
+      "format": "Handbook",
+      "description": "Connect requirements, design tradeoffs, integration, verification and validation.",
+      "assumes": "Assumes basic engineering project experience"
+    },
+    "px4": {
+      "id": "px4",
+      "title": "PX4 Autopilot guide",
+      "publisher": "PX4",
+      "url": "https://docs.px4.io/main/en/",
+      "format": "Documentation",
+      "description": "Explore aerial vehicle architecture, simulation, estimation and control.",
+      "assumes": "Assumes feedback control and basic electronics"
+    },
+    "toolbox": {
+      "id": "toolbox",
+      "title": "Robotics Toolbox for Python",
+      "publisher": "Peter Corke & contributors",
+      "url": "https://petercorke.github.io/robotics-toolbox-python/",
+      "format": "Documentation",
+      "description": "Experiment with robot models, kinematics, dynamics and trajectories.",
+      "assumes": "Assumes Python and linear algebra"
+    },
+    "michigan": {
+      "id": "michigan",
+      "title": "Robotics course catalog",
+      "publisher": "University of Michigan",
+      "url": "https://robotics.umich.edu/academics/courses/",
+      "format": "Curriculum reference",
+      "description": "A university reference for undergraduate and graduate coverage, with links to open courses.",
+      "assumes": "Course prerequisites vary"
+    },
+    "mrsd": {
+      "id": "mrsd",
+      "title": "Robotic Systems Development curriculum",
+      "publisher": "Carnegie Mellon University",
+      "url": "https://mrsd.ri.cmu.edu/curriculum/",
+      "format": "Curriculum reference",
+      "description": "A professional master’s example connecting autonomy, mobility, manipulation and systems projects.",
+      "assumes": "Assumes undergraduate engineering preparation"
+    },
+    "cpp": {
+      "id": "cpp",
+      "title": "Learn modern C++",
+      "publisher": "LearnCpp",
+      "url": "https://www.learncpp.com/",
+      "format": "Tutorials",
+      "description": "Work through compilation, types, functions, memory, classes and the standard library with examples.",
+      "assumes": "No prior C++ knowledge required"
     }
-  }
+  },
+  "relationships": [
+    [
+      "mathematics-physics",
+      "motion-control"
+    ],
+    [
+      "mathematics-physics",
+      "perception-estimation"
+    ],
+    [
+      "programming",
+      "robot-learning"
+    ],
+    [
+      "programming",
+      "planning-navigation"
+    ],
+    [
+      "mechanical-design",
+      "motion-control"
+    ],
+    [
+      "electronics-sensing",
+      "perception-estimation"
+    ],
+    [
+      "electronics-sensing",
+      "motion-control"
+    ],
+    [
+      "motion-control",
+      "robot-platforms"
+    ],
+    [
+      "perception-estimation",
+      "planning-navigation"
+    ],
+    [
+      "planning-navigation",
+      "robot-platforms"
+    ],
+    [
+      "robot-learning",
+      "robot-platforms"
+    ],
+    [
+      "human-systems",
+      "robot-platforms"
+    ],
+    [
+      "robot-platforms",
+      "research-practice"
+    ],
+    [
+      "human-systems",
+      "research-practice"
+    ]
+  ]
 }

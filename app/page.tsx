@@ -2,23 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { Shell } from "@/components/atlas/site-shell";
-import { Atlas } from "@/components/atlas/atlas";
+import { RoboticsExplorer } from "@/components/atlas/robotics-explorer";
+import { subjects } from "@/data/atlas";
 export default function Page() {
   return (
     <Shell>
       <section className="hero shell">
         <div className="hero-copy">
           <h1>
-            Find your way
+            A little curiosity.
             <br />
-            into <span>robotics.</span>
+            <span>A world of robots.</span>
           </h1>
           <p>
-            A robot brings a lot of ideas together. Explore the subjects behind
-            it, follow your curiosity, and find something worth building.
+            Ever wondered how a robot finds its way, moves its hands, or learns
+            something new? Discover the ideas behind it, one step at a time.
           </p>
           <a className="button primary" href="#explore">
-            Explore the map <ArrowDown size={18} />
+            Find your starting point <ArrowDown size={18} />
           </a>
         </div>
         <div className="hero-photo">
@@ -34,28 +35,29 @@ export default function Page() {
       <section className="explore-section" id="explore">
         <div className="shell">
           <div className="section-heading">
-            <h2>Make your own connections.</h2>
+            <h2>Where would you like to begin?</h2>
+            <p>
+              From the first “how does that work?” to ideas of your own. Take a
+              look around—you don’t need to know anything yet.
+            </p>
           </div>
-          <Atlas />
+          <RoboticsExplorer />
           <noscript>
             <p className="small-note">
               The interactive map uses JavaScript. You can also open a subject
               directly:
             </p>
             <div className="related-links">
-              <Link href="/topics/mechanical-design">Mechanical design →</Link>
-              <Link href="/topics/electronics-sensing">
-                Electronics & sensing →
+              <Link href="/curriculum">
+                Browse the complete learning journey →
               </Link>
-              <Link href="/topics/programming">Programming →</Link>
-              <Link href="/topics/motion-control">Motion & control →</Link>
+              {subjects.map((s) => (
+                <Link key={s.id} href={`/topics/${s.id}`}>
+                  {s.title} →
+                </Link>
+              ))}
             </div>
           </noscript>
-          <p className="map-footnote">
-            Choose a subject and expand its topics. Drag to pan; pinch or use
-            the controls to zoom. Solid lines connect related subjects; dashed
-            lines reveal their topics.
-          </p>
         </div>
       </section>
       <section className="shell home-build">
