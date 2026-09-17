@@ -24,12 +24,53 @@ const base = process.env.SITE_URL || "http://localhost:3101";
       label,
     );
   }
+  async function homeStyles(width) {
+    const styles = await page.evaluate(() => {
+      const stages = getComputedStyle(
+        document.querySelector(".journey-stages"),
+      );
+      return {
+        display: stages.display,
+        columns: stages.gridTemplateColumns.split(" ").length,
+        toolbar: getComputedStyle(document.querySelector(".explorer-toolbar"))
+          .display,
+        topics: getComputedStyle(document.querySelector(".journey-topics"))
+          .display,
+        hero: getComputedStyle(document.querySelector(".hero-copy h1 span"))
+          .fontStyle,
+      };
+    });
+    assert.deepEqual(
+      styles,
+      {
+        display: "grid",
+        columns: width <= 800 ? 3 : 6,
+        toolbar: "flex",
+        topics: "grid",
+        hero: "italic",
+      },
+      `Homepage layout styles must load at ${width}px`,
+    );
+    await page.locator(".hero-photo img").evaluate(async (image) => {
+      await image.decode();
+      if (!image.naturalWidth)
+        throw new Error("Homepage hero image did not load");
+    });
+  }
   await page.goto(base);
+  await homeStyles(1440);
   assert.equal(await page.locator(".journey-stages button").count(), 6);
   assert.equal(await page.locator("dialog[open]").count(), 0);
   const firstTopic = page.locator(".journey-subject button").first();
   await firstTopic.click();
   assert.equal(await page.locator("dialog[open]").count(), 1);
+  assert.equal(
+    await page
+      .locator("dialog[open]")
+      .evaluate((dialog) => getComputedStyle(dialog).position),
+    "fixed",
+    "Topic previews must use the modal layout styles",
+  );
   await page.keyboard.press("Escape");
   await page.waitForFunction(() => !document.querySelector("dialog[open]"));
   assert.equal(
@@ -154,6 +195,7 @@ const base = process.env.SITE_URL || "http://localhost:3101";
     await page.setViewportSize({ width, height: 1000 });
     await page.goto(base);
     await noOverflow(`home ${width}`);
+    await homeStyles(width);
     if (process.argv[4] && (width === 390 || width === 1440))
       await page.screenshot({
         path: `${process.argv[4]}/journey-${width}.png`,
